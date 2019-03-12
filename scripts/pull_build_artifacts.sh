@@ -10,7 +10,7 @@
 # Tag it as $ARCH-$BASE_VERSION (1.3.0)
 #############################################
 
-export ORG_NAME=hyperledger/fabric
+export ORG_NAME=hyperledger/udo
 export NEXUS_URL=nexus3.hyperledger.org:10001
 export STABLE_VERSION=${STABLE_VERSION:-1.3.0-stable}
 export BASE_VERSION=${BASE_VERSION:-1.3.0}
@@ -27,20 +27,20 @@ else
 fi
 
 printHelp() {
-  echo "Usage: STABLE_VERSION=1.3.0-stable BASE_VERSION=1.3.0 ./scripts/pull_Build_Artifacts.sh --pull_Fabric_Images"
+  echo "Usage: STABLE_VERSION=1.3.0-stable BASE_VERSION=1.3.0 ./scripts/pull_Build_Artifacts.sh --pull_UDO_Images"
   echo
-  echo "pull_All - pull fabric, fabric-ca and thirdparty images"
-  echo "pull_Fabric_Images_All_Platforms - pull fabric images amd64, s390x"
+  echo "pull_All - pull udo, fabric-ca and thirdparty images"
+  echo "pull_UDO_Images_All_Platforms - pull udo images amd64, s390x"
   echo "cleanup - delete unused docker images"
-  echo "pull_Fabric_Images - pull fabric docker images on current arch"
-  echo "pull_Fabric_Binaries - pull fabric binaries on current arch"
-  echo "pull_Thirdparty_Images - pull fabric thirdparty docker images on current arch"
-  echo "pull_Ca_Images - pull fabric ca docker images on current arch"
+  echo "pull_UDO_Images - pull udo docker images on current arch"
+  echo "pull_UDO_Binaries - pull udo binaries on current arch"
+  echo "pull_Thirdparty_Images - pull udo thirdparty docker images on current arch"
+  echo "pull_Ca_Images - pull udo ca docker images on current arch"
   echo "pull_Java_Images - pull javaenv docker images on current arch (only on master branch)"
   echo
   # STABLE_VERSION - Image will be pulled from Nexus3
   # BASE_VERSION - Tag it as BASE_VERSION in Makefile
-  echo "e.g. STABLE_VERSION=1.3.0-stable BASE_VERSION=1.3.0 ./scripts/pull_build_artifacts.sh --pull_Fabric_Images"
+  echo "e.g. STABLE_VERSION=1.3.0-stable BASE_VERSION=1.3.0 ./scripts/pull_build_artifacts.sh --pull_UDO_Images"
   echo "e.g. STABLE_VERSION=1.3.0-stable BASE_VERSION=1.3.0 ./scripts/pull_build_artifacts.sh --pull_Ca_Images"
 
 }
@@ -51,22 +51,22 @@ cleanup() {
   docker images -q | xargs docker rmi -f || true
 }
 
-# pull fabric, fabric-ca and thirdparty images, and binaries
+# pull udo, fabric-ca and thirdparty images, and binaries
 pull_All() {
   echo "-------> pull thirdparty docker images"
   pull_Thirdparty_Images
   echo "-------> pull binaries"
-  pull_Fabric_Binaries
-  echo "-------> pull fabric docker images"
-  pull_Fabric_Images
-  echo "-------> pull fabric ca docker images"
+  pull_UDO_Binaries
+  echo "-------> pull udo docker images"
+  pull_UDO_Images
+  echo "-------> pull udo ca docker images"
   pull_Ca_Images
   echo "-------> pull javaenv images"
   pull_Java_Images
 }
 
-# pull fabric docker images
-pull_Fabric_Images() {
+# pull udo docker images
+pull_UDO_Images() {
   for IMAGE in ${IMAGES_LIST[*]}; do
        docker pull $NEXUS_URL/$ORG_NAME-$IMAGE:$ARCH-$STABLE_VERSION
        docker tag $NEXUS_URL/$ORG_NAME-$IMAGE:$ARCH-$STABLE_VERSION $ORG_NAME-$IMAGE:$ARCH-$BASE_VERSION
@@ -75,25 +75,25 @@ pull_Fabric_Images() {
   done
 }
 
-# pull fabric binaries
-pull_Fabric_Binaries() {
+# pull udo binaries
+pull_UDO_Binaries() {
   export MARCH=$(echo "$(uname -s|tr '[:upper:]' '[:lower:]'|sed 's/mingw64_nt.*/windows/')-$(uname -m | sed 's/x86_64/amd64/g')" | awk '{print tolower($0)}')
   echo "-------> MARCH:" $MARCH
   echo "-------> pull stable binaries for all platforms (x and z)"
-  MVN_METADATA=$(echo "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-$STABLE_VERSION/maven-metadata.xml")
+  MVN_METADATA=$(echo "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/udo/hyperledger-udo-$STABLE_VERSION/maven-metadata.xml")
   curl -L "$MVN_METADATA" > maven-metadata.xml
   RELEASE_TAG=$(cat maven-metadata.xml | grep release)
   COMMIT=$(echo $RELEASE_TAG | awk -F - '{ print $4 }' | cut -d "<" -f1)
   echo "-------> COMMIT:" $COMMIT
-  curl https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric-$STABLE_VERSION/$MARCH.$STABLE_VERSION-$COMMIT/hyperledger-fabric-$STABLE_VERSION-$MARCH.$STABLE_VERSION-$COMMIT.tar.gz | tar xz
+  curl https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/udo/hyperledger-udo-$STABLE_VERSION/$MARCH.$STABLE_VERSION-$COMMIT/hyperledger-udo-$STABLE_VERSION-$MARCH.$STABLE_VERSION-$COMMIT.tar.gz | tar xz
   if [ $? != 0 ]; then
-    echo "-------> FAILED to pull fabric binaries"
+    echo "-------> FAILED to pull udo binaries"
     exit 1
   fi
 }
 
-# pull fabric docker images from amd64 and s390x platforms
-pull_Fabric_Images_All_Platforms() {
+# pull udo docker images from amd64 and s390x platforms
+pull_UDO_Images_All_Platforms() {
   # pull stable images from nexus and tag to hyperledger
   echo "-------> pull docker images for all platforms (x, z)"
   for arch in amd64 s390x; do
@@ -108,7 +108,7 @@ pull_Fabric_Images_All_Platforms() {
 # pull thirdparty docker images from nexus
 pull_Thirdparty_Images() {
   echo "------> pull thirdparty docker images from nexus"
-  BASEIMAGE_VERSION=$(curl --silent  https://raw.githubusercontent.com/hyperledger/fabric/master/Makefile 2>&1 | tee Makefile | grep "BASEIMAGE_RELEASE=" | cut -d "=" -f2)
+  BASEIMAGE_VERSION=$(curl --silent  https://raw.githubusercontent.com/hyperledger/udo/master/Makefile 2>&1 | tee Makefile | grep "BASEIMAGE_RELEASE=" | cut -d "=" -f2)
   for IMAGE in ${THIRDPARTY_IMAGES_LIST[*]}; do
         docker pull $NEXUS_URL/$ORG_NAME-$IMAGE:$ARCH-$BASEIMAGE_VERSION
         docker tag $NEXUS_URL/$ORG_NAME-$IMAGE:$ARCH-$BASEIMAGE_VERSION $ORG_NAME-$IMAGE
@@ -149,14 +149,14 @@ Parse_Arguments() {
             --pull_Thirdparty_Images)
                 pull_Thirdparty_Images
                 ;;
-            --pull_Fabric_Binaries)
-                pull_Fabric_Binaries
+            --pull_UDO_Binaries)
+                pull_UDO_Binaries
                 ;;
-            --pull_Fabric_Images)
-                pull_Fabric_Images
+            --pull_UDO_Images)
+                pull_UDO_Images
                 ;;
-            --pull_Fabric_Images_All_Platforms)
-                pull_Fabric_Images_All_Platforms
+            --pull_UDO_Images_All_Platforms)
+                pull_UDO_Images_All_Platforms
                 ;;
             --pull_Ca_Images)
                 pull_Ca_Images

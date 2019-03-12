@@ -12,8 +12,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/internal/namer"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/metrics/internal/namer"
 )
 
 // A Field represents data that is included in the reference table for metrics.
@@ -35,7 +35,7 @@ type Column struct {
 }
 
 // NewPrometheusTable creates a table that can be used to document Prometheus
-// metrics maintained by Fabric.
+// metrics maintained by UDO.
 func NewPrometheusTable(cells Cells) Table {
 	return Table{
 		Cells: cells,
@@ -49,7 +49,7 @@ func NewPrometheusTable(cells Cells) Table {
 }
 
 // NewStatsdTable creates a table that can be used to document StatsD metrics
-// maintained by Fabric.
+// maintained by UDO.
 func NewStatsdTable(cells Cells) Table {
 	return Table{
 		Cells: cells,

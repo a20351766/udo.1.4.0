@@ -10,10 +10,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 

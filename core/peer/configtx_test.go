@@ -15,21 +15,21 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/capabilities"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/configtxgentest"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/customtx"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	ordererconfig "github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/capabilities"
+	"github.com/hyperledger/udo/common/channelconfig"
+	configtxtest "github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/tools/configtxgen/configtxgentest"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/customtx"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	ordererconfig "github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -218,7 +218,7 @@ func (h *testHelper) constructChannelBundle(chainid string, ledger ledger.PeerLe
 
 func (h *testHelper) initLocalMSP() {
 	rand.Seed(time.Now().UnixNano())
-	cleanup := configtest.SetDevFabricConfigPath(h.t)
+	cleanup := configtest.SetDevUDOConfigPath(h.t)
 	defer cleanup()
 	conf, err := ordererconfig.Load()
 	if err != nil {

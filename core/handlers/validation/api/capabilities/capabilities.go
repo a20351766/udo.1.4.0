@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package validation
 
-import "github.com/hyperledger/fabric/core/handlers/validation/api"
+import "github.com/hyperledger/udo/core/handlers/validation/api"
 
 // Capabilities defines what capabilities the validation
 // should take into account when validating a transaction
@@ -45,13 +45,13 @@ type Capabilities interface {
 
 	// MetadataLifecycle indicates whether the peer should use the deprecated and problematic
 	// v1.0/v1.1 lifecycle, or whether it should use the newer per channel peer local chaincode
-	// metadata package approach planned for release with Fabric v1.2
+	// metadata package approach planned for release with UDO v1.2
 	MetadataLifecycle() bool
 
 	// KeyLevelEndorsement returns true if this channel supports endorsement
 	// policies expressible at a ledger key granularity, as described in FAB-8812
 	KeyLevelEndorsement() bool
 
-	// FabToken returns true if fabric token function is supported.
+	// FabToken returns true if udo token function is supported.
 	FabToken() bool
 }

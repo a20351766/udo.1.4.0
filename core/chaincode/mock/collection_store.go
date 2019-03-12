@@ -4,10 +4,10 @@ package mock
 import (
 	sync "sync"
 
-	privdata "github.com/hyperledger/fabric/core/common/privdata"
-	ledger "github.com/hyperledger/fabric/core/ledger"
-	common "github.com/hyperledger/fabric/protos/common"
-	peer "github.com/hyperledger/fabric/protos/peer"
+	privdata "github.com/hyperledger/udo/core/common/privdata"
+	ledger "github.com/hyperledger/udo/core/ledger"
+	common "github.com/hyperledger/udo/protos/common"
+	peer "github.com/hyperledger/udo/protos/peer"
 )
 
 type CollectionStore struct {

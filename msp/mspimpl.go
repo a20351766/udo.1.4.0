@@ -15,15 +15,15 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/bccsp/signer"
-	m "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/bccsp/signer"
+	m "github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 )
 
 // mspSetupFuncType is the prototype of the setup function
-type mspSetupFuncType func(config *m.FabricMSPConfig) error
+type mspSetupFuncType func(config *m.UDOMSPConfig) error
 
 // validateIdentityOUsFuncType is the prototype of the function to validate identity's OUs
 type validateIdentityOUsFuncType func(id *identity) error
@@ -87,7 +87,7 @@ type bccspmsp struct {
 	ouIdentifiers map[string][][]byte
 
 	// cryptoConfig contains
-	cryptoConfig *m.FabricCryptoConfig
+	cryptoConfig *m.UDOCryptoConfig
 
 	// NodeOUs configuration
 	ouEnforcement bool
@@ -210,11 +210,11 @@ func (msp *bccspmsp) Setup(conf1 *m.MSPConfig) error {
 		return errors.New("Setup error: nil conf reference")
 	}
 
-	// given that it's an msp of type fabric, extract the MSPConfig instance
-	conf := &m.FabricMSPConfig{}
+	// given that it's an msp of type udo, extract the MSPConfig instance
+	conf := &m.UDOMSPConfig{}
 	err := proto.Unmarshal(conf1.Config, conf)
 	if err != nil {
-		return errors.Wrap(err, "failed unmarshalling fabric msp config")
+		return errors.Wrap(err, "failed unmarshalling udo msp config")
 	}
 
 	// set the name for this msp
@@ -232,7 +232,7 @@ func (msp *bccspmsp) GetVersion() MSPVersion {
 
 // GetType returns the type for this MSP
 func (msp *bccspmsp) GetType() ProviderType {
-	return FABRIC
+	return UDO
 }
 
 // GetIdentifier returns the MSP identifier for this instance

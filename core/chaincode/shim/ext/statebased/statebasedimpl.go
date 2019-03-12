@@ -11,10 +11,10 @@ import (
 	"sort"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mb "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	cb "github.com/hyperledger/udo/protos/common"
+	mb "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 

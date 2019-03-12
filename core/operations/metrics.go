@@ -9,14 +9,14 @@ package operations
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/prometheus"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/metrics/prometheus"
 )
 
 var (
-	fabricVersion = metrics.GaugeOpts{
-		Name:         "fabric_version",
-		Help:         "The active version of Fabric.",
+	udoVersion = metrics.GaugeOpts{
+		Name:         "udo_version",
+		Help:         "The active version of UDO.",
 		LabelNames:   []string{"version"},
 		StatsdFormat: "%{#fqname}.%{version}",
 	}
@@ -31,11 +31,11 @@ func versionGauge(provider metrics.Provider) metrics.Gauge {
 		gaugeLock.Lock()
 		defer gaugeLock.Unlock()
 		if promVersionGauge == nil {
-			promVersionGauge = provider.NewGauge(fabricVersion)
+			promVersionGauge = provider.NewGauge(udoVersion)
 		}
 		return promVersionGauge
 
 	default:
-		return provider.NewGauge(fabricVersion)
+		return provider.NewGauge(udoVersion)
 	}
 }

@@ -21,15 +21,15 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/internal"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/ledger/rwset/kvrwset"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/validator/internal"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/ledger/rwset/kvrwset"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -45,7 +45,7 @@ type keyValue struct {
 
 func TestMain(m *testing.M) {
 	flogging.ActivateSpec("statevalidator,statebasedval,statecouchdb=debug")
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/kvledger/txmgmt/validator/statebasedval")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/kvledger/txmgmt/validator/statebasedval")
 	os.Exit(m.Run())
 }
 

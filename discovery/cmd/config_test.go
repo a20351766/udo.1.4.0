@@ -11,11 +11,11 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hyperledger/fabric/cmd/common"
-	"github.com/hyperledger/fabric/discovery/cmd"
-	"github.com/hyperledger/fabric/discovery/cmd/mocks"
-	. "github.com/hyperledger/fabric/protos/discovery"
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/cmd/common"
+	"github.com/hyperledger/udo/discovery/cmd"
+	"github.com/hyperledger/udo/discovery/cmd/mocks"
+	. "github.com/hyperledger/udo/protos/discovery"
+	"github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -81,7 +81,7 @@ func TestParseConfigResponse(t *testing.T) {
 
 	t.Run("Success", func(t *testing.T) {
 		chanRes.On("Config").Return(&ConfigResult{
-			Msps: map[string]*msp.FabricMSPConfig{
+			Msps: map[string]*msp.UDOMSPConfig{
 				"Org1MSP": nil,
 				"Org2MSP": nil,
 			},

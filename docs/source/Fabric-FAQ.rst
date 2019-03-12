@@ -40,7 +40,7 @@ Security & Access Control
   For more information refer to the :doc:`private_data_tutorial` tutorial.
   Note that the key concepts topic also explains `when to use private data instead of a channel <private-data/private-data.html#when-to-use-a-collection-within-a-channel-vs-a-separate-channel>`_.
 
-  Third, as an alternative to Fabric hashing the data using private data,
+  Third, as an alternative to UDO hashing the data using private data,
   the client application can hash or encrypt the data before calling
   chaincode. If you hash the data then you will need to provide a means to
   share the source data. If you encrypt the data then you will need to provide
@@ -58,7 +58,7 @@ Security & Access Control
 :Answer:
   No, the orderers only order transactions, they do not open the transactions.
   If you do not want the data to go through the orderers at all, then utilize
-  the private data feature of Fabric.  Alternatively, you can hash or encrypt
+  the private data feature of UDO.  Alternatively, you can hash or encrypt
   the data in the client application before calling chaincode. If you encrypt
   the data then you will need to provide a means to share the decryption keys.
 
@@ -113,7 +113,7 @@ Chaincode (Smart Contracts and Digital Assets)
 ----------------------------------------------
 
 :Question:
-  Does Hyperledger Fabric support smart contract logic?
+  Does Hyperledger UDO support smart contract logic?
 
 :Answer:
   Yes. We call this feature :ref:`chaincode`. It is our interpretation of the
@@ -159,11 +159,11 @@ Chaincode (Smart Contracts and Digital Assets)
   Chaincode can be written in any programming language and executed in
   containers. Currently, Golang, node.js and java chaincode are supported.
 
-  It is also possible to build Hyperledger Fabric applications using
+  It is also possible to build Hyperledger UDO applications using
   `Hyperledger Composer <https://hyperledger.github.io/composer/>`__.
 
 :Question:
-  Does the Hyperledger Fabric have native currency?
+  Does the Hyperledger UDO have native currency?
 
 :Answer:
   No. However, if you really need a native currency for your chain network,
@@ -241,7 +241,7 @@ Ordering Service
 ..
 
 :Question:
-  **I want to write a consensus implementation for Fabric. Where do I begin?**
+  **I want to write a consensus implementation for UDO. Where do I begin?**
 
 :Answer:
   A consensus plugin needs to implement the ``Consenter`` and ``Chain``
@@ -250,10 +250,10 @@ Ordering Service
   cues for your own implementation. The ordering service code can be found under
   the `orderer package`_.
 
-.. _consensus package: https://github.com/hyperledger/fabric/blob/master/orderer/consensus/consensus.go
-.. _solo: https://github.com/hyperledger/fabric/tree/master/orderer/consensus/solo
-.. _kafka: https://github.com/hyperledger/fabric/tree/master/orderer/consensus/kafka
-.. _orderer package: https://github.com/hyperledger/fabric/tree/master/orderer
+.. _consensus package: https://github.com/hyperledger/udo/blob/master/orderer/consensus/consensus.go
+.. _solo: https://github.com/hyperledger/udo/tree/master/orderer/consensus/solo
+.. _kafka: https://github.com/hyperledger/udo/tree/master/orderer/consensus/kafka
+.. _orderer package: https://github.com/hyperledger/udo/tree/master/orderer
 
 ..
 
@@ -294,7 +294,7 @@ Kafka
   Kafka-based ordering service. How do I proceed?**
 
 :Answer:
-  The Hyperledger Fabric documentation assumes the reader generally has the
+  The Hyperledger UDO documentation assumes the reader generally has the
   operational expertise to setup, configure, and manage a Kafka cluster
   (see :ref:`kafka-caveat`). If you insist on proceeding without such expertise,
   you should complete, *at a minimum*, the first 6 steps of the
@@ -303,7 +303,7 @@ Kafka
   explanation of the sensible defaults for Kafka/ZooKeeper.
 
 .. _Kafka Quickstart guide: https://kafka.apache.org/quickstart
-.. _this sample configuration file: https://github.com/hyperledger/fabric/blob/release-1.1/bddtests/dc-orderer-kafka.yml
+.. _this sample configuration file: https://github.com/hyperledger/udo/blob/release-1.1/bddtests/dc-orderer-kafka.yml
 
 ..
 
@@ -314,7 +314,7 @@ Kafka
 :Answer:
   Consult `the end-to-end CLI example`_.
 
-.. _the end-to-end CLI example: https://github.com/hyperledger/fabric/blob/release-1.3/examples/e2e_cli/docker-compose-e2e.yaml
+.. _the end-to-end CLI example: https://github.com/hyperledger/udo/blob/release-1.3/examples/e2e_cli/docker-compose-e2e.yaml
 
 ..
 
@@ -344,7 +344,7 @@ BFT
 
 :Answer:
   No date has been set. We are working towards a release during the 1.x cycle,
-  i.e. it will come with a minor version upgrade in Fabric. Track FAB-33_ for
+  i.e. it will come with a minor version upgrade in UDO. Track FAB-33_ for
   updates.
 
 .. _FAB-33: https://jira.hyperledger.org/browse/FAB-33

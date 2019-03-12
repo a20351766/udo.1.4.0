@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/common/viperutil"
-	cf "github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/common/viperutil"
+	cf "github.com/hyperledger/udo/core/config"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
 	"github.com/spf13/viper"
 )
 
@@ -206,7 +206,7 @@ var genesisDefaults = TopLevel{
 
 // LoadTopLevel simply loads the configtx.yaml file into the structs above and
 // completes their initialization. Config paths may optionally be provided and
-// will be used in place of the FABRIC_CFG_PATH env variable.
+// will be used in place of the UDO_CFG_PATH env variable.
 //
 // Note, for environment overrides to work properly within a profile, Load
 // should be used instead.
@@ -249,7 +249,7 @@ func LoadTopLevel(configPaths ...string) *TopLevel {
 
 // Load returns the orderer/application config combination that corresponds to
 // a given profile. Config paths may optionally be provided and will be used
-// in place of the FABRIC_CFG_PATH env variable.
+// in place of the UDO_CFG_PATH env variable.
 func Load(profile string, configPaths ...string) *Profile {
 	config := viper.New()
 	if len(configPaths) > 0 {
@@ -345,7 +345,7 @@ func (r *Resources) completeInitialization() {
 func (org *Organization) completeInitialization(configDir string) {
 	// set the MSP type; if none is specified we assume BCCSP
 	if org.MSPType == "" {
-		org.MSPType = msp.ProviderTypeToString(msp.FABRIC)
+		org.MSPType = msp.ProviderTypeToString(msp.UDO)
 	}
 
 	if org.AdminPrincipal == "" {

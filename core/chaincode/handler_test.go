@@ -11,16 +11,16 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
-	"github.com/hyperledger/fabric/common/mocks/config"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/aclmgmt/resources"
-	"github.com/hyperledger/fabric/core/chaincode"
-	"github.com/hyperledger/fabric/core/chaincode/fake"
-	"github.com/hyperledger/fabric/core/chaincode/mock"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/sysccprovider"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/metrics/metricsfakes"
+	"github.com/hyperledger/udo/common/mocks/config"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/aclmgmt/resources"
+	"github.com/hyperledger/udo/core/chaincode"
+	"github.com/hyperledger/udo/core/chaincode/fake"
+	"github.com/hyperledger/udo/core/chaincode/mock"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/common/sysccprovider"
+	pb "github.com/hyperledger/udo/protos/peer"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
@@ -2786,7 +2786,7 @@ var _ = Describe("Handler", func() {
 
 			It("returns an error", func() {
 				err := handler.ProcessStream(fakeChatStream)
-				Expect(err).To(MatchError("error handling message, ending stream: [tx-id] Fabric side handler cannot handle message (9999) while in created state"))
+				Expect(err).To(MatchError("error handling message, ending stream: [tx-id] UDO side handler cannot handle message (9999) while in created state"))
 			})
 		})
 

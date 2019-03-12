@@ -19,13 +19,13 @@ package multichannel
 import (
 	"testing"
 
-	newchannelconfig "github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	mockconfigtx "github.com/hyperledger/fabric/common/mocks/configtx"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	cb "github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	newchannelconfig "github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	mockconfigtx "github.com/hyperledger/udo/common/mocks/configtx"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	cb "github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

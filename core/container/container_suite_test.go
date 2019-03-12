@@ -8,7 +8,7 @@ package container_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/container"
+	"github.com/hyperledger/udo/core/container"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

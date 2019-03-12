@@ -92,7 +92,7 @@ Here's a list of the available options and what they do.
   over resources, such as being able to read and write the ledger, for example.
 
   A user identity must be specified. As you can see, this identity is
-  fundamental to the idea that Hyperledger Fabric is a *permissioned* network --
+  fundamental to the idea that Hyperledger UDO is a *permissioned* network --
   all actors have an identity, including applications, peers and orderers, which
   determines their control over resources. You can read more about this idea in the membership services [topic](../membership/membership.html).
 
@@ -150,9 +150,9 @@ Here's a list of the available options and what they do.
 
   * <`PluginEventHandlerFunction`> The name of a user-defined event handler.
     This allows a user to define their own logic for event handling. See how to
-    [define](https://fabric-sdk-node.github.io/master/tutorial-transaction-commit-events.html)
+    [define](https://udo-sdk-node.github.io/master/tutorial-transaction-commit-events.html)
     a plugin event handler, and examine a [sample
-    handler](https://github.com/hyperledger/fabric-sdk-node/blob/master/test/integration/network-e2e/sample-transaction-event-handler.js).
+    handler](https://github.com/hyperledger/udo-sdk-node/blob/master/test/integration/network-e2e/sample-transaction-event-handler.js).
 
     A user-defined event handler is only necessary if you have very specific
     event handling requirements; in general, one of the built-in event

@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package acl
 
 import (
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/policies"
-	cb "github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/policies"
+	cb "github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 )
 

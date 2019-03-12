@@ -43,7 +43,7 @@ Logging specification
 ----
 
 The logging levels of the ``peer`` and ``orderer`` commands are controlled
-by a logging specification, which is set via the ``FABRIC_LOGGING_SPEC``
+by a logging specification, which is set via the ``UDO_LOGGING_SPEC``
 environment variable.
 
 The full logging level specification is of the form
@@ -79,7 +79,7 @@ Logging format
 ----
 
 The logging format of the ``peer`` and ``orderer`` commands is controlled
-via the ``FABRIC_LOGGING_FORMAT`` environment variable. This can be set to
+via the ``UDO_LOGGING_FORMAT`` environment variable. This can be set to
 a format string, such as the default
 
 ::
@@ -177,7 +177,7 @@ logger *name* will appear in all log messages created by the logger. The
 
 The default logging level for loggers within the Chaincode container can
 be set in the
-`core.yaml <https://github.com/hyperledger/fabric/blob/master/sampleconfig/core.yaml>`__
+`core.yaml <https://github.com/hyperledger/udo/blob/master/sampleconfig/core.yaml>`__
 file. The key ``chaincode.logging.level`` sets the default level for all
 loggers within the Chaincode container. The key ``chaincode.logging.shim``
 overrides the default level for the ``shim`` logger.

@@ -19,9 +19,9 @@ package fileledger
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/ledger/blkstorage"
-	"github.com/hyperledger/fabric/common/ledger/blkstorage/fsblkstorage"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
+	"github.com/hyperledger/udo/common/ledger/blkstorage"
+	"github.com/hyperledger/udo/common/ledger/blkstorage/fsblkstorage"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
 )
 
 type fileLedgerFactory struct {

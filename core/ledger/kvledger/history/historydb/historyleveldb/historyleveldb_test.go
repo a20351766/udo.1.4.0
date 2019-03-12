@@ -11,21 +11,21 @@ import (
 	"strconv"
 	"testing"
 
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	util2 "github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	"github.com/hyperledger/fabric/protos/peer"
+	configtxtest "github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	util2 "github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/kvledger/history/historydb/historyleveldb")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/kvledger/history/historydb/historyleveldb")
 	flogging.ActivateSpec("leveldbhelper,historyleveldb=debug")
 	os.Exit(m.Run())
 }

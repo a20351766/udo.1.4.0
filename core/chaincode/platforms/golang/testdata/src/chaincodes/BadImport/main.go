@@ -11,7 +11,7 @@ import (
 	"bogus/package"
 	"fmt"
 
-	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/chaincode/shim"
 )
 
 // SimpleChaincode example simple Chaincode implementation

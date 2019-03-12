@@ -21,7 +21,7 @@ import (
 	"hash"
 	"reflect"
 
-	"github.com/hyperledger/fabric/bccsp"
+	"github.com/hyperledger/udo/bccsp"
 )
 
 type Encryptor struct {

@@ -12,10 +12,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/mock"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/mock"
+	"github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -25,7 +25,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestWithNoCollectionConfig(t *testing.T) {
-	dbPath := "/tmp/fabric/core/ledger/confighistory"
+	dbPath := "/tmp/udo/core/ledger/confighistory"
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	env := newTestEnv(t, dbPath, mockCCInfoProvider)
 	mgr := env.mgr
@@ -44,7 +44,7 @@ func TestWithNoCollectionConfig(t *testing.T) {
 }
 
 func TestMgr(t *testing.T) {
-	dbPath := "/tmp/fabric/core/ledger/confighistory"
+	dbPath := "/tmp/udo/core/ledger/confighistory"
 	mockCCInfoProvider := &mock.DeployedChaincodeInfoProvider{}
 	env := newTestEnv(t, dbPath, mockCCInfoProvider)
 	mgr := env.mgr

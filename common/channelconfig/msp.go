@@ -10,9 +10,9 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/cache"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/msp/cache"
+	mspprotos "github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 )
 
@@ -40,7 +40,7 @@ func (bh *MSPConfigHandler) ProposeMSP(mspConfig *mspprotos.MSPConfig) (msp.MSP,
 	var err error
 
 	switch mspConfig.Type {
-	case int32(msp.FABRIC):
+	case int32(msp.UDO):
 		// create the bccsp msp instance
 		mspInst, err := msp.New(&msp.BCCSPNewOpts{NewBaseOpts: msp.NewBaseOpts{Version: bh.version}})
 		if err != nil {

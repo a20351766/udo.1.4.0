@@ -13,8 +13,8 @@
 #   - configtxlator - builds a native configtxlator binary
 #   - cryptogen  -  builds a native cryptogen binary
 #   - idemixgen  -  builds a native idemixgen binary
-#   - peer - builds a native fabric peer binary
-#   - orderer - builds a native fabric orderer binary
+#   - peer - builds a native udo peer binary
+#   - orderer - builds a native udo orderer binary
 #   - release - builds release packages for the host platform
 #   - release-all - builds release packages for all target platforms
 #   - unit-test - runs the go-test based unit tests
@@ -51,11 +51,11 @@ BASEIMAGE_RELEASE=0.4.14
 
 # Allow to build as a submodule setting the main project to
 # the PROJECT_NAME env variable, for example,
-# export PROJECT_NAME=hyperledger/fabric-test
+# export PROJECT_NAME=hyperledger/udo-test
 ifeq ($(PROJECT_NAME),true)
-PROJECT_NAME = $(PROJECT_NAME)/fabric
+PROJECT_NAME = $(PROJECT_NAME)/udo
 else
-PROJECT_NAME = hyperledger/fabric
+PROJECT_NAME = hyperledger/udo
 endif
 
 BUILD_DIR ?= .build
@@ -81,7 +81,7 @@ GO_LDFLAGS = $(patsubst %,-X $(PKGNAME)/common/metadata.%,$(METADATA_VAR))
 
 GO_TAGS ?=
 
-CHAINTOOL_URL ?= https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/chaintool-$(CHAINTOOL_RELEASE)/hyperledger-fabric-chaintool-$(CHAINTOOL_RELEASE).jar
+CHAINTOOL_URL ?= https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/udo/hyperledger-udo/chaintool-$(CHAINTOOL_RELEASE)/hyperledger-udo-chaintool-$(CHAINTOOL_RELEASE).jar
 
 export GO_LDFLAGS GO_TAGS
 
@@ -125,12 +125,12 @@ help-docs: native
 # Pull thirdparty docker images based on the latest baseimage release version
 .PHONY: docker-thirdparty
 docker-thirdparty:
-	docker pull $(BASE_DOCKER_NS)/fabric-couchdb:$(BASE_DOCKER_TAG)
-	docker tag $(BASE_DOCKER_NS)/fabric-couchdb:$(BASE_DOCKER_TAG) $(DOCKER_NS)/fabric-couchdb
-	docker pull $(BASE_DOCKER_NS)/fabric-zookeeper:$(BASE_DOCKER_TAG)
-	docker tag $(BASE_DOCKER_NS)/fabric-zookeeper:$(BASE_DOCKER_TAG) $(DOCKER_NS)/fabric-zookeeper
-	docker pull $(BASE_DOCKER_NS)/fabric-kafka:$(BASE_DOCKER_TAG)
-	docker tag $(BASE_DOCKER_NS)/fabric-kafka:$(BASE_DOCKER_TAG) $(DOCKER_NS)/fabric-kafka
+	docker pull $(BASE_DOCKER_NS)/udo-couchdb:$(BASE_DOCKER_TAG)
+	docker tag $(BASE_DOCKER_NS)/udo-couchdb:$(BASE_DOCKER_TAG) $(DOCKER_NS)/udo-couchdb
+	docker pull $(BASE_DOCKER_NS)/udo-zookeeper:$(BASE_DOCKER_TAG)
+	docker tag $(BASE_DOCKER_NS)/udo-zookeeper:$(BASE_DOCKER_TAG) $(DOCKER_NS)/udo-zookeeper
+	docker pull $(BASE_DOCKER_NS)/udo-kafka:$(BASE_DOCKER_TAG)
+	docker tag $(BASE_DOCKER_NS)/udo-kafka:$(BASE_DOCKER_TAG) $(DOCKER_NS)/udo-kafka
 
 .PHONY: spelling
 spelling:
@@ -206,19 +206,19 @@ native: peer orderer configtxgen cryptogen idemixgen configtxlator discover
 
 linter: check-deps buildenv
 	@echo "LINT: Running code checks.."
-	@$(DRUN) $(DOCKER_NS)/fabric-buildenv:$(DOCKER_TAG) ./scripts/golinter.sh
+	@$(DRUN) $(DOCKER_NS)/udo-buildenv:$(DOCKER_TAG) ./scripts/golinter.sh
 
 check-deps: buildenv
 	@echo "DEP: Checking for dependency issues.."
-	@$(DRUN) $(DOCKER_NS)/fabric-buildenv:$(DOCKER_TAG) ./scripts/check_deps.sh
+	@$(DRUN) $(DOCKER_NS)/udo-buildenv:$(DOCKER_TAG) ./scripts/check_deps.sh
 
 check-metrics-doc: buildenv
 	@echo "METRICS: Checking for outdated reference documentation.."
-	@$(DRUN) $(DOCKER_NS)/fabric-buildenv:$(DOCKER_TAG) ./scripts/metrics_doc.sh check
+	@$(DRUN) $(DOCKER_NS)/udo-buildenv:$(DOCKER_TAG) ./scripts/metrics_doc.sh check
 
 generate-metrics-doc: buildenv
 	@echo "Generating metrics reference documentation..."
-	@$(DRUN) $(DOCKER_NS)/fabric-buildenv:$(DOCKER_TAG) ./scripts/metrics_doc.sh generate
+	@$(DRUN) $(DOCKER_NS)/udo-buildenv:$(DOCKER_TAG) ./scripts/metrics_doc.sh generate
 
 $(BUILD_DIR)/%/chaintool: Makefile
 	@echo "Installing chaintool"
@@ -235,7 +235,7 @@ $(BUILD_DIR)/docker/bin/%: $(PROJECT_FILES)
 	@$(DRUN) \
 		-v $(abspath $(BUILD_DIR)/docker/bin):/opt/gopath/bin \
 		-v $(abspath $(BUILD_DIR)/docker/$(TARGET)/pkg):/opt/gopath/pkg \
-		$(BASE_DOCKER_NS)/fabric-baseimage:$(BASE_DOCKER_TAG) \
+		$(BASE_DOCKER_NS)/udo-baseimage:$(BASE_DOCKER_TAG) \
 		go install -tags "$(GO_TAGS)" -ldflags "$(DOCKER_GO_LDFLAGS)" $(pkgmap.$(@F))
 	@touch $@
 
@@ -253,7 +253,7 @@ $(BUILD_DIR)/docker/gotools: gotools.mk
 	@$(DRUN) \
 		-v $(abspath $@):/opt/gotools \
 		-w /opt/gopath/src/$(PKGNAME) \
-		$(BASE_DOCKER_NS)/fabric-baseimage:$(BASE_DOCKER_TAG) \
+		$(BASE_DOCKER_NS)/udo-baseimage:$(BASE_DOCKER_TAG) \
 		make -f gotools.mk GOTOOLS_BINDIR=/opt/gotools/bin GOTOOLS_GOPATH=/opt/gotools/obj
 
 $(BUILD_DIR)/bin/%: $(PROJECT_FILES)
@@ -294,17 +294,17 @@ $(BUILD_DIR)/image/%/Dockerfile: images/%/Dockerfile.in
 $(BUILD_DIR)/image/tools/$(DUMMY): $(BUILD_DIR)/image/tools/Dockerfile
 	$(eval TARGET = ${patsubst $(BUILD_DIR)/image/%/$(DUMMY),%,${@}})
 	@echo "Building docker $(TARGET)-image"
-	$(DBUILD) -t $(DOCKER_NS)/fabric-$(TARGET) -f $(@D)/Dockerfile .
-	docker tag $(DOCKER_NS)/fabric-$(TARGET) $(DOCKER_NS)/fabric-$(TARGET):$(DOCKER_TAG)
-	docker tag $(DOCKER_NS)/fabric-$(TARGET) $(DOCKER_NS)/fabric-$(TARGET):$(ARCH)-latest
+	$(DBUILD) -t $(DOCKER_NS)/udo-$(TARGET) -f $(@D)/Dockerfile .
+	docker tag $(DOCKER_NS)/udo-$(TARGET) $(DOCKER_NS)/udo-$(TARGET):$(DOCKER_TAG)
+	docker tag $(DOCKER_NS)/udo-$(TARGET) $(DOCKER_NS)/udo-$(TARGET):$(ARCH)-latest
 	@touch $@
 
 $(BUILD_DIR)/image/%/$(DUMMY): Makefile $(BUILD_DIR)/image/%/payload $(BUILD_DIR)/image/%/Dockerfile
 	$(eval TARGET = ${patsubst $(BUILD_DIR)/image/%/$(DUMMY),%,${@}})
 	@echo "Building docker $(TARGET)-image"
-	$(DBUILD) -t $(DOCKER_NS)/fabric-$(TARGET) $(@D)
-	docker tag $(DOCKER_NS)/fabric-$(TARGET) $(DOCKER_NS)/fabric-$(TARGET):$(DOCKER_TAG)
-	docker tag $(DOCKER_NS)/fabric-$(TARGET) $(DOCKER_NS)/fabric-$(TARGET):$(ARCH)-latest
+	$(DBUILD) -t $(DOCKER_NS)/udo-$(TARGET) $(@D)
+	docker tag $(DOCKER_NS)/udo-$(TARGET) $(DOCKER_NS)/udo-$(TARGET):$(DOCKER_TAG)
+	docker tag $(DOCKER_NS)/udo-$(TARGET) $(DOCKER_NS)/udo-$(TARGET):$(ARCH)-latest
 	@touch $@
 
 $(BUILD_DIR)/gotools.tar.bz2: $(BUILD_DIR)/docker/gotools
@@ -406,21 +406,21 @@ dist-all: dist-clean $(patsubst %,dist/%, $(RELEASE_PLATFORMS))
 dist/%: release/%
 	mkdir -p release/$(@F)/config
 	cp -r sampleconfig/*.yaml release/$(@F)/config
-	cd release/$(@F) && tar -czvf hyperledger-fabric-$(@F).$(PROJECT_VERSION).tar.gz *
+	cd release/$(@F) && tar -czvf hyperledger-udo-$(@F).$(PROJECT_VERSION).tar.gz *
 
 .PHONY: protos
 protos: buildenv
-	@$(DRUN) $(DOCKER_NS)/fabric-buildenv:$(DOCKER_TAG) ./scripts/compile_protos.sh
+	@$(DRUN) $(DOCKER_NS)/udo-buildenv:$(DOCKER_TAG) ./scripts/compile_protos.sh
 
 %-docker-list:
 	$(eval TARGET = ${patsubst %-docker-list,%,${@}})
-	@echo $(DOCKER_NS)/fabric-$(TARGET):$(DOCKER_TAG)
+	@echo $(DOCKER_NS)/udo-$(TARGET):$(DOCKER_TAG)
 
 docker-list: $(patsubst %,%-docker-list, $(IMAGES))
 
 %-docker-clean:
 	$(eval TARGET = ${patsubst %-docker-clean,%,${@}})
-	-docker images --quiet --filter=reference='$(DOCKER_NS)/fabric-$(TARGET):$(ARCH)-$(BASE_VERSION)$(if $(EXTRA_VERSION),-snapshot-*,)' | xargs docker rmi -f
+	-docker images --quiet --filter=reference='$(DOCKER_NS)/udo-$(TARGET):$(ARCH)-$(BASE_VERSION)$(if $(EXTRA_VERSION),-snapshot-*,)' | xargs docker rmi -f
 	-@rm -rf $(BUILD_DIR)/image/$(TARGET) ||:
 
 docker-clean: $(patsubst %,%-docker-clean, $(IMAGES))
@@ -429,13 +429,13 @@ docker-tag-latest: $(IMAGES:%=%-docker-tag-latest)
 
 %-docker-tag-latest:
 	$(eval TARGET = ${patsubst %-docker-tag-latest,%,${@}})
-	docker tag $(DOCKER_NS)/fabric-$(TARGET):$(DOCKER_TAG) $(DOCKER_NS)/fabric-$(TARGET):latest
+	docker tag $(DOCKER_NS)/udo-$(TARGET):$(DOCKER_TAG) $(DOCKER_NS)/udo-$(TARGET):latest
 
 docker-tag-stable: $(IMAGES:%=%-docker-tag-stable)
 
 %-docker-tag-stable:
 	$(eval TARGET = ${patsubst %-docker-tag-stable,%,${@}})
-	docker tag $(DOCKER_NS)/fabric-$(TARGET):$(DOCKER_TAG) $(DOCKER_NS)/fabric-$(TARGET):stable
+	docker tag $(DOCKER_NS)/udo-$(TARGET):$(DOCKER_TAG) $(DOCKER_NS)/udo-$(TARGET):stable
 
 .PHONY: clean
 clean: docker-clean unit-test-clean release-clean
@@ -448,11 +448,11 @@ clean-all: clean gotools-clean dist-clean
 
 .PHONY: dist-clean
 dist-clean:
-	-@rm -rf release/windows-amd64/hyperledger-fabric-windows-amd64.$(PROJECT_VERSION).tar.gz
-	-@rm -rf release/darwin-amd64/hyperledger-fabric-darwin-amd64.$(PROJECT_VERSION).tar.gz
-	-@rm -rf release/linux-amd64/hyperledger-fabric-linux-amd64.$(PROJECT_VERSION).tar.gz
-	-@rm -rf release/linux-s390x/hyperledger-fabric-linux-s390x.$(PROJECT_VERSION).tar.gz
-	-@rm -rf release/linux-ppc64le/hyperledger-fabric-linux-ppc64le.$(PROJECT_VERSION).tar.gz
+	-@rm -rf release/windows-amd64/hyperledger-udo-windows-amd64.$(PROJECT_VERSION).tar.gz
+	-@rm -rf release/darwin-amd64/hyperledger-udo-darwin-amd64.$(PROJECT_VERSION).tar.gz
+	-@rm -rf release/linux-amd64/hyperledger-udo-linux-amd64.$(PROJECT_VERSION).tar.gz
+	-@rm -rf release/linux-s390x/hyperledger-udo-linux-s390x.$(PROJECT_VERSION).tar.gz
+	-@rm -rf release/linux-ppc64le/hyperledger-udo-linux-ppc64le.$(PROJECT_VERSION).tar.gz
 
 %-release-clean:
 	$(eval TARGET = ${patsubst %-release-clean,%,${@}})

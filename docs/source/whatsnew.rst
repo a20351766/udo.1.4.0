@@ -1,17 +1,17 @@
 What's new in v1.4
 ==================
 
-Hyperledger Fabric has matured since the initial v1.0 release, and so has the
-community of Fabric operators and developers. The Fabric developers have been
+Hyperledger UDO has matured since the initial v1.0 release, and so has the
+community of UDO operators and developers. The UDO developers have been
 working with network operators and application developers to deliver v1.4 with
 a focus on production operations and developer ease of use. The two major
-release themes for Hyperledger Fabric v1.4 revolve around these two areas:
+release themes for Hyperledger UDO v1.4 revolve around these two areas:
 
-* **Serviceability and Operations**: As more Hyperledger Fabric networks get
+* **Serviceability and Operations**: As more Hyperledger UDO networks get
   deployed and enter a production state, serviceability and operational aspects
-  are critical. Fabric v1.4 takes a giant leap forward with logging improvements,
+  are critical. UDO v1.4 takes a giant leap forward with logging improvements,
   health checks, and operational metrics. Along with a focus on stability
-  and fixes, Fabric v1.4 is the recommended release for production operations.
+  and fixes, UDO v1.4 is the recommended release for production operations.
   Future fixes will be delivered on the v1.4.x stream, while new features are
   being developed in the v2.0 stream.
 
@@ -45,7 +45,7 @@ Improved programming model for developing applications
 The new Node.js SDK and chaincode programming model makes developing decentralized
 applications easier and improves developer productivity. New documentation helps you
 understand the various aspects of creating a decentralized application for
-Hyperledger Fabric, using a commercial paper business network scenario.
+Hyperledger UDO, using a commercial paper business network scenario.
 
 * :doc:`developapps/scenario`:
   Describes a hypothetical business network involving six organizations who want
@@ -100,7 +100,7 @@ Private data enhancements
 -------------------------
 
 * :doc:`private-data-arch`:
-  The Private data feature has been a part of Fabric since v1.2, and this release
+  The Private data feature has been a part of UDO since v1.2, and this release
   debuts two new enhancements:
 
   * **Reconciliation**, which allows peers for organizations that are added
@@ -117,8 +117,8 @@ Release notes
 The release notes provide more details for users moving to the new release, along
 with a link to the full release change log.
 
-* `Fabric release notes <https://github.com/hyperledger/fabric/releases/tag/v1.4.0>`_.
-* `Fabric CA release notes <https://github.com/hyperledger/fabric-ca/releases/tag/v1.4.0>`_.
+* `UDO release notes <https://github.com/hyperledger/udo/releases/tag/v1.4.0>`_.
+* `UDO CA release notes <https://github.com/hyperledger/fabric-ca/releases/tag/v1.4.0>`_.
 
 .. Licensed under Creative Commons Attribution 4.0 International License
    https://creativecommons.org/licenses/by/4.0/

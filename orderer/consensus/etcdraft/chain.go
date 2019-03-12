@@ -20,14 +20,14 @@ import (
 	"github.com/coreos/etcd/raft/raftpb"
 	"github.com/coreos/etcd/wal"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/consensus"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 
@@ -84,7 +84,7 @@ type Options struct {
 	SnapshotCatchUpEntries uint64
 
 	MemoryStorage MemoryStorage
-	Logger        *flogging.FabricLogger
+	Logger        *flogging.UDOLogger
 
 	TickInterval    time.Duration
 	ElectionTick    int
@@ -140,7 +140,7 @@ type Chain struct {
 	storage *RaftStorage
 	opts    Options
 
-	logger *flogging.FabricLogger
+	logger *flogging.UDOLogger
 }
 
 // NewChain constructs a chain object.

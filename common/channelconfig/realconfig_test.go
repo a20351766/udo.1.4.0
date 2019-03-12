@@ -9,11 +9,11 @@ package channelconfig_test
 import (
 	"testing"
 
-	newchannelconfig "github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/configtxgentest"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/protos/utils"
+	newchannelconfig "github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/tools/configtxgen/configtxgentest"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

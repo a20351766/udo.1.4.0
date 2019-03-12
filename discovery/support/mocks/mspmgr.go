@@ -4,8 +4,8 @@ package mocks
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/msp"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/msp"
+	mspprotos "github.com/hyperledger/udo/protos/msp"
 )
 
 type MSPManager struct {

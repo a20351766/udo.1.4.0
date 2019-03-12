@@ -6,11 +6,11 @@ Upgrading Your Network Components
           from a v1.3 binary to a v1.4 binary). The term “update,” on the other
           hand, refers not to versions but to configuration changes, such as
           updating a channel configuration or a deployment script. As there is
-          no data migration, technically speaking, in Fabric, we will not use
+          no data migration, technically speaking, in UDO, we will not use
           the term "migration" or "migrate" here.
 
-.. note:: Also, if your network is not yet at Fabric v1.3, follow the instructions for
-          `Upgrading Your Network to v1.3 <http://hyperledger-fabric.readthedocs.io/en/release-1.3/upgrading_your_network_tutorial.html>`_.
+.. note:: Also, if your network is not yet at UDO v1.3, follow the instructions for
+          `Upgrading Your Network to v1.3 <http://hyperledger-udo.readthedocs.io/en/release-1.3/upgrading_your_network_tutorial.html>`_.
           The instructions in this documentation only cover moving from v1.3 to
           v1.4, not from any other version to v1.4.
 
@@ -21,14 +21,14 @@ Because the :doc:`build_network` (BYFN) tutorial defaults to the “latest” bi
 if you have run it since the release of v1.4, your machine will have v1.4 binaries
 and tools installed on it and you will not be able to upgrade them.
 
-As a result, this tutorial will provide a network based on Hyperledger Fabric
+As a result, this tutorial will provide a network based on Hyperledger UDO
 v1.3 binaries as well as the v1.4 binaries you will be upgrading to.
 
 At a high level, our upgrade tutorial will perform the following steps:
 
 1. Backup the ledger and MSPs.
-2. Upgrade the orderer binaries to Fabric v1.4.
-3. Upgrade the peer binaries to Fabric v1.4.
+2. Upgrade the orderer binaries to UDO v1.4.
+3. Upgrade the peer binaries to UDO v1.4.
 
 .. note:: There are no new :doc:`capability_requirements` in v1.4. As a result,
           we do not have to update any channel configurations as part of an
@@ -47,7 +47,7 @@ updated.
           Because BYFN is not compatible with the following components, our script for
           upgrading BYFN will not cover them:
 
-          * **Fabric CA**
+          * **UDO CA**
           * **Kafka**
           * **CouchDB**
           * **SDK**
@@ -58,9 +58,9 @@ updated.
 
 From an operational perspective, it's worth noting that the process for gathering
 logs has changed in v1.4, from ``CORE_LOGGING_LEVEL`` (for the peer) and
-``ORDERER_GENERAL_LOGLEVEL`` (for the orderer) to ``FABRIC_LOGGING_SPEC`` (the new
+``ORDERER_GENERAL_LOGLEVEL`` (for the orderer) to ``UDO_LOGGING_SPEC`` (the new
 operations service). For more information, check out the
-`Fabric release notes <https://github.com/hyperledger/fabric/releases/tag/v1.4.0>`_.
+`UDO release notes <https://github.com/hyperledger/udo/releases/tag/v1.4.0>`_.
 
 Prerequisites
 ~~~~~~~~~~~~~
@@ -71,7 +71,7 @@ machine as described in :doc:`prereqs`.
 Launch a v1.3 network
 ---------------------
 
-Before we can upgrade to v1.4, we must first provision a network running Fabric
+Before we can upgrade to v1.4, we must first provision a network running UDO
 v1.3 images.
 
 Just as in the BYFN tutorial, we will be operating from the ``first-network``
@@ -114,7 +114,7 @@ If BYFN has launched properly, you will see:
 
   ===================== All GOOD, BYFN execution completed =====================
 
-We are now ready to upgrade our network to Hyperledger Fabric v1.4.
+We are now ready to upgrade our network to Hyperledger UDO v1.4.
 
 Get the newest samples
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -217,7 +217,7 @@ Once the orderer is down, you'll want to **backup its ledger and MSP**:
 In a production network this process would be repeated for each of the Kafka-based
 orderers in a rolling fashion.
 
-Now **download and restart the orderer** with our new fabric image:
+Now **download and restart the orderer** with our new udo image:
 
 .. code:: bash
 
@@ -231,7 +231,7 @@ after restarting the orderer to verify that it has caught up to the other ordere
 Upgrade the peer containers
 ---------------------------
 
-Next, let's look at how to upgrade peer containers to Fabric v1.4. Peer containers should,
+Next, let's look at how to upgrade peer containers to UDO v1.4. Peer containers should,
 like the orderers, be upgraded in a rolling fashion (one at a time). As mentioned
 during the orderer upgrade, orderers and peers may be upgraded in parallel, but for
 the purposes of this tutorial we’ve separated the processes out. At a high level,
@@ -315,7 +315,7 @@ to ensure the upgrade has been completed properly with a chaincode invoke.
           Although, this is only mandatory if you are updating your chaincode
           as part of the upgrade process. If you are not updating your chaincode
           as part of the upgrade process, it is possible to get endorsements
-          from peers running at different Fabric versions.
+          from peers running at different UDO versions.
 
 Before we get into the CLI container and issue the invoke, make sure the CLI is
 updated to the most current version by issuing:
@@ -345,13 +345,13 @@ the name of the ``ORDERER_CA``:
 
   CH_NAME=mychannel
 
-  ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+  ORDERER_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 Now you can issue the invoke:
 
 .. code:: bash
 
-  peer chaincode invoke -o orderer.example.com:7050 --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt --tls --cafile $ORDERER_CA  -C $CH_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
+  peer chaincode invoke -o orderer.example.com:7050 --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt --tls --cafile $ORDERER_CA  -C $CH_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
 
 Our query earlier revealed ``a`` to have a value of ``90`` and we have just removed
 ``10`` with our invoke. Therefore, a query against ``a`` should reveal ``80``.
@@ -384,20 +384,20 @@ Although this is the end of our update tutorial, there are other components that
 exist in production networks that are not compatible with the BYFN sample. In this
 section, we’ll talk through the process of updating them.
 
-Fabric CA container
+UDO CA container
 ~~~~~~~~~~~~~~~~~~~
 
-To learn how to upgrade your Fabric CA server, click over to the
+To learn how to upgrade your UDO CA server, click over to the
 `CA documentation <http://hyperledger-fabric-ca.readthedocs.io/en/latest/users-guide.html#upgrading-the-server>`_.
 
 Upgrade Node SDK clients
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note:: Upgrade Fabric and Fabric CA before upgrading Node SDK clients.
-          Fabric and Fabric CA are tested for backwards compatibility with
+.. note:: Upgrade UDO and UDO CA before upgrading Node SDK clients.
+          UDO and UDO CA are tested for backwards compatibility with
           older SDK clients. While newer SDK clients often work with older
-          Fabric and Fabric CA releases, they may expose features that
-          are not yet available in the older Fabric and Fabric CA releases,
+          UDO and UDO CA releases, they may expose features that
+          are not yet available in the older UDO and UDO CA releases,
           and are not tested for full compatibility.
 
 Use NPM to upgrade any ``Node.js`` client by executing these commands in the
@@ -409,18 +409,18 @@ root directory of your application:
 
   npm install fabric-ca-client@latest
 
-These commands install the new version of both the Fabric client and Fabric-CA
+These commands install the new version of both the UDO client and UDO-CA
 client and write the new versions ``package.json``.
 
 Upgrading the Kafka cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It is not required, but it is recommended that the Kafka cluster be upgraded and
-kept up to date along with the rest of Fabric. Newer versions of Kafka support
+kept up to date along with the rest of UDO. Newer versions of Kafka support
 older protocol versions, so you may upgrade Kafka before or after the rest of
-Fabric.
+UDO.
 
-If you followed the `Upgrading Your Network to v1.3 tutorial <http://hyperledger-fabric.readthedocs.io/en/release-1.3/upgrading_your_network_tutorial.html>`_,
+If you followed the `Upgrading Your Network to v1.3 tutorial <http://hyperledger-udo.readthedocs.io/en/release-1.3/upgrading_your_network_tutorial.html>`_,
 your Kafka cluster should be at v1.0.0. If it isn't, refer to the official Apache
 Kafka documentation on `upgrading Kafka from previous versions`__ to upgrade the
 Kafka cluster brokers.
@@ -444,14 +444,14 @@ Upgrading CouchDB
 
 If you are using CouchDB as state database, you should upgrade the peer's
 CouchDB at the same time the peer is being upgraded. CouchDB v2.2.0 has
-been tested with Fabric v1.4.
+been tested with UDO v1.4.
 
 To upgrade CouchDB:
 
 1. Stop CouchDB.
 2. Backup CouchDB data directory.
 3. Install CouchDB v2.2.0 binaries or update deployment scripts to use a new Docker image
-   (CouchDB v2.2.0 pre-configured Docker image is provided alongside Fabric v1.4).
+   (CouchDB v2.2.0 pre-configured Docker image is provided alongside UDO v1.4).
 4. Restart CouchDB.
 
 Upgrade Node chaincode shim
@@ -459,14 +459,14 @@ Upgrade Node chaincode shim
 
 To move to the new version of the Node chaincode shim a developer would need to:
 
-1. Change the level of ``fabric-shim`` in their chaincode ``package.json`` from
+1. Change the level of ``udo-shim`` in their chaincode ``package.json`` from
    1.3 to 1.4.
 2. Repackage this new chaincode package and install it on all the endorsing peers
    in the channel.
 3. Perform an upgrade to this new chaincode. To see how to do this, check out :doc:`commands/peerchaincode`.
 
 .. note:: This flow isn't specific to moving from 1.3 to 1.4. It is also how
-          one would upgrade from any incremental version of the node fabric shim.
+          one would upgrade from any incremental version of the node udo shim.
 
 Upgrade Chaincodes with vendored shim
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

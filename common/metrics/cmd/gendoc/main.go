@@ -13,12 +13,12 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/hyperledger/fabric/common/metrics/gendoc"
+	"github.com/hyperledger/udo/common/metrics/gendoc"
 	"golang.org/x/tools/go/packages"
 )
 
 // Gendoc can be used used to discover the metrics options declared at the
-// package level in the fabric tree and output a table that can be used in the
+// package level in the udo tree and output a table that can be used in the
 // documentation.
 
 var templatePath = flag.String(
@@ -32,7 +32,7 @@ func main() {
 
 	patterns := flag.Args()
 	if len(patterns) == 0 {
-		patterns = []string{"github.com/hyperledger/fabric/..."}
+		patterns = []string{"github.com/hyperledger/udo/..."}
 	}
 
 	pkgs, err := packages.Load(&packages.Config{Mode: packages.LoadSyntax}, patterns...)

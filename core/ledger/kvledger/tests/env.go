@@ -11,18 +11,18 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/protos/common"
 
-	"github.com/hyperledger/fabric/common/ledger/blkstorage/fsblkstorage"
-	"github.com/hyperledger/fabric/common/ledger/util"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/ledger/ledgerconfig"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/peer"
-	"github.com/hyperledger/fabric/core/scc/lscc"
+	"github.com/hyperledger/udo/common/ledger/blkstorage/fsblkstorage"
+	"github.com/hyperledger/udo/common/ledger/util"
+	"github.com/hyperledger/udo/core/common/privdata"
+	"github.com/hyperledger/udo/core/ledger/ledgerconfig"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	"github.com/hyperledger/udo/core/peer"
+	"github.com/hyperledger/udo/core/scc/lscc"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -39,7 +39,7 @@ const (
 
 var (
 	defaultConfig = config{
-		"peer.fileSystemPath":        "/tmp/fabric/ledgertests",
+		"peer.fileSystemPath":        "/tmp/udo/ledgertests",
 		"ledger.state.stateDatabase": "goleveldb",
 	}
 )

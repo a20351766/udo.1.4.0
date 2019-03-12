@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/Shopify/sarama"
-	bccsp "github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/viperutil"
-	coreconfig "github.com/hyperledger/fabric/core/config"
+	bccsp "github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/viperutil"
+	coreconfig "github.com/hyperledger/udo/core/config"
 	"github.com/spf13/viper"
 )
 
@@ -225,7 +225,7 @@ var Defaults = TopLevel{
 	},
 	FileLedger: FileLedger{
 		Location: "/var/hyperledger/production/orderer",
-		Prefix:   "hyperledger-fabric-ordererledger",
+		Prefix:   "hyperledger-udo-ordererledger",
 	},
 	Kafka: Kafka{
 		Retry: Retry{

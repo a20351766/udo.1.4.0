@@ -6,12 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-option go_package = "github.com/hyperledger/fabric/protos/token";
+option go_package = "github.com/hyperledger/udo/protos/token";
 
 
-// ================ Existing Fabric Transaction structure ===============
+// ================ Existing UDO Transaction structure ===============
 //
-//In Summary, Fabric supports the following transaction structure:
+//In Summary, UDO supports the following transaction structure:
 //
 //  Envelope
 //  |\_ Signature                                    (signature on the common.Payload message
@@ -31,7 +31,7 @@ option go_package = "github.com/hyperledger/fabric/protos/token";
 //
 //
 //
-//  =============== Changes to Existing Fabric Transaction structure ===============
+//  =============== Changes to Existing UDO Transaction structure ===============
 //  For envelopes that carry FabToken transaction we still maintain the same structure
 //  such that the orderers functionality is not disturbed:
 //

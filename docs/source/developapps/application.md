@@ -21,7 +21,7 @@ In this topic, we're going to cover:
 * [How to process a transaction response](#process-response)
 
 To help your understanding, we'll make reference to the commercial paper sample
-application provided with Hyperledger Fabric. You can [download
+application provided with Hyperledger UDO. You can [download
 it](../install.html) and [run it locally](../tutorial/commercial_paper.html). It
 is written in JavaScript, but the logic is quite language independent, so you'll
 be easily able to see what's going on! (The sample will become available for
@@ -29,7 +29,7 @@ Java and GOLANG as well.)
 
 ## Basic Flow
 
-An application interacts with a blockchain network using the Fabric SDK. Here's
+An application interacts with a blockchain network using the UDO SDK. Here's
 a simplified diagram of how an application invokes a commercial paper smart
 contract:
 
@@ -46,7 +46,7 @@ An application has to follow six basic steps to submit a transaction:
 * Process the response
 
 You're going to see how a typical application performs these six steps using the
-Fabric SDK. You'll find the application code in the `issue.js` file. [View
+UDO SDK. You'll find the application code in the `issue.js` file. [View
 it](https://github.com/hyperledger/fabric-samples/blob/master/commercial-paper/organization/magnetocorp/application/issue.js)
 in your browser, or open it in your favourite editor if you've downloaded it.
 Spend a few moments looking at the overall structure of the application; even
@@ -54,17 +54,17 @@ with comments and spacing, it's only 100 lines of code!
 
 ## Wallet
 
-Towards the top of `issue.js`, you'll see two Fabric classes are brought
+Towards the top of `issue.js`, you'll see two UDO classes are brought
 into scope:
 
 ```JavaScript
-const { FileSystemWallet, Gateway } = require('fabric-network');
+const { FileSystemWallet, Gateway } = require('udo-network');
 ```
 
-You can read about the `fabric-network` classes in the
-[node SDK documentation](https://fabric-sdk-node.github.io/master/module-fabric-network.html), but for
+You can read about the `udo-network` classes in the
+[node SDK documentation](https://udo-sdk-node.github.io/master/module-udo-network.html), but for
 now, let's see how they are used to connect MagnetoCorp's application to
-PaperNet. The application uses the Fabric **Wallet** class as follows:
+PaperNet. The application uses the UDO **Wallet** class as follows:
 
 ```JavaScript
 const wallet = new FileSystemWallet('../identity/user/isabella/wallet');
@@ -73,7 +73,7 @@ const wallet = new FileSystemWallet('../identity/user/isabella/wallet');
 See how `wallet` locates a [wallet](./wallet.html) in the local filesystem. The
 identity retrieved from the wallet is clearly for a user called Isabella, who is
 using the `issue` application. The wallet holds a set of identities -- X.509
-digital certificates -- which can be used to access PaperNet or any other Fabric
+digital certificates -- which can be used to access PaperNet or any other UDO
 network. If you run the tutorial, and look in this directory, you'll see the
 identity credentials for Isabella.
 
@@ -91,7 +91,7 @@ identities.
 
 ## Gateway
 
-The second key class is a Fabric **Gateway**. Most importantly, a
+The second key class is a UDO **Gateway**. Most importantly, a
 [gateway](./gateway.html) identifies one or more peers that provide access to a
 network -- in our case, PaperNet. See how `issue.js` connects to its gateway:
 
@@ -231,7 +231,7 @@ const network2 = await gateway.getNetwork('BondNet');
 Now our application has access to a second network, `BondNet`, simultaneously
 with `PaperNet`!
 
-We can see here a powerful feature of Hyperledger Fabric -- applications can
+We can see here a powerful feature of Hyperledger UDO -- applications can
 participate in a **network of networks**, by connecting to multiple gateway
 peers, each of which is joined to multiple network channels. Applications will
 have different rights in different channels according to their wallet identity

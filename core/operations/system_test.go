@@ -19,12 +19,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/hyperledger/fabric-lib-go/healthz"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/metrics/prometheus"
-	"github.com/hyperledger/fabric/common/metrics/statsd"
-	"github.com/hyperledger/fabric/core/operations"
-	"github.com/hyperledger/fabric/core/operations/fakes"
+	"github.com/hyperledger/udo-lib-go/healthz"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/metrics/prometheus"
+	"github.com/hyperledger/udo/common/metrics/statsd"
+	"github.com/hyperledger/udo/core/operations"
+	"github.com/hyperledger/udo/core/operations/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -258,7 +258,7 @@ var _ = Describe("System", func() {
 			Expect(resp.StatusCode).To(Equal(http.StatusUnauthorized))
 		})
 
-		It("records the fabric version", func() {
+		It("records the udo version", func() {
 			err := system.Start()
 			Expect(err).NotTo(HaveOccurred())
 
@@ -269,8 +269,8 @@ var _ = Describe("System", func() {
 			body, err := ioutil.ReadAll(resp.Body)
 			resp.Body.Close()
 			Expect(err).NotTo(HaveOccurred())
-			Expect(string(body)).To(ContainSubstring("# TYPE fabric_version gauge"))
-			Expect(string(body)).To(ContainSubstring(`fabric_version{version="test-version"}`))
+			Expect(string(body)).To(ContainSubstring("# TYPE udo_version gauge"))
+			Expect(string(body)).To(ContainSubstring(`udo_version{version="test-version"}`))
 		})
 	})
 
@@ -336,13 +336,13 @@ var _ = Describe("System", func() {
 			Eventually(statsBuffer).Should(gbytes.Say(`\Qprefix.go.mem.gc_last_epoch_nanotime:\E`))
 		})
 
-		It("emits the fabric version statsd metric", func() {
+		It("emits the udo version statsd metric", func() {
 			statsBuffer := gbytes.NewBuffer()
 			go recordStats(statsBuffer)
 
 			err := system.Start()
 			Expect(err).NotTo(HaveOccurred())
-			Eventually(statsBuffer).Should(gbytes.Say(`\Qprefix.fabric_version.test-version:1.000000|g\E`))
+			Eventually(statsBuffer).Should(gbytes.Say(`\Qprefix.udo_version.test-version:1.000000|g\E`))
 		})
 
 		Context("when checking the network and address fails", func() {

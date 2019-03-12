@@ -9,9 +9,9 @@ package etcdraft
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
 	"github.com/pkg/errors"
 )
 
@@ -36,7 +36,7 @@ type ReceiverGetter interface {
 
 // Dispatcher dispatches Submit and Step requests to the designated per chain instances
 type Dispatcher struct {
-	Logger        *flogging.FabricLogger
+	Logger        *flogging.UDOLogger
 	ChainSelector ReceiverGetter
 }
 

@@ -15,9 +15,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
+	"github.com/hyperledger/udo/common/chaincode"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
 	"github.com/pkg/errors"
 )
 

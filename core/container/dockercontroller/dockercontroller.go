@@ -21,12 +21,12 @@ import (
 	"time"
 
 	"github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/container"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	cutil "github.com/hyperledger/fabric/core/container/util"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/container"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	cutil "github.com/hyperledger/udo/core/container/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
@@ -309,8 +309,8 @@ func (vm *DockerVM) Start(ccid ccintf.CCID, args, env []string, filesToUpload ma
 	return nil
 }
 
-// streamOutput mirrors output from the named container to a fabric logger.
-func streamOutput(logger *flogging.FabricLogger, client dockerClient, containerName string, containerLogger *flogging.FabricLogger) {
+// streamOutput mirrors output from the named container to a udo logger.
+func streamOutput(logger *flogging.UDOLogger, client dockerClient, containerName string, containerLogger *flogging.UDOLogger) {
 	// Launch a few go routines to manage output streams from the container.
 	// They will be automatically destroyed when the container exits
 	attached := make(chan struct{})

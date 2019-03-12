@@ -12,19 +12,19 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/validation"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/transientstore"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/common/validation"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/protos/common"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/transientstore"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )
@@ -145,7 +145,7 @@ func (e *Endorser) callChaincode(txParams *ccprovider.TransactionParams, version
 	}
 
 	// per doc anything < 400 can be sent as TX.
-	// fabric errors will always be >= 400 (ie, unambiguous errors )
+	// udo errors will always be >= 400 (ie, unambiguous errors )
 	// "lscc" will respond with status 200 or 500 (ie, unambiguous OK or ERROR)
 	if res.Status >= shim.ERRORTHRESHOLD {
 		return res, nil, nil
@@ -312,7 +312,7 @@ func (e *Endorser) endorseProposal(_ context.Context, chainID string, txid strin
 
 	// set version of executing chaincode
 	if isSysCC {
-		// if we want to allow mixed fabric levels we should
+		// if we want to allow mixed udo levels we should
 		// set syscc version to ""
 		ccid.Version = util.GetSysCCVersion()
 	} else {

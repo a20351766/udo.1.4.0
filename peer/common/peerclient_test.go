@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/peer/common"
+	"github.com/hyperledger/udo/peer/common"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -21,12 +21,12 @@ import (
 func initPeerTestEnv(t *testing.T) (cleanup func()) {
 	t.Helper()
 	cfgPath := "./testdata"
-	os.Setenv("FABRIC_CFG_PATH", cfgPath)
+	os.Setenv("UDO_CFG_PATH", cfgPath)
 	viper.Reset()
 	_ = common.InitConfig("test")
 
 	return func() {
-		err := os.Unsetenv("FABRIC_CFG_PATH")
+		err := os.Unsetenv("UDO_CFG_PATH")
 		assert.NoError(t, err)
 		viper.Reset()
 	}

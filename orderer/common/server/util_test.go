@@ -11,13 +11,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
-	config "github.com/hyperledger/fabric/orderer/common/localconfig"
+	"github.com/hyperledger/udo/core/config/configtest"
+	config "github.com/hyperledger/udo/orderer/common/localconfig"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateLedgerFactory(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	testCases := []struct {
 		name            string

@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-export FABRIC_CFG_PATH=./sampleconfig
+export UDO_CFG_PATH=./sampleconfig
 
 DOC=docs/source/commands/peerversion.md
 cat docs/wrappers/peer_version_preamble.md > $DOC

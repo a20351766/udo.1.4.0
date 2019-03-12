@@ -17,19 +17,19 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/configtxgentest"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/peer/chaincode/mock"
-	"github.com/hyperledger/fabric/peer/common"
-	"github.com/hyperledger/fabric/peer/common/api"
-	cmock "github.com/hyperledger/fabric/peer/common/mock"
-	common2 "github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	"github.com/hyperledger/udo/common/tools/configtxgen/configtxgentest"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/peer/chaincode/mock"
+	"github.com/hyperledger/udo/peer/common"
+	"github.com/hyperledger/udo/peer/common/api"
+	cmock "github.com/hyperledger/udo/peer/common/mock"
+	common2 "github.com/hyperledger/udo/protos/common"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	. "github.com/onsi/gomega"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -225,7 +225,7 @@ func TestValidatePeerConnectionParams(t *testing.T) {
 	defer resetFlags()
 	defer viper.Reset()
 	assert := assert.New(t)
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	// TLS disabled

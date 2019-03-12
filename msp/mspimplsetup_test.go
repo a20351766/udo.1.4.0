@@ -10,7 +10,7 @@ import (
 	"crypto/x509"
 	"testing"
 
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/protos/msp"
 
 	"github.com/onsi/gomega"
 )
@@ -75,7 +75,7 @@ func TestTLSCAValidation(t *testing.T) {
 			opts: &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()},
 		}
 
-		err := mspImpl.setupTLSCAs(&msp.FabricMSPConfig{
+		err := mspImpl.setupTLSCAs(&msp.UDOMSPConfig{
 			TlsRootCerts: [][]byte{[]byte(caCert)},
 		})
 		gt.Expect(err).NotTo(gomega.HaveOccurred())
@@ -86,7 +86,7 @@ func TestTLSCAValidation(t *testing.T) {
 			opts: &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()},
 		}
 
-		err := mspImpl.setupTLSCAs(&msp.FabricMSPConfig{
+		err := mspImpl.setupTLSCAs(&msp.UDOMSPConfig{
 			TlsRootCerts: [][]byte{[]byte(nonCACert)},
 		})
 		gt.Expect(err).To(gomega.MatchError("CA Certificate did not have the CA attribute, (SN: c9dff7f76657d46f082570f6965051f5)"))
@@ -97,7 +97,7 @@ func TestTLSCAValidation(t *testing.T) {
 			opts: &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()},
 		}
 
-		err := mspImpl.setupTLSCAs(&msp.FabricMSPConfig{
+		err := mspImpl.setupTLSCAs(&msp.UDOMSPConfig{
 			TlsRootCerts: [][]byte{[]byte(caWithoutSKI)},
 		})
 		gt.Expect(err).To(gomega.MatchError("CA Certificate problem with Subject Key Identifier extension, (SN: ab0ae311f3e32036): subjectKeyIdentifier not found in certificate"))

@@ -13,11 +13,11 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/floggingtest"
-	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mb "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/flogging/floggingtest"
+	"github.com/hyperledger/udo/msp"
+	cb "github.com/hyperledger/udo/protos/common"
+	mb "github.com/hyperledger/udo/protos/msp"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -352,7 +352,7 @@ func TestDeserializeIdentityError(t *testing.T) {
 	assert.NoError(t, err)
 
 	logger, recorder := floggingtest.NewTestLogger(t)
-	defer func(old *flogging.FabricLogger) {
+	defer func(old *flogging.UDOLogger) {
 		cauthdslLogger = old
 	}(cauthdslLogger)
 	cauthdslLogger = logger

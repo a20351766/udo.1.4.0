@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/comm"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/filter"
-	proto "github.com/hyperledger/fabric/protos/gossip"
+	"github.com/hyperledger/udo/gossip/api"
+	"github.com/hyperledger/udo/gossip/comm"
+	"github.com/hyperledger/udo/gossip/common"
+	"github.com/hyperledger/udo/gossip/discovery"
+	"github.com/hyperledger/udo/gossip/filter"
+	proto "github.com/hyperledger/udo/protos/gossip"
 )
 
 // Gossip is the interface of the gossip component

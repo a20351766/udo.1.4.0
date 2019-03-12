@@ -10,8 +10,8 @@ import (
 	"bytes"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/flogging"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 // This governs the max number of created blocks in-flight; i.e. blocks
@@ -29,10 +29,10 @@ type blockCreator struct {
 	CreatedBlocks      chan *cb.Block
 	LastCreatedBlock   *cb.Block
 	LastCommittedBlock *cb.Block
-	logger             *flogging.FabricLogger
+	logger             *flogging.UDOLogger
 }
 
-func newBlockCreator(lastBlock *cb.Block, logger *flogging.FabricLogger) *blockCreator {
+func newBlockCreator(lastBlock *cb.Block, logger *flogging.UDOLogger) *blockCreator {
 	if lastBlock == nil {
 		logger.Panic("block creator initialized with nil last block")
 	}

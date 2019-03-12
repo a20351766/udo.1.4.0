@@ -16,19 +16,19 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/viperutil"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/core/scc/cscc"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/peer/common/api"
-	pcommon "github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/viperutil"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/config"
+	"github.com/hyperledger/udo/core/scc/cscc"
+	"github.com/hyperledger/udo/msp"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/peer/common/api"
+	pcommon "github.com/hyperledger/udo/protos/common"
+	pb "github.com/hyperledger/udo/protos/peer"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -108,7 +108,7 @@ func InitConfig(cmdRoot string) error {
 		// Display a more helpful message to avoid confusing the user.
 		if strings.Contains(fmt.Sprint(err), "Unsupported Config Type") {
 			return errors.New(fmt.Sprintf("Could not find config file. "+
-				"Please make sure that FABRIC_CFG_PATH is set to a path "+
+				"Please make sure that UDO_CFG_PATH is set to a path "+
 				"which contains %s.yaml", cmdRoot))
 		} else {
 			return errors.WithMessage(err, fmt.Sprintf("error when reading %s config file", cmdRoot))
@@ -279,7 +279,7 @@ func InitCmd(cmd *cobra.Command, args []string) {
 	}
 
 	// read in the legacy logging level settings and, if set,
-	// notify users of the FABRIC_LOGGING_SPEC env variable
+	// notify users of the UDO_LOGGING_SPEC env variable
 	var loggingLevel string
 	if viper.GetString("logging_level") != "" {
 		loggingLevel = viper.GetString("logging_level")
@@ -287,11 +287,11 @@ func InitCmd(cmd *cobra.Command, args []string) {
 		loggingLevel = viper.GetString("logging.level")
 	}
 	if loggingLevel != "" {
-		mainLogger.Warning("CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable")
+		mainLogger.Warning("CORE_LOGGING_LEVEL is no longer supported, please use the UDO_LOGGING_SPEC environment variable")
 	}
 
-	loggingSpec := os.Getenv("FABRIC_LOGGING_SPEC")
-	loggingFormat := os.Getenv("FABRIC_LOGGING_FORMAT")
+	loggingSpec := os.Getenv("UDO_LOGGING_SPEC")
+	loggingFormat := os.Getenv("UDO_LOGGING_FORMAT")
 
 	flogging.Init(flogging.Config{
 		Format:  loggingFormat,
@@ -304,7 +304,7 @@ func InitCmd(cmd *cobra.Command, args []string) {
 	var mspID = viper.GetString("peer.localMspId")
 	var mspType = viper.GetString("peer.localMspType")
 	if mspType == "" {
-		mspType = msp.ProviderTypeToString(msp.FABRIC)
+		mspType = msp.ProviderTypeToString(msp.UDO)
 	}
 	err = InitCrypto(mspMgrConfigDir, mspID, mspType)
 	if err != nil { // Handle errors reading the config file

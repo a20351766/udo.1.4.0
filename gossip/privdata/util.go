@@ -10,14 +10,14 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	privdatacommon "github.com/hyperledger/fabric/gossip/privdata/common"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/ledger/rwset"
-	"github.com/hyperledger/fabric/protos/ledger/rwset/kvrwset"
-	"github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/rwsetutil"
+	privdatacommon "github.com/hyperledger/udo/gossip/privdata/common"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/ledger/rwset"
+	"github.com/hyperledger/udo/protos/ledger/rwset/kvrwset"
+	"github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/peer"
 )
 
 type txValidationFlags []uint8

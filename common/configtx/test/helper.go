@@ -7,18 +7,18 @@ SPDX-License-Identifier: Apache-2.0
 package test
 
 import (
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/genesis"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/configtxgentest"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mspproto "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/peer"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/genesis"
+	"github.com/hyperledger/udo/common/tools/configtxgen/configtxgentest"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/core/ledger/util"
+	cb "github.com/hyperledger/udo/protos/common"
+	mspproto "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/peer"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 )
 
 var logger = flogging.MustGetLogger("common.configtx.test")

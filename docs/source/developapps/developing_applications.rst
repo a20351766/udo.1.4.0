@@ -14,7 +14,7 @@ Developing Applications
    designelements
 
 This topic covers how to develop a client application and smart contract to
-solve a business problem using Hyperledger Fabric. In a real world **Commercial
+solve a business problem using Hyperledger UDO. In a real world **Commercial
 Paper** scenario, involving multiple organizations, you'll learn about all the
 concepts and tasks required to accomplish this goal. We assume that the
 blockchain network is already available.

@@ -32,16 +32,16 @@ func TestSpawnEtcdRaft(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer os.RemoveAll(tempDir)
 
-	// Set the fabric root folder for easy navigation to sampleconfig folder
-	fabricRootDir, err := filepath.Abs(filepath.Join("..", "..", ".."))
+	// Set the udo root folder for easy navigation to sampleconfig folder
+	udoRootDir, err := filepath.Abs(filepath.Join("..", "..", ".."))
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	// Build the configtxgen binary
-	configtxgen, err := gexec.Build("github.com/hyperledger/fabric/common/tools/configtxgen")
+	configtxgen, err := gexec.Build("github.com/hyperledger/udo/common/tools/configtxgen")
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	// Build the orderer binary
-	orderer, err := gexec.Build("github.com/hyperledger/fabric/orderer")
+	orderer, err := gexec.Build("github.com/hyperledger/udo/orderer")
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	defer gexec.CleanupBuildArtifacts()
@@ -50,7 +50,7 @@ func TestSpawnEtcdRaft(t *testing.T) {
 	genesisBlockPath := filepath.Join(tempDir, "genesis.block")
 	cmd := exec.Command(configtxgen, "-channelID", "system", "-profile", "SampleDevModeEtcdRaft",
 		"-outputBlock", genesisBlockPath)
-	cmd.Env = append(cmd.Env, fmt.Sprintf("FABRIC_CFG_PATH=%s", filepath.Join(cwd, "testdata")))
+	cmd.Env = append(cmd.Env, fmt.Sprintf("UDO_CFG_PATH=%s", filepath.Join(cwd, "testdata")))
 	configtxgenProcess, err := gexec.Start(cmd, nil, nil)
 	gt.Expect(err).NotTo(HaveOccurred())
 
@@ -58,13 +58,13 @@ func TestSpawnEtcdRaft(t *testing.T) {
 	gt.Expect(configtxgenProcess.Err).To(gbytes.Say("Writing genesis block"))
 
 	// Launch the OSN
-	ordererProcess := launchOrderer(gt, cmd, orderer, tempDir, genesisBlockPath, fabricRootDir)
+	ordererProcess := launchOrderer(gt, cmd, orderer, tempDir, genesisBlockPath, udoRootDir)
 	gt.Eventually(ordererProcess.Err, time.Minute).Should(gbytes.Say("Beginning to serve requests"))
 	gt.Eventually(ordererProcess.Err, time.Minute).Should(gbytes.Say("becomeLeader"))
 	ordererProcess.Kill()
 }
 
-func launchOrderer(gt *GomegaWithT, cmd *exec.Cmd, orderer, tempDir, genesisBlockPath, fabricRootDir string) *gexec.Session {
+func launchOrderer(gt *GomegaWithT, cmd *exec.Cmd, orderer, tempDir, genesisBlockPath, udoRootDir string) *gexec.Session {
 	cwd, err := filepath.Abs(".")
 	gt.Expect(err).NotTo(HaveOccurred())
 
@@ -87,7 +87,7 @@ func launchOrderer(gt *GomegaWithT, cmd *exec.Cmd, orderer, tempDir, genesisBloc
 		fmt.Sprintf("ORDERER_GENERAL_TLS_PRIVATEKEY=%s", filepath.Join(cwd, "testdata", "tls", "server.key")),
 		fmt.Sprintf("ORDERER_CONSENSUS_WALDIR=%s", filepath.Join(tempDir, "wal")),
 		fmt.Sprintf("ORDERER_CONSENSUS_SNAPDIR=%s", filepath.Join(tempDir, "snapshot")),
-		fmt.Sprintf("FABRIC_CFG_PATH=%s", filepath.Join(fabricRootDir, "sampleconfig")),
+		fmt.Sprintf("UDO_CFG_PATH=%s", filepath.Join(udoRootDir, "sampleconfig")),
 	}
 	sess, err := gexec.Start(cmd, nil, nil)
 	gt.Expect(err).NotTo(HaveOccurred())

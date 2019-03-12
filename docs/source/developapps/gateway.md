@@ -16,7 +16,7 @@ In this topic, we're going to cover:
 
 ## Scenario
 
-A Hyperledger Fabric network channel can constantly change.  The peer, orderer
+A Hyperledger UDO network channel can constantly change.  The peer, orderer
 and CA components, contributed by the different organizations in the network,
 will come and go. Reasons for this include increased or reduced business demand,
 and both planned and unplanned outages. A gateway relieves an application of
@@ -127,7 +127,7 @@ paper transactions endorsed and distributed.
 
 Applications can use a gateway statically by explicitly specifying the connect
 option `discovery: { enabled:false }` on the `gateway.connect()` API.
-Alternatively, the environment variable setting `FABRIC_SDK_DISCOVERY=false`
+Alternatively, the environment variable setting `UDO_SDK_DISCOVERY=false`
 will always override the application choice.
 
 Examine the [connection
@@ -159,10 +159,10 @@ smart contracts installed on peers and their endorsement policies defined at a
 channel level. As with static gateways, the discovered network must be
 sufficient to get commercial paper transactions endorsed and distributed.
 
-Dynamic gateways are the default setting for Fabric applications. They can be
+Dynamic gateways are the default setting for UDO applications. They can be
 explicitly specified using the connect option `discovery: { enabled:true }` on
 the `gateway.connect()` API. Alternatively, the environment variable setting
-`FABRIC_SDK_DISCOVERY=true` will always override the application choice.
+`UDO_SDK_DISCOVERY=true` will always override the application choice.
 
 A dynamic gateway represents an up-to-date view of a network. As networks
 change, service discovery will ensure that the network view is an accurate

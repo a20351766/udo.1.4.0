@@ -23,7 +23,7 @@ All code samples below assume two things:
    to your chaincode.
 2. You have added the following import statement to your chaincode.
     ```
-    import "github.com/hyperledger/fabric/core/chaincode/shim/ext/cid"
+    import "github.com/hyperledger/udo/core/chaincode/shim/ext/cid"
     ```
 #### Getting the client's ID
 
@@ -118,9 +118,9 @@ as demonstrated above.
 ## Adding Attributes to Identities
 
 This section describes how to add custom attributes to certificates when
-using Hyperledger Fabric CA as well as when using an external CA.
+using Hyperledger UDO CA as well as when using an external CA.
 
-#### Managing attributes with Fabric CA
+#### Managing attributes with UDO CA
 
 There are two methods of adding attributes to an enrollment certificate
 with fabric-ca:
@@ -207,7 +207,7 @@ Certificate:
 ```
 
 If you want to use the client identity library to extract or assert attribute
-values as described previously but you are not using Hyperledger Fabric CA,
+values as described previously but you are not using Hyperledger UDO CA,
 then you must ensure that the certificates which are issued by your external CA
 contain attributes of the form shown above.  In particular, the certificates
 must contain the `1.2.3.4.5.6.7.8.1` X509v3 extension with a JSON value

@@ -3,7 +3,7 @@
 **Audience**: Architects, application and smart contract developers
 
 A connection profile describes a set of components, including peers, orderers
-and certificate authorities in a Hyperledger Fabric blockchain network. It also
+and certificate authorities in a Hyperledger UDO blockchain network. It also
 contains channel and organization information relating to these components. A
 connection profile is primarily used by an application to configure a
 [gateway](./gateway.html) that handles all network interactions, allowing it it
@@ -56,7 +56,7 @@ reasons:
   successfully handle transaction submission or event notification for example.
 
 * Service Discovery can augment the information in a connection profile.
-  Specifically, dynamic gateways can be configured with minimal Fabric topology
+  Specifically, dynamic gateways can be configured with minimal UDO topology
   information; the rest can be discovered.
 
 A static connection profile is normally created by an administrator who
@@ -75,7 +75,7 @@ is used by a sample MagnetoCorp `issue` application:
 
 ```javascript
 const yaml = require('js-yaml');
-const { Gateway } = require('fabric-network');
+const { Gateway } = require('udo-network');
 
 const connectionProfile = yaml.safeLoad(fs.readFileSync('../gateway/paperNet.yaml', 'utf8'));
 
@@ -288,7 +288,7 @@ This file is reproduced inline from the GitHub commercial paper
 11: # [Optional]. Analogous to HTTP, properties with an "x-" prefix are deemed
 12: # "application-specific", and ignored by the gateway. For example, property
 13: # "x-type" with value "hlfv1" was originally used to identify a connection
-14: # profile for Fabric 1.x rather than 0.x.
+14: # profile for UDO 1.x rather than 0.x.
 15: #
 16: x-type: "hlfv1"
 17: #
@@ -388,7 +388,7 @@ This file is reproduced inline from the GitHub commercial paper
 111:       - peer2.magnetocorp.example.com
 112:       - peer3.magnetocorp.example.com
 113:     #
-114:     # [Optional]. Fabric-CA Certificate Authorities.
+114:     # [Optional]. UDO-CA Certificate Authorities.
 115:     #
 116:     certificateAuthorities:
 117:       - ca-magnetocorp
@@ -464,7 +464,7 @@ This file is reproduced inline from the GitHub commercial paper
 187:       ssl-target-name-override: peer9.digibank.example.com
 188:       request-timeout: 120001
 189: #
-190: # [Optional]. Fabric-CA Certificate Authority physical information, by name.
+190: # [Optional]. UDO-CA Certificate Authority physical information, by name.
 191: # This information can be used to (e.g.) enroll new users. Communication is via
 192: # REST, hence options relate to HTTP rather than gRPC.
 193: #
@@ -483,7 +483,7 @@ This file is reproduced inline from the GitHub commercial paper
 206:     httpOptions:
 207:       verify: false
 208:     #
-209:     # [Optional]. Fabric-CA supports Certificate Signing Requests (CSRs). A
+209:     # [Optional]. UDO-CA supports Certificate Signing Requests (CSRs). A
 210:     # registrar is needed to enroll new users.
 211:     #
 212:     registrar:

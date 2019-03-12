@@ -4,9 +4,9 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/orderer/common/broadcast"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/orderer/common/broadcast"
+	"github.com/hyperledger/udo/orderer/common/msgprocessor"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 type ChannelSupport struct {

@@ -1,7 +1,7 @@
 Videos
 ======
 
-Refer to the Hyperledger Fabric channel on YouTube
+Refer to the Hyperledger UDO channel on YouTube
 
 .. raw:: html
 

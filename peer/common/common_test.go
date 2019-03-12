@@ -12,17 +12,17 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/peer/common"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/peer/common"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestInitConfig(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	type args struct {
@@ -60,7 +60,7 @@ func TestInitConfig(t *testing.T) {
 
 func TestInitCryptoMissingDir(t *testing.T) {
 	dir := os.TempDir() + "/" + util.GenerateUUID()
-	err := common.InitCrypto(dir, "SampleOrg", msp.ProviderTypeToString(msp.FABRIC))
+	err := common.InitCrypto(dir, "SampleOrg", msp.ProviderTypeToString(msp.UDO))
 	assert.Error(t, err, "Should be able to initialize crypto with non-existing directory")
 	assert.Contains(t, err.Error(), fmt.Sprintf("folder \"%s\" does not exist", dir))
 }
@@ -68,12 +68,12 @@ func TestInitCryptoMissingDir(t *testing.T) {
 func TestInitCrypto(t *testing.T) {
 	mspConfigPath, err := configtest.GetDevMspDir()
 	localMspId := "SampleOrg"
-	err = common.InitCrypto(mspConfigPath, localMspId, msp.ProviderTypeToString(msp.FABRIC))
+	err = common.InitCrypto(mspConfigPath, localMspId, msp.ProviderTypeToString(msp.UDO))
 	assert.NoError(t, err, "Unexpected error [%s] calling InitCrypto()", err)
-	err = common.InitCrypto("/etc/foobaz", localMspId, msp.ProviderTypeToString(msp.FABRIC))
+	err = common.InitCrypto("/etc/foobaz", localMspId, msp.ProviderTypeToString(msp.UDO))
 	assert.Error(t, err, fmt.Sprintf("Expected error [%s] calling InitCrypto()", err))
 	localMspId = ""
-	err = common.InitCrypto(mspConfigPath, localMspId, msp.ProviderTypeToString(msp.FABRIC))
+	err = common.InitCrypto(mspConfigPath, localMspId, msp.ProviderTypeToString(msp.UDO))
 	assert.Error(t, err, fmt.Sprintf("Expected error [%s] calling InitCrypto()", err))
 }
 
@@ -83,7 +83,7 @@ func TestSetBCCSPKeystorePath(t *testing.T) {
 	absPath, _ := filepath.Abs(cfgPath)
 	keystorePath := "/msp/keystore"
 
-	os.Setenv("FABRIC_CFG_PATH", cfgPath)
+	os.Setenv("UDO_CFG_PATH", cfgPath)
 	viper.Reset()
 	_ = common.InitConfig("notset")
 	common.SetBCCSPKeystorePath()
@@ -104,7 +104,7 @@ func TestSetBCCSPKeystorePath(t *testing.T) {
 		viper.GetString(cfgKey))
 
 	viper.Reset()
-	os.Unsetenv("FABRIC_CFG_PATH")
+	os.Unsetenv("UDO_CFG_PATH")
 }
 
 func TestCheckLogLevel(t *testing.T) {
@@ -175,7 +175,7 @@ func TestGetDefaultSigner(t *testing.T) {
 }
 
 func TestInitCmd(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	defer viper.Reset()
 
@@ -189,12 +189,12 @@ func TestInitCmd(t *testing.T) {
 	flogging.ActivateSpec("test.test2=warn")
 	assert.Equal(t, "warn", flogging.Global.Level("test.test2").String())
 
-	origEnvValue := os.Getenv("FABRIC_LOGGING_SPEC")
-	os.Setenv("FABRIC_LOGGING_SPEC", "chaincode=debug:test.test2=fatal:abc=error")
+	origEnvValue := os.Getenv("UDO_LOGGING_SPEC")
+	os.Setenv("UDO_LOGGING_SPEC", "chaincode=debug:test.test2=fatal:abc=error")
 	common.InitCmd(nil, nil)
 	assert.Equal(t, "debug", flogging.Global.Level("chaincode").String())
 	assert.Equal(t, "info", flogging.Global.Level("test").String())
 	assert.Equal(t, "fatal", flogging.Global.Level("test.test2").String())
 	assert.Equal(t, "error", flogging.Global.Level("abc").String())
-	os.Setenv("FABRIC_LOGGING_SPEC", origEnvValue)
+	os.Setenv("UDO_LOGGING_SPEC", origEnvValue)
 }

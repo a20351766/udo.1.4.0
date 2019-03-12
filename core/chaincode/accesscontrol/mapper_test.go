@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/crypto/tlsgen"
 	"github.com/stretchr/testify/assert"
 )
 

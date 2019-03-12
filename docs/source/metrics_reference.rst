@@ -93,7 +93,7 @@ The following metrics are currently exported for consumption by Prometheus.
 | dockercontroller_chaincode_container_build_duration | histogram | The time to build a chaincode image in seconds.            | chaincode          |
 |                                                     |           |                                                            | success            |
 +-----------------------------------------------------+-----------+------------------------------------------------------------+--------------------+
-| fabric_version                                      | gauge     | The active version of Fabric.                              | version            |
+| udo_version                                      | gauge     | The active version of UDO.                              | version            |
 +-----------------------------------------------------+-----------+------------------------------------------------------------+--------------------+
 | grpc_comm_conn_closed                               | counter   | gRPC connections closed. Open minus closed is the active   |                    |
 |                                                     |           | number of connections.                                     |                    |
@@ -222,7 +222,7 @@ associated with the metric.
 +-----------------------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | dockercontroller.chaincode_container_build_duration.%{chaincode}.%{success}             | histogram | The time to build a chaincode image in seconds.            |
 +-----------------------------------------------------------------------------------------+-----------+------------------------------------------------------------+
-| fabric_version.%{version}                                                               | gauge     | The active version of Fabric.                              |
+| udo_version.%{version}                                                               | gauge     | The active version of UDO.                              |
 +-----------------------------------------------------------------------------------------+-----------+------------------------------------------------------------+
 | grpc.comm.conn_closed                                                                   | counter   | gRPC connections closed. Open minus closed is the active   |
 |                                                                                         |           | number of connections.                                     |

@@ -20,8 +20,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -66,7 +66,7 @@ func TestBasicRW(t *testing.T, dbProvider statedb.VersionedDBProvider) {
 	assert.Nil(t, sp)
 
 	// Test retrieval of non-existent key - returns nil rather than error
-	// For more details see https://github.com/hyperledger-archives/fabric/issues/936.
+	// For more details see https://github.com/hyperledger-archives/udo/issues/936.
 	val, err := db.GetState("ns", "key1")
 	assert.NoError(t, err, "Should receive nil rather than error upon reading non existent key")
 	assert.Nil(t, val)

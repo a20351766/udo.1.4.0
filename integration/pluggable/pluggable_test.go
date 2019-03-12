@@ -16,9 +16,9 @@ import (
 	"time"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
+	"github.com/hyperledger/udo/integration/nwo"
+	"github.com/hyperledger/udo/integration/nwo/commands"
+	"github.com/hyperledger/udo/integration/nwo/udoconfig"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -84,7 +84,7 @@ var _ = Describe("EndToEnd", func() {
 		chaincode = nwo.Chaincode{
 			Name:    "mycc",
 			Version: "0.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `OR ('Org1MSP.member','Org2MSP.member')`,
 		}
@@ -125,7 +125,7 @@ func compilePlugin(pluginType string) string {
 	cmd := exec.Command(
 		"go", "build", "-buildmode=plugin",
 		"-o", pluginFilePath,
-		fmt.Sprintf("github.com/hyperledger/fabric/integration/pluggable/testdata/plugins/%s", pluginType),
+		fmt.Sprintf("github.com/hyperledger/udo/integration/pluggable/testdata/plugins/%s", pluginType),
 	)
 	sess, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).NotTo(HaveOccurred())
@@ -138,11 +138,11 @@ func compilePlugin(pluginType string) string {
 func configurePlugins(network *nwo.Network, endorsement, validation string) {
 	for _, p := range network.Peers {
 		core := network.ReadPeerConfig(p)
-		core.Peer.Handlers.Endorsers = fabricconfig.HandlerMap{
-			"escc": fabricconfig.Handler{Name: "plugin-escc", Library: endorsement},
+		core.Peer.Handlers.Endorsers = udoconfig.HandlerMap{
+			"escc": udoconfig.Handler{Name: "plugin-escc", Library: endorsement},
 		}
-		core.Peer.Handlers.Validators = fabricconfig.HandlerMap{
-			"vscc": fabricconfig.Handler{Name: "plugin-vscc", Library: validation},
+		core.Peer.Handlers.Validators = udoconfig.HandlerMap{
+			"vscc": udoconfig.Handler{Name: "plugin-vscc", Library: validation},
 		}
 		network.WritePeerConfig(p, core)
 	}

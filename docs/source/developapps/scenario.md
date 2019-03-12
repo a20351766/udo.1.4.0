@@ -5,7 +5,7 @@ professionals
 
 In this topic, we're going to describe a business scenario involving six
 organizations who use PaperNet, a commercial paper network built on Hyperledger
-Fabric, to issue, buy and redeem commercial paper. We're going to use the
+UDO, to issue, buy and redeem commercial paper. We're going to use the
 scenario to outline requirements for the development of commercial paper
 applications and smart contracts used by the participant organizations.
 

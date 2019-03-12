@@ -12,8 +12,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/ledger"
-	protopeer "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/ledger"
+	protopeer "github.com/hyperledger/udo/protos/peer"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -154,7 +154,7 @@ func (d *sampleDataHelper) verifyLedgerContent(h *testhelper) {
 	d.verifyGetTransactionByID(h)
 
 	// the submitted data could not be available if the test ledger is loaded from disk in a fresh run
-	// (e.g., a backup of a test lesger from a previous fabric version)
+	// (e.g., a backup of a test lesger from a previous udo version)
 	if len(d.submittedData) != 0 {
 		d.t.Log("Verifying using submitted data")
 		d.verifyBlockAndPvtdataUsingSubmittedData(h)

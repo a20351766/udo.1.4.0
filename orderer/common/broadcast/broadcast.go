@@ -10,11 +10,11 @@ import (
 	"io"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/orderer/common/msgprocessor"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
 	"github.com/pkg/errors"
 )
 

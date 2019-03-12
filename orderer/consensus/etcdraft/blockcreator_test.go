@@ -12,8 +12,8 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/flogging"
+	cb "github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"
 )
@@ -26,7 +26,7 @@ func getSeedBlock() *cb.Block {
 
 func TestValidCreatedBlocksQueue(t *testing.T) {
 	seedBlock := getSeedBlock()
-	logger := flogging.NewFabricLogger(zap.NewNop())
+	logger := flogging.NewUDOLogger(zap.NewNop())
 	bc := newBlockCreator(seedBlock, logger)
 
 	t.Run("correct creation of a single block", func(t *testing.T) {

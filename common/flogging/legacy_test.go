@@ -9,7 +9,7 @@ package flogging_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/common/flogging"
 	"github.com/stretchr/testify/assert"
 )
 

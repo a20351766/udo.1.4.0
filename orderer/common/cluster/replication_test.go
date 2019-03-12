@@ -13,18 +13,18 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/mocks/crypto"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/cluster/mocks"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/mocks/crypto"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/common/cluster/mocks"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -705,12 +705,12 @@ func injectTLSCACert(t *testing.T, block *common.Block, tlsCA []byte) {
 	rawMSPConfig := mspKey.Value
 	mspConf := &msp.MSPConfig{}
 	proto.Unmarshal(rawMSPConfig, mspConf)
-	fabricMSPConf := &msp.FabricMSPConfig{}
-	proto.Unmarshal(mspConf.Config, fabricMSPConf)
+	udoMSPConf := &msp.UDOMSPConfig{}
+	proto.Unmarshal(mspConf.Config, udoMSPConf)
 	// Replace the TLS root certs with the given ones
-	fabricMSPConf.TlsRootCerts = [][]byte{tlsCA}
+	udoMSPConf.TlsRootCerts = [][]byte{tlsCA}
 	// And put it back into the block
-	mspConf.Config = utils.MarshalOrPanic(fabricMSPConf)
+	mspConf.Config = utils.MarshalOrPanic(udoMSPConf)
 	mspKey.Value = utils.MarshalOrPanic(mspConf)
 	payload.Data = utils.MarshalOrPanic(confEnv)
 	env.Payload = utils.MarshalOrPanic(payload)

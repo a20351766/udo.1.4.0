@@ -1,7 +1,7 @@
 Securing Communication With Transport Layer Security (TLS)
 ==========================================================
 
-Fabric supports for secure communication between nodes using TLS.  TLS communication
+UDO supports for secure communication between nodes using TLS.  TLS communication
 can use both one-way (server only) and two-way (server and client) authentication.
 
 Configuring TLS for peers nodes
@@ -127,7 +127,7 @@ Debugging TLS issues
 
 Before debugging TLS issues, it is advisable to enable ``GRPC debug`` on both the TLS client
 and the server side to get additional information. To enable ``GRPC debug``, set the
-environment variable ``FABRIC_LOGGING_SPEC`` to include ``grpc=debug``. For example, to
+environment variable ``UDO_LOGGING_SPEC`` to include ``grpc=debug``. For example, to
 set the default logging level to ``INFO`` and the GRPC logging level to ``DEBUG``, set
 the logging specification to ``grpc=debug:info``.
 
@@ -138,7 +138,7 @@ not trust. Make sure the client is sending its certificate and that it has been 
 of the CA certificates trusted by the peer or orderer node.
 
 If you see the error message ``remote error: tls: bad certificate`` in your chaincode logs,
-ensure that your chaincode has been built using the chaincode shim provided with Fabric v1.1
+ensure that your chaincode has been built using the chaincode shim provided with UDO v1.1
 or newer. If your chaincode does not contain a vendored copy of the shim, deleting the
 chaincode container and restarting its peer will rebuild the chaincode container using the
 current shim version.

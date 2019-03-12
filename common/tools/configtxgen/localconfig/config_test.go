@@ -9,14 +9,14 @@ package localconfig
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestLoadProfile(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	pNames := []string{
@@ -54,7 +54,7 @@ func TestLoadProfileWithPath(t *testing.T) {
 }
 
 func TestLoadTopLevel(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	topLevel := LoadTopLevel()
@@ -78,7 +78,7 @@ func TestLoadTopLevelWithPath(t *testing.T) {
 }
 
 func TestConsensusSpecificInit(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	devConfigDir, err := configtest.GetDevConfigDir()

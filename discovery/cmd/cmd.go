@@ -10,8 +10,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/hyperledger/fabric/cmd/common"
-	"github.com/hyperledger/fabric/discovery/client"
+	"github.com/hyperledger/udo/cmd/common"
+	"github.com/hyperledger/udo/discovery/client"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 

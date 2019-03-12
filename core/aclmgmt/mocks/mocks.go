@@ -9,8 +9,8 @@ package mocks
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/mock"
 )
 

@@ -20,18 +20,18 @@ import (
 	"code.cloudfoundry.org/clock/fakeclock"
 	"github.com/coreos/etcd/raft"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/common/flogging"
-	mockconfig "github.com/hyperledger/fabric/common/mocks/config"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft/mocks"
-	consensusmocks "github.com/hyperledger/fabric/orderer/consensus/mocks"
-	mockblockcutter "github.com/hyperledger/fabric/orderer/mocks/common/blockcutter"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	raftprotos "github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/crypto/tlsgen"
+	"github.com/hyperledger/udo/common/flogging"
+	mockconfig "github.com/hyperledger/udo/common/mocks/config"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/consensus/etcdraft"
+	"github.com/hyperledger/udo/orderer/consensus/etcdraft/mocks"
+	consensusmocks "github.com/hyperledger/udo/orderer/consensus/mocks"
+	mockblockcutter "github.com/hyperledger/udo/orderer/mocks/common/blockcutter"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	raftprotos "github.com/hyperledger/udo/protos/orderer/etcdraft"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
@@ -65,13 +65,13 @@ var _ = Describe("Chain", func() {
 		env       *common.Envelope
 		channelID string
 		tlsCA     tlsgen.CA
-		logger    *flogging.FabricLogger
+		logger    *flogging.UDOLogger
 	)
 
 	BeforeEach(func() {
 		tlsCA, _ = tlsgen.NewCA()
 		channelID = "test-channel"
-		logger = flogging.NewFabricLogger(zap.NewNop())
+		logger = flogging.NewUDOLogger(zap.NewNop())
 		env = &common.Envelope{
 			Payload: marshalOrPanic(&common.Payload{
 				Header: &common.Header{ChannelHeader: marshalOrPanic(&common.ChannelHeader{Type: int32(common.HeaderType_MESSAGE), ChannelId: channelID})},
@@ -2090,7 +2090,7 @@ func newChain(timeout time.Duration, channel string, dataDir string, id uint64, 
 		MaxSizePerMsg:   1024 * 1024,
 		MaxInflightMsgs: 256,
 		RaftMetadata:    raftMetadata,
-		Logger:          flogging.NewFabricLogger(zap.NewNop()),
+		Logger:          flogging.NewUDOLogger(zap.NewNop()),
 		MemoryStorage:   storage,
 		WALDir:          path.Join(dataDir, "wal"),
 		SnapDir:         path.Join(dataDir, "snapshot"),

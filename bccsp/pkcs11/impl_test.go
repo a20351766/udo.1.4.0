@@ -27,10 +27,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/signer"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/bccsp/utils"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/signer"
+	"github.com/hyperledger/udo/bccsp/sw"
+	"github.com/hyperledger/udo/bccsp/utils"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/sha3"
 )
@@ -107,7 +107,7 @@ func TestNew(t *testing.T) {
 		SecLevel:   256,
 		SoftVerify: false,
 		Library:    "lib",
-		Label:      "ForFabric",
+		Label:      "ForUDO",
 		Pin:        "98765432",
 	}
 

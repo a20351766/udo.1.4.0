@@ -14,12 +14,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
@@ -34,7 +34,7 @@ type BlockPuller struct {
 	Channel             string
 	FetchTimeout        time.Duration
 	RetryTimeout        time.Duration
-	Logger              *flogging.FabricLogger
+	Logger              *flogging.UDOLogger
 	Dialer              Dialer
 	VerifyBlockSequence BlockSequenceVerifier
 	Endpoints           []string
@@ -439,7 +439,7 @@ type endpointInfo struct {
 
 type endpointInfoBucket struct {
 	bucket <-chan *endpointInfo
-	logger *flogging.FabricLogger
+	logger *flogging.UDOLogger
 }
 
 func (eib endpointInfoBucket) byEndpoints() map[string]*endpointInfo {

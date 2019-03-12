@@ -9,7 +9,7 @@ package msp
 import (
 	"time"
 
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/protos/msp"
 )
 
 // IdentityDeserializer is implemented by both MSPManger and MSP
@@ -24,11 +24,11 @@ type IdentityDeserializer interface {
 	IsWellFormed(identity *msp.SerializedIdentity) error
 }
 
-// Membership service provider APIs for Hyperledger Fabric:
+// Membership service provider APIs for Hyperledger UDO:
 //
 // By "membership service provider" we refer to an abstract component of the
 // system that would provide (anonymous) credentials to clients, and peers for
-// them to participate in Hyperledger/fabric network. Clients use these
+// them to participate in Hyperledger/udo network. Clients use these
 // credentials to authenticate their transactions, and peers use these credentials
 // to authenticate transaction processing results (endorsements). While
 // strongly connected to the transaction processing components of the systems,
@@ -130,7 +130,7 @@ type Identity interface {
 	GetMSPIdentifier() string
 
 	// Validate uses the rules that govern this identity to validate it.
-	// E.g., if it is a fabric TCert implemented as identity, validate
+	// E.g., if it is a udo TCert implemented as identity, validate
 	// will check the TCert signature against the assumed root certificate
 	// authority.
 	Validate() error
@@ -168,7 +168,7 @@ type Identity interface {
 
 // SigningIdentity is an extension of Identity to cover signing capabilities.
 // E.g., signing identity should be requested in the case of a client who wishes
-// to sign transactions, or fabric endorser who wishes to sign proposal
+// to sign transactions, or udo endorser who wishes to sign proposal
 // processing outcomes.
 type SigningIdentity interface {
 
@@ -198,7 +198,7 @@ type ProviderType int
 
 // The ProviderType of a member relative to the member API
 const (
-	FABRIC ProviderType = iota // MSP is of FABRIC type
+	UDO ProviderType = iota // MSP is of UDO type
 	IDEMIX                     // MSP is of IDEMIX type
 	OTHER                      // MSP is of OTHER TYPE
 
@@ -207,7 +207,7 @@ const (
 )
 
 var mspTypeStrings = map[ProviderType]string{
-	FABRIC: "bccsp",
+	UDO: "bccsp",
 	IDEMIX: "idemix",
 }
 

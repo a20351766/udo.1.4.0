@@ -9,11 +9,11 @@ package chaincode_test
 import (
 	"testing"
 
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/core/chaincode"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/ledger"
+	commonledger "github.com/hyperledger/udo/common/ledger"
+	"github.com/hyperledger/udo/core/chaincode"
+	"github.com/hyperledger/udo/core/common/privdata"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	"github.com/hyperledger/udo/core/ledger"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

@@ -4,7 +4,7 @@ package metricsfakes
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/metrics"
+	"github.com/hyperledger/udo/common/metrics"
 )
 
 type Histogram struct {

@@ -8,17 +8,17 @@ package lockbasedtxmgr
 import (
 	"fmt"
 
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	ledger "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/storageutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
-	"github.com/hyperledger/fabric/core/ledger/ledgerconfig"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	"github.com/hyperledger/fabric/protos/ledger/rwset/kvrwset"
+	commonledger "github.com/hyperledger/udo/common/ledger"
+	ledger "github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/storageutil"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
+	"github.com/hyperledger/udo/core/ledger/ledgerconfig"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	"github.com/hyperledger/udo/protos/ledger/rwset/kvrwset"
 	"github.com/pkg/errors"
 )
 

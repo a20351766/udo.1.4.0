@@ -3970,7 +3970,7 @@ var stdlib = map[string]string{
 	"syscall.ARPHRD_ETHER":                        "syscall",
 	"syscall.ARPHRD_EUI64":                        "syscall",
 	"syscall.ARPHRD_FCAL":                         "syscall",
-	"syscall.ARPHRD_FCFABRIC":                     "syscall",
+	"syscall.ARPHRD_FCUDO":                     "syscall",
 	"syscall.ARPHRD_FCPL":                         "syscall",
 	"syscall.ARPHRD_FCPP":                         "syscall",
 	"syscall.ARPHRD_FDDI":                         "syscall",

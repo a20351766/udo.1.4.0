@@ -59,7 +59,7 @@ configtxgen -outputAnchorPeersUpdate anchor_peer_tx.pb -profile SampleSingleMSPC
 ## Configuration
 
 The `configtxgen` tool's output is largely controlled by the content of
-`configtx.yaml`.  This file is searched for at `FABRIC_CFG_PATH` and must be
+`configtx.yaml`.  This file is searched for at `UDO_CFG_PATH` and must be
 present for `configtxgen` to operate.
 
 This configuration file may be edited, or, individual properties may be
@@ -82,7 +82,7 @@ instead simply omit the profile specifics and use the `CONFIGTX` prefix
 followed by the elements relative to the profile name such as
 `CONFIGTX_ORDERER_ORDERERTYPE`.
 
-Refer to the sample `configtx.yaml` shipped with Fabric for all possible
+Refer to the sample `configtx.yaml` shipped with UDO for all possible
 configuration options.  You may find this file in the `config` directory of
 the release artifacts tar, or you may find it under the `sampleconfig` folder
 if you are building from source.

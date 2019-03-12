@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/common/flogging"
 )
 
 //go:generate counterfeiter -o fakes/logging.go -fake-name Logging . Logging
@@ -38,7 +38,7 @@ func NewSpecHandler() *SpecHandler {
 
 type SpecHandler struct {
 	Logging Logging
-	Logger  *flogging.FabricLogger
+	Logger  *flogging.UDOLogger
 }
 
 func (h *SpecHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {

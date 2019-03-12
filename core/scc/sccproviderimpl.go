@@ -9,10 +9,10 @@ package scc
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/peer"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/peer"
 )
 
 // NewProvider creates a new Provider instance

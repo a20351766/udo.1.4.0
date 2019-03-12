@@ -1,9 +1,9 @@
 ## Development Environment
 
-If you're looking for instructions on how to setup the Hyperledger Fabric development environment, see
-the [development environment setup readme](http://hyperledger-fabric.readthedocs.io/en/latest/dev-setup/devenv.html).
+If you're looking for instructions on how to setup the Hyperledger UDO development environment, see
+the [development environment setup readme](http://hyperledger-udo.readthedocs.io/en/latest/dev-setup/devenv.html).
 
-This folder contains the files which are used for bootstrapping the Hyperledger Fabric development environment.
+This folder contains the files which are used for bootstrapping the Hyperledger UDO development environment.
 
 Below is a deployment diagram of the current development environment. Note that version numbers may be out of date.
 ![Development Environment Deployment Diagram](./images/openchain-dev-env-deployment-diagram.png)

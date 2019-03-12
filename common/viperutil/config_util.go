@@ -20,7 +20,7 @@ import (
 
 	"github.com/Shopify/sarama"
 	version "github.com/hashicorp/go-version"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/common/flogging"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 )

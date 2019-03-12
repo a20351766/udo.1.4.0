@@ -12,12 +12,12 @@ MSP may define their own notion of identity, and the rules by which those
 identities are governed (identity validation) and authenticated (signature
 generation and verification).
 
-A Hyperledger Fabric blockchain network can be governed by one or more MSPs.
+A Hyperledger UDO blockchain network can be governed by one or more MSPs.
 This provides modularity of membership operations, and interoperability
 across different membership standards and architectures.
 
 In the rest of this document we elaborate on the setup of the MSP
-implementation supported by Hyperledger Fabric, and discuss best practices
+implementation supported by Hyperledger UDO, and discuss best practices
 concerning its use.
 
 MSP Configuration
@@ -96,12 +96,12 @@ How to generate MSP certificates and their signing keys?
 
 To generate X.509 certificates to feed its MSP configuration, the application
 can use `Openssl <https://www.openssl.org/>`_. We emphasize that in Hyperledger
-Fabric there is no support for certificates including RSA keys.
+UDO there is no support for certificates including RSA keys.
 
 Alternatively one can use ``cryptogen`` tool, whose operation is explained in
 :doc:`getting_started`.
 
-`Hyperledger Fabric CA <http://hyperledger-fabric-ca.readthedocs.io/en/latest/>`_
+`Hyperledger UDO CA <http://hyperledger-fabric-ca.readthedocs.io/en/latest/>`_
 can also be used to generate the keys and certificates needed to configure an MSP.
 
 MSP setup on the peer & orderer side
@@ -132,7 +132,7 @@ and a file:
 In the configuration file of the node (core.yaml file for the peer, and
 orderer.yaml for the orderer), one needs to specify the path to the
 mspconfig folder, and the MSP Identifier of the node's MSP. The path to the
-mspconfig folder is expected to be relative to FABRIC_CFG_PATH and is provided
+mspconfig folder is expected to be relative to UDO_CFG_PATH and is provided
 as the value of parameter ``mspConfigPath`` for the peer, and ``LocalMSPDir``
 for the orderer. The identifier of the node's MSP is provided as a value of
 parameter ``localMspId`` for the peer and ``LocalMSPID`` for the orderer.

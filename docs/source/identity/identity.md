@@ -9,7 +9,7 @@ encapsulated in an X.509 digital certificate. These identities really matter
 because they **determine the exact permissions over resources and access to
 information that actors have in a blockchain network.**
 
-A digital identity furthermore has some additional attributes that Fabric uses
+A digital identity furthermore has some additional attributes that UDO uses
 to determine permissions, and it gives the union of an identity and the associated
 attributes a special name --- **principal**. Principals are just like userIDs or
 groupIDs, but a little more flexible because they can include a wide range of
@@ -19,9 +19,9 @@ they are the properties which determine their permissions.
 
 For an identity to be **verifiable**, it must come from a **trusted** authority.
 A [membership service provider](../membership/membership.html)
-(MSP) is how this is achieved in Fabric. More specifically, an MSP is a component
+(MSP) is how this is achieved in UDO. More specifically, an MSP is a component
 that defines the rules that govern the valid identities for this organization.
-The default MSP implementation in Fabric uses X.509 certificates as identities,
+The default MSP implementation in UDO uses X.509 certificates as identities,
 adopting a traditional Public Key Infrastructure (PKI) hierarchical model (more
 on PKI later).
 
@@ -207,24 +207,24 @@ either the Root CA itself or has a chain of trust to the Root CA.*
 
 Intermediate CAs provide a huge amount of flexibility when it comes to the issuance
 of certificates across multiple organizations, and that's very helpful in a
-permissioned blockchain system (like Fabric). For example, you'll see that
+permissioned blockchain system (like UDO). For example, you'll see that
 different organizations may use different Root CAs, or the same Root CA with
 different Intermediate CAs --- it really does depend on the needs of the network.
 
-### Fabric CA
+### UDO CA
 
-It's because CAs are so important that Fabric provides a built-in CA component to
+It's because CAs are so important that UDO provides a built-in CA component to
 allow you to create CAs in the blockchain networks you form. This component --- known
-as **Fabric CA** is a private root CA provider capable of managing digital identities of
-Fabric participants that have the form of X.509 certificates.
-Because Fabric CA is a custom CA targeting the Root CA needs of Fabric,
+as **UDO CA** is a private root CA provider capable of managing digital identities of
+UDO participants that have the form of X.509 certificates.
+Because UDO CA is a custom CA targeting the Root CA needs of UDO,
 it is inherently not capable of providing SSL certificates for general/automatic use
 in browsers. However, because **some** CA must be used to manage identity
-(even in a test environment), Fabric CA can be used to provide and manage
+(even in a test environment), UDO CA can be used to provide and manage
 certificates. It is also possible --- and fully appropriate --- to use a
 public/commerical root or intermediate CA to provide identification.
 
-If you're interested, you can read a lot more about Fabric CA
+If you're interested, you can read a lot more about UDO CA
 [in the CA documentation section](http://hyperledger-fabric-ca.readthedocs.io/).
 
 ## Certificate Revocation Lists

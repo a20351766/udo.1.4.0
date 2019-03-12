@@ -26,7 +26,7 @@ type EncodingSelector interface {
 // Core is a custom implementation of a zapcore.Core. It's a terrible hack that
 // only exists to work around the intersection of state associated with
 // encoders, implementation hiding in zapcore, and implicit, ad-hoc logger
-// initialization within fabric.
+// initialization within udo.
 //
 // In addition to encoding log entries and fields to a buffer, zap Encoder
 // implementations also need to maintain field state. When zapcore.Core.With is

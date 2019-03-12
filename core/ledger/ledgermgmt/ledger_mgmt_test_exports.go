@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/golang"
-	"github.com/hyperledger/fabric/core/ledger/ledgerconfig"
-	"github.com/hyperledger/fabric/core/ledger/mock"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/golang"
+	"github.com/hyperledger/udo/core/ledger/ledgerconfig"
+	"github.com/hyperledger/udo/core/ledger/mock"
 )
 
 // InitializeTestEnv initializes ledgermgmt for tests

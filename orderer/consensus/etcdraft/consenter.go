@@ -15,16 +15,16 @@ import (
 	"code.cloudfoundry.org/clock"
 	"github.com/coreos/etcd/raft"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/viperutil"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/common/multichannel"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/viperutil"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/orderer/common/multichannel"
+	"github.com/hyperledger/udo/orderer/consensus"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
 	"github.com/pkg/errors"
 )
 
@@ -50,7 +50,7 @@ type Consenter struct {
 	Communication cluster.Communicator
 	*Dispatcher
 	Chains         ChainGetter
-	Logger         *flogging.FabricLogger
+	Logger         *flogging.UDOLogger
 	EtcdRaftConfig Config
 	OrdererConfig  localconfig.TopLevel
 	Cert           []byte

@@ -17,8 +17,8 @@ limitations under the License.
 syntax = "proto3";
 
 package protos;
-option java_package = "org.hyperledger.fabric.protos.peer";
-option go_package = "github.com/hyperledger/fabric/protos/peer";
+option java_package = "org.hyperledger.udo.protos.peer";
+option go_package = "github.com/hyperledger/udo/protos/peer";
 
 
 // Confidentiality Levels

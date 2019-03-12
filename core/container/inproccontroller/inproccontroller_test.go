@@ -11,9 +11,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	pb "github.com/hyperledger/udo/protos/peer"
 	"github.com/stretchr/testify/assert"
 )
 

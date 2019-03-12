@@ -51,7 +51,7 @@ const (
 
 func TestUnmarshalV12Digests(t *testing.T) {
 	// This test ensures that digests of data digest messages and data requests
-	// that originated from fabric v1.3 can be successfully parsed by v1.2
+	// that originated from udo v1.3 can be successfully parsed by v1.2
 	for msgBytes, expectedMsg := range map[string]*GossipMessage{
 		v12DataDigestBytes:  digestMsg,
 		v12DataRequestBytes: requestMsg,

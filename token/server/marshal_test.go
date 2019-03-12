@@ -12,9 +12,9 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/hyperledger/fabric/protos/token"
-	"github.com/hyperledger/fabric/token/server"
-	"github.com/hyperledger/fabric/token/server/mock"
+	"github.com/hyperledger/udo/protos/token"
+	"github.com/hyperledger/udo/token/server"
+	"github.com/hyperledger/udo/token/server/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"

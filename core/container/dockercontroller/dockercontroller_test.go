@@ -19,15 +19,15 @@ import (
 	"time"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/common/flogging/floggingtest"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/golang"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	coreutil "github.com/hyperledger/fabric/core/testutil"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/flogging/floggingtest"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/metrics/metricsfakes"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/golang"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	coreutil "github.com/hyperledger/udo/core/testutil"
+	pb "github.com/hyperledger/udo/protos/peer"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/spf13/viper"
@@ -123,7 +123,7 @@ func Test_Start(t *testing.T) {
 	gt.Expect(err).To(HaveOccurred())
 	buildErr = false
 
-	chaincodePath := "github.com/hyperledger/fabric/examples/chaincode/go/example01/cmd"
+	chaincodePath := "github.com/hyperledger/udo/examples/chaincode/go/example01/cmd"
 	spec := &pb.ChaincodeSpec{
 		Type:        pb.ChaincodeSpec_GOLANG,
 		ChaincodeId: &pb.ChaincodeID{Name: "ex01", Path: chaincodePath},

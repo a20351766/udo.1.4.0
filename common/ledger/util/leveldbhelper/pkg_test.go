@@ -23,7 +23,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-const testDBPath = "/tmp/fabric/ledgertests/util/leveldbhelper"
+const testDBPath = "/tmp/udo/ledgertests/util/leveldbhelper"
 
 type testDBEnv struct {
 	t    *testing.T

@@ -19,34 +19,34 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/grpclogging"
-	"github.com/hyperledger/fabric/common/grpcmetrics"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/common/localmsp"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/operations"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/orderer/common/bootstrap/file"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/common/metadata"
-	"github.com/hyperledger/fabric/orderer/common/multichannel"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/orderer/consensus/kafka"
-	"github.com/hyperledger/fabric/orderer/consensus/solo"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/grpclogging"
+	"github.com/hyperledger/udo/common/grpcmetrics"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	"github.com/hyperledger/udo/common/localmsp"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/operations"
+	"github.com/hyperledger/udo/msp"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/orderer/common/bootstrap/file"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/orderer/common/metadata"
+	"github.com/hyperledger/udo/orderer/common/multichannel"
+	"github.com/hyperledger/udo/orderer/consensus"
+	"github.com/hyperledger/udo/orderer/consensus/etcdraft"
+	"github.com/hyperledger/udo/orderer/consensus/kafka"
+	"github.com/hyperledger/udo/orderer/consensus/solo"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/utils"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -56,7 +56,7 @@ var logger = flogging.MustGetLogger("orderer.common.server")
 
 //command line flags
 var (
-	app = kingpin.New("orderer", "Hyperledger Fabric orderer node")
+	app = kingpin.New("orderer", "Hyperledger UDO orderer node")
 
 	start     = app.Command("start", "Start the orderer node").Default()
 	version   = app.Command("version", "Show version information")
@@ -154,8 +154,8 @@ func Start(cmd string, conf *localconfig.TopLevel) {
 }
 
 func initializeLogging() {
-	loggingSpec := os.Getenv("FABRIC_LOGGING_SPEC")
-	loggingFormat := os.Getenv("FABRIC_LOGGING_FORMAT")
+	loggingSpec := os.Getenv("UDO_LOGGING_SPEC")
+	loggingFormat := os.Getenv("UDO_LOGGING_FORMAT")
 	flogging.Init(flogging.Config{
 		Format:  loggingFormat,
 		Writer:  os.Stderr,
@@ -480,8 +480,8 @@ func updateTrustedRoots(srv *comm.GRPCServer, rootCASupport *comm.CASupport,
 		return
 	}
 	for k, v := range msps {
-		// check to see if this is a FABRIC MSP
-		if v.GetType() == msp.FABRIC {
+		// check to see if this is a UDO MSP
+		if v.GetType() == msp.UDO {
 			for _, root := range v.GetTLSRootCerts() {
 				// check to see of this is an app org MSP
 				if _, ok := appOrgMSPs[k]; ok {

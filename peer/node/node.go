@@ -19,8 +19,8 @@ package node
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/peer/common"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/peer/common"
 	"github.com/spf13/cobra"
 )
 

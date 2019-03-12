@@ -6,8 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-option go_package = "github.com/hyperledger/fabric/protos/msp";
-option java_package = "org.hyperledger.fabric.protos.msp";
+option go_package = "github.com/hyperledger/udo/protos/msp";
+option java_package = "org.hyperledger.udo.protos.msp";
 option java_outer_classname = "MspConfigPackage";
 
 package msp;
@@ -17,22 +17,22 @@ package msp;
 // that depends on the Type
 message MSPConfig {
     // Type holds the type of the MSP; the default one would
-    // be of type FABRIC implementing an X.509 based provider
+    // be of type UDO implementing an X.509 based provider
     int32 type = 1;
 
     // Config is MSP dependent configuration info
     bytes config = 2;
 }
 
-// FabricMSPConfig collects all the configuration information for
-// a Fabric MSP.
+// UDOMSPConfig collects all the configuration information for
+// a UDO MSP.
 // Here we assume a default certificate validation policy, where
 // any certificate signed by any of the listed rootCA certs would
 // be considered as valid under this MSP.
 // This MSP may or may not come with a signing identity. If it does,
 // it can also issue signing identities. If it does not, it can only
 // be used to validate and verify certificates.
-message FabricMSPConfig {
+message UDOMSPConfig {
     // Name holds the identifier of the MSP; MSP identifier
     // is chosen by the application that governs this MSP.
     // For example, and assuming the default implementation of MSP,
@@ -67,13 +67,13 @@ message FabricMSPConfig {
     SigningIdentityInfo signing_identity = 6;
 
     // OrganizationalUnitIdentifiers holds one or more
-    // fabric organizational unit identifiers that belong to
+    // udo organizational unit identifiers that belong to
     // this MSP configuration
-    repeated FabricOUIdentifier organizational_unit_identifiers = 7;
+    repeated UDOOUIdentifier organizational_unit_identifiers = 7;
 
-    // FabricCryptoConfig contains the configuration parameters
+    // UDOCryptoConfig contains the configuration parameters
     // for the cryptographic algorithms used by this MSP
-    FabricCryptoConfig crypto_config = 8;
+    UDOCryptoConfig crypto_config = 8;
 
     // List of TLS root certificates trusted by this MSP.
     // They are returned by GetTLSRootCerts.
@@ -83,15 +83,15 @@ message FabricMSPConfig {
     // They are returned by GetTLSIntermediateCerts.
     repeated bytes tls_intermediate_certs = 10;
 
-    // fabric_node_ous contains the configuration to distinguish clients from peers from orderers
+    // udo_node_ous contains the configuration to distinguish clients from peers from orderers
     // based on the OUs.
-    FabricNodeOUs fabric_node_ous = 11;
+    UDONodeOUs udo_node_ous = 11;
 }
 
-// FabricCryptoConfig contains configuration parameters
+// UDOCryptoConfig contains configuration parameters
 // for the cryptographic algorithms used by the MSP
 // this configuration refers to
-message FabricCryptoConfig {
+message UDOCryptoConfig {
 
     // SignatureHashFamily is a string representing the hash family to be used
     // during sign and verify operations.
@@ -174,9 +174,9 @@ message KeyInfo {
     bytes key_material = 2;
 }
 
-// FabricOUIdentifier represents an organizational unit and
+// UDOOUIdentifier represents an organizational unit and
 // its related chain of trust identifier.
-message FabricOUIdentifier {
+message UDOOUIdentifier {
 
     // Certificate represents the second certificate in a certification chain.
     // (Notice that the first certificate in a certification chain is supposed
@@ -192,17 +192,17 @@ message FabricOUIdentifier {
     string organizational_unit_identifier = 2;
 }
 
-// FabricNodeOUs contains configuration to tell apart clients from peers from orderers
+// UDONodeOUs contains configuration to tell apart clients from peers from orderers
 // based on OUs. If NodeOUs recognition is enabled then an msp identity
 // that does not contain any of the specified OU will be considered invalid.
-message FabricNodeOUs {
+message UDONodeOUs {
     // If true then an msp identity that does not contain any of the specified OU will be considered invalid.
     bool   enable = 1;
 
     // OU Identifier of the clients
-    FabricOUIdentifier client_ou_identifier = 2;
+    UDOOUIdentifier client_ou_identifier = 2;
 
     // OU Identifier of the peers
-    FabricOUIdentifier peer_ou_identifier = 3;
+    UDOOUIdentifier peer_ou_identifier = 3;
 
 }

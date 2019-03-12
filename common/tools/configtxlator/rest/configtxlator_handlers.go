@@ -23,9 +23,9 @@ import (
 	"net/http"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/tools/configtxlator/sanitycheck"
-	"github.com/hyperledger/fabric/common/tools/configtxlator/update"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/tools/configtxlator/sanitycheck"
+	"github.com/hyperledger/udo/common/tools/configtxlator/update"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 func fieldBytes(fieldName string, r *http.Request) ([]byte, error) {

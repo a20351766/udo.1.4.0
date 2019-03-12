@@ -22,14 +22,14 @@ import (
 
 	"github.com/fsouza/go-dockerclient"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-lib-go/healthz"
-	"github.com/hyperledger/fabric/core/aclmgmt/resources"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/protos/common"
-	protosorderer "github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo-lib-go/healthz"
+	"github.com/hyperledger/udo/core/aclmgmt/resources"
+	"github.com/hyperledger/udo/integration/nwo"
+	"github.com/hyperledger/udo/integration/nwo/commands"
+	"github.com/hyperledger/udo/protos/common"
+	protosorderer "github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/protos/utils"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -57,7 +57,7 @@ var _ = Describe("EndToEnd", func() {
 		chaincode = nwo.Chaincode{
 			Name:    "mycc",
 			Version: "0.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `AND ('Org1MSP.member','Org2MSP.member')`,
 		}

@@ -17,15 +17,15 @@ import (
 	"time"
 
 	gproto "github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/comm"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/gossip/algo"
-	"github.com/hyperledger/fabric/gossip/util"
-	proto "github.com/hyperledger/fabric/protos/gossip"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/gossip/api"
+	"github.com/hyperledger/udo/gossip/comm"
+	"github.com/hyperledger/udo/gossip/common"
+	"github.com/hyperledger/udo/gossip/discovery"
+	"github.com/hyperledger/udo/gossip/gossip/algo"
+	"github.com/hyperledger/udo/gossip/util"
+	proto "github.com/hyperledger/udo/protos/gossip"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"go.uber.org/zap"
@@ -2191,7 +2191,7 @@ func TestMembershiptrackerStopWhenGCStops(t *testing.T) {
 	}).Once()
 
 	flogging.Global.ActivateSpec("info")
-	gc.(*gossipChannel).logger = gc.(*gossipChannel).logger.(*flogging.FabricLogger).WithOptions(zap.Hooks(func(entry zapcore.Entry) error {
+	gc.(*gossipChannel).logger = gc.(*gossipChannel).logger.(*flogging.UDOLogger).WithOptions(zap.Hooks(func(entry zapcore.Entry) error {
 		if !strings.Contains(entry.Message, "Membership view has changed. peers went offline:  [[a]] , peers went online:  [[b]] , current view:  [[b]]") {
 			return nil
 		}

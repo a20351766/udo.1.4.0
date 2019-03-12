@@ -8,11 +8,11 @@ import "gossip/message.proto";
 import "msp/msp_config.proto";
 import "msp/identities.proto";
 
-option go_package = "github.com/hyperledger/fabric/protos/discovery" ;
+option go_package = "github.com/hyperledger/udo/protos/discovery" ;
 
 package discovery;
 
-// Discovery defines a service that serves information about the fabric network
+// Discovery defines a service that serves information about the udo network
 // like which peers, orderers, chaincodes, etc.
 service Discovery {
     // Discover receives a signed request, and returns a response.
@@ -67,7 +67,7 @@ message Query {
     string channel = 1;
     oneof query {
         // ConfigQuery is used to query for the configuration of the channel,
-        // such as FabricMSPConfig, and rorderer endpoints.
+        // such as UDOMSPConfig, and rorderer endpoints.
         // The client has to query a peer it trusts as it doesn't have means to self-verify
         // the authenticity of the returned result.
         // The result is returned in the form of ConfigResult.
@@ -97,7 +97,7 @@ message QueryResult {
         Error error = 1;
 
         // ConfigResult contains the configuration of the channel,
-        // such as FabricMSPConfig and orderer endpoints
+        // such as UDOMSPConfig and orderer endpoints
         ConfigResult config_result = 2;
 
         // ChaincodeQueryResult contains information about chaincodes,
@@ -116,8 +116,8 @@ message ConfigQuery {
 }
 
 message ConfigResult {
-    // msps is a map from MSP_ID to FabricMSPConfig
-    map<string, msp.FabricMSPConfig> msps = 1;
+    // msps is a map from MSP_ID to UDOMSPConfig
+    map<string, msp.UDOMSPConfig> msps = 1;
     // orderers is a map from MSP_ID to endpoint lists of orderers
     map<string, Endpoints> orderers = 2;
 }

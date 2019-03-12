@@ -186,7 +186,7 @@ can be checked against the current holder of the paper.
 
 In this topic, we've seen how transactions and the resultant paper states are
 the two most important concepts in PaperNet. Indeed, we'll see these two
-fundamental elements in any Hyperledger Fabric distributed
+fundamental elements in any Hyperledger UDO distributed
 [ledger](../ledger/ledger.html) -- a world state, that contains the current
 value of all objects, and a blockchain that records the history of all
 transactions that resulted in the current world state.

@@ -13,10 +13,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/msp"
 	"github.com/spf13/viper"
 )
 

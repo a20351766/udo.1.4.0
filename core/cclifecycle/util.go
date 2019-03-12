@@ -8,9 +8,9 @@ package cc
 
 import (
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/privdata"
+	"github.com/hyperledger/udo/common/chaincode"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/common/privdata"
 	"github.com/pkg/errors"
 )
 

@@ -1,7 +1,7 @@
 v1.3.0-rc1 Release Notes - September 24, 2018
 ---------------------------------------------
 
-What's New in Hyperledger Fabric v1.3
+What's New in Hyperledger UDO v1.3
 -------------------------------------
 
 The following features/epics are included in this release:
@@ -19,7 +19,7 @@ Clients can now page through result sets from chaincode queries, making it
 feasible to support large result sets with high performance.
 
 FAB-8779 - Java chaincode support
-As an addition to the current Fabric support for chaincode written in Go and
+As an addition to the current UDO support for chaincode written in Go and
 Node.js, Java is now supported.
 
 
@@ -28,9 +28,9 @@ Changes, Known Issues, and Workarounds
 
 FAB-11122 - Removal of event hub
 
-The 'old' event hub has been removed in Hyperledger Fabric v1.3.  It is
+The 'old' event hub has been removed in Hyperledger UDO v1.3.  It is
 replaced by the peer channel-based event service which was introduced in
-Fabric v1.1.
+UDO v1.1.
 Applications using the old event hub must switch over to the new
 channel-based event service before upgrading to v1.3 peer or SDKs.
 
@@ -67,4 +67,4 @@ Updated to Go version 1.10.4
 Updated baseimage version to 0.4.12
 
 For the full list of improvements and fixes, refer to the release change log:
-https://github.com/hyperledger/fabric/blob/master/CHANGELOG.md#v130-rc1
+https://github.com/hyperledger/udo/blob/master/CHANGELOG.md#v130-rc1

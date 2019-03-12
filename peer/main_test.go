@@ -22,7 +22,7 @@ import (
 
 func TestPluginLoadingFailure(t *testing.T) {
 	gt := NewGomegaWithT(t)
-	peer, err := gexec.Build("github.com/hyperledger/fabric/peer")
+	peer, err := gexec.Build("github.com/hyperledger/udo/peer")
 	gt.Expect(err).NotTo(HaveOccurred())
 	defer gexec.CleanupBuildArtifacts()
 
@@ -44,7 +44,7 @@ func TestPluginLoadingFailure(t *testing.T) {
 				fmt.Sprintf("CORE_PEER_FILESYSTEMPATH=%s", tempDir),
 				fmt.Sprintf("CORE_PEER_HANDLERS_%s_LIBRARY=testdata/invalid_plugins/invalidplugin.so", plugin),
 				fmt.Sprintf("CORE_PEER_MSPCONFIGPATH=%s", "msp"),
-				fmt.Sprintf("FABRIC_CFG_PATH=%s", filepath.Join(parentDir, "sampleconfig")),
+				fmt.Sprintf("UDO_CFG_PATH=%s", filepath.Join(parentDir, "sampleconfig")),
 				"CORE_OPERATIONS_TLS_ENABLED=false",
 			}
 

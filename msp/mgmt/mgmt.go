@@ -10,10 +10,10 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/cache"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/msp/cache"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
@@ -147,11 +147,11 @@ func loadLocaMSP() msp.MSP {
 	// determine the type of MSP (by default, we'll use bccspMSP)
 	mspType := viper.GetString("peer.localMspType")
 	if mspType == "" {
-		mspType = msp.ProviderTypeToString(msp.FABRIC)
+		mspType = msp.ProviderTypeToString(msp.UDO)
 	}
 
 	var mspOpts = map[string]msp.NewOpts{
-		msp.ProviderTypeToString(msp.FABRIC): &msp.BCCSPNewOpts{NewBaseOpts: msp.NewBaseOpts{Version: msp.MSPv1_0}},
+		msp.ProviderTypeToString(msp.UDO): &msp.BCCSPNewOpts{NewBaseOpts: msp.NewBaseOpts{Version: msp.MSPv1_0}},
 		msp.ProviderTypeToString(msp.IDEMIX): &msp.IdemixNewOpts{NewBaseOpts: msp.NewBaseOpts{Version: msp.MSPv1_1}},
 	}
 	newOpts, found := mspOpts[mspType]
@@ -164,7 +164,7 @@ func loadLocaMSP() msp.MSP {
 		mspLogger.Fatalf("Failed to initialize local MSP, received err %+v", err)
 	}
 	switch mspType {
-	case msp.ProviderTypeToString(msp.FABRIC):
+	case msp.ProviderTypeToString(msp.UDO):
 		mspInst, err = cache.New(mspInst)
 		if err != nil {
 			mspLogger.Fatalf("Failed to initialize local MSP, received err %+v", err)

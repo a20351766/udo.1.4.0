@@ -20,9 +20,9 @@ import (
 	"sort"
 
 	"github.com/golang/protobuf/proto"
-	cb "github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	cb "github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/utils"
 )
 
 // AcceptAllPolicy always evaluates to true
@@ -79,24 +79,24 @@ func SignedBy(index int32) *cb.SignaturePolicy {
 // SignedByMspMember creates a SignaturePolicyEnvelope
 // requiring 1 signature from any member of the specified MSP
 func SignedByMspMember(mspId string) *cb.SignaturePolicyEnvelope {
-	return signedByFabricEntity(mspId, msp.MSPRole_MEMBER)
+	return signedByUDOEntity(mspId, msp.MSPRole_MEMBER)
 }
 
 // SignedByMspClient creates a SignaturePolicyEnvelope
 // requiring 1 signature from any client of the specified MSP
 func SignedByMspClient(mspId string) *cb.SignaturePolicyEnvelope {
-	return signedByFabricEntity(mspId, msp.MSPRole_CLIENT)
+	return signedByUDOEntity(mspId, msp.MSPRole_CLIENT)
 }
 
 // SignedByMspPeer creates a SignaturePolicyEnvelope
 // requiring 1 signature from any peer of the specified MSP
 func SignedByMspPeer(mspId string) *cb.SignaturePolicyEnvelope {
-	return signedByFabricEntity(mspId, msp.MSPRole_PEER)
+	return signedByUDOEntity(mspId, msp.MSPRole_PEER)
 }
 
-// SignedByFabricEntity creates a SignaturePolicyEnvelope
-// requiring 1 signature from any fabric entity, having the passed role, of the specified MSP
-func signedByFabricEntity(mspId string, role msp.MSPRole_MSPRoleType) *cb.SignaturePolicyEnvelope {
+// SignedByUDOEntity creates a SignaturePolicyEnvelope
+// requiring 1 signature from any udo entity, having the passed role, of the specified MSP
+func signedByUDOEntity(mspId string, role msp.MSPRole_MSPRoleType) *cb.SignaturePolicyEnvelope {
 	// specify the principal: it's a member of the msp we just found
 	principal := &msp.MSPPrincipal{
 		PrincipalClassification: msp.MSPPrincipal_ROLE,

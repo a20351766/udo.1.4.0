@@ -9,14 +9,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
-	lgr "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/mock"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/metrics/metricsfakes"
+	lgr "github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/hyperledger/udo/core/ledger/mock"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/stretchr/testify/assert"
 )
 

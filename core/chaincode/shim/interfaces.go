@@ -8,11 +8,11 @@ package shim
 
 import (
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
-// Chaincode interface must be implemented by all chaincodes. The fabric runs
+// Chaincode interface must be implemented by all chaincodes. The udo runs
 // the transactions by calling these functions as specified.
 type Chaincode interface {
 	// Init is called during Instantiate transaction after the chaincode container

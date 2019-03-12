@@ -20,12 +20,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/ledger/blkstorage"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	putil "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/ledger/blkstorage"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
+	putil "github.com/hyperledger/udo/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

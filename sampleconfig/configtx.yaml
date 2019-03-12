@@ -60,14 +60,14 @@ Organizations:
 #
 #   CAPABILITIES
 #
-#   This section defines the capabilities of fabric network. This is a new
+#   This section defines the capabilities of udo network. This is a new
 #   concept as of v1.1.0 and should not be utilized in mixed networks with
 #   v1.0.x peers and orderers.  Capabilities define features which must be
-#   present in a fabric binary for that binary to safely participate in the
-#   fabric network.  For instance, if a new MSP type is added, newer binaries
+#   present in a udo binary for that binary to safely participate in the
+#   udo network.  For instance, if a new MSP type is added, newer binaries
 #   might recognize and validate the signatures from this type, while older
 #   binaries without this support would be unable to validate those
-#   transactions.  This could lead to different versions of the fabric binaries
+#   transactions.  This could lead to different versions of the udo binaries
 #   having different world states.  Instead, defining a capability for a channel
 #   informs those binaries without this capability that they must cease
 #   processing transactions until they have been upgraded.  For v1.0.x if any
@@ -104,14 +104,14 @@ Capabilities:
     # Set the value of the capability to true to require it.
     Application: &ApplicationCapabilities
         # V1.3 for Application enables the new non-backwards compatible
-        # features and fixes of fabric v1.3.
+        # features and fixes of udo v1.3.
         V1_3: true
         # V1.2 for Application enables the new non-backwards compatible
-        # features and fixes of fabric v1.2 (note, this need not be set if
+        # features and fixes of udo v1.2 (note, this need not be set if
         # later version capabilities are set)
         V1_2: false
         # V1.1 for Application enables the new non-backwards compatible
-        # features and fixes of fabric v1.1 (note, this need not be set if
+        # features and fixes of udo v1.1 (note, this need not be set if
         # later version capabilities are set).
         V1_1: false
 
@@ -242,7 +242,7 @@ Orderer: &OrdererDefaults
 
     # Batch Size: Controls the number of messages batched into a block.
     # The orderer views messages opaquely, but typically, messages may
-    # be considered to be Fabric transactions.  The 'batch' is the group
+    # be considered to be UDO transactions.  The 'batch' is the group
     # of messages in the 'data' field of the block.  Blocks will be a few kb
     # larger than the batch size, when signatures, hashes, and other metadata
     # is applied.

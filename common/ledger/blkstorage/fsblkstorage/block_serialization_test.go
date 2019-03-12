@@ -20,8 +20,8 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/stretchr/testify/assert"
 )
 

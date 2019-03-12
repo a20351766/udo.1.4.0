@@ -12,21 +12,21 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/floggingtest"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/internal"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
-	lutils "github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/flogging/floggingtest"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/validator/internal"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
+	lutils "github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
+	putils "github.com/hyperledger/udo/protos/utils"
 	logging "github.com/op/go-logging"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -34,7 +34,7 @@ import (
 
 func TestMain(m *testing.M) {
 	flogging.ActivateSpec("internal=debug")
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/kvledger/txmgmt/validator/internal")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/kvledger/txmgmt/validator/internal")
 	os.Exit(m.Run())
 }
 

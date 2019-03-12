@@ -4,10 +4,10 @@ package mock
 import (
 	sync "sync"
 
-	client "github.com/hyperledger/fabric/token/client"
+	client "github.com/hyperledger/udo/token/client"
 )
 
-type FabricTxSubmitter struct {
+type UDOTxSubmitter struct {
 	SubmitStub        func([]byte) error
 	submitMutex       sync.RWMutex
 	submitArgsForCall []struct {
@@ -23,7 +23,7 @@ type FabricTxSubmitter struct {
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FabricTxSubmitter) Submit(arg1 []byte) error {
+func (fake *UDOTxSubmitter) Submit(arg1 []byte) error {
 	var arg1Copy []byte
 	if arg1 != nil {
 		arg1Copy = make([]byte, len(arg1))
@@ -46,26 +46,26 @@ func (fake *FabricTxSubmitter) Submit(arg1 []byte) error {
 	return fakeReturns.result1
 }
 
-func (fake *FabricTxSubmitter) SubmitCallCount() int {
+func (fake *UDOTxSubmitter) SubmitCallCount() int {
 	fake.submitMutex.RLock()
 	defer fake.submitMutex.RUnlock()
 	return len(fake.submitArgsForCall)
 }
 
-func (fake *FabricTxSubmitter) SubmitCalls(stub func([]byte) error) {
+func (fake *UDOTxSubmitter) SubmitCalls(stub func([]byte) error) {
 	fake.submitMutex.Lock()
 	defer fake.submitMutex.Unlock()
 	fake.SubmitStub = stub
 }
 
-func (fake *FabricTxSubmitter) SubmitArgsForCall(i int) []byte {
+func (fake *UDOTxSubmitter) SubmitArgsForCall(i int) []byte {
 	fake.submitMutex.RLock()
 	defer fake.submitMutex.RUnlock()
 	argsForCall := fake.submitArgsForCall[i]
 	return argsForCall.arg1
 }
 
-func (fake *FabricTxSubmitter) SubmitReturns(result1 error) {
+func (fake *UDOTxSubmitter) SubmitReturns(result1 error) {
 	fake.submitMutex.Lock()
 	defer fake.submitMutex.Unlock()
 	fake.SubmitStub = nil
@@ -74,7 +74,7 @@ func (fake *FabricTxSubmitter) SubmitReturns(result1 error) {
 	}{result1}
 }
 
-func (fake *FabricTxSubmitter) SubmitReturnsOnCall(i int, result1 error) {
+func (fake *UDOTxSubmitter) SubmitReturnsOnCall(i int, result1 error) {
 	fake.submitMutex.Lock()
 	defer fake.submitMutex.Unlock()
 	fake.SubmitStub = nil
@@ -88,7 +88,7 @@ func (fake *FabricTxSubmitter) SubmitReturnsOnCall(i int, result1 error) {
 	}{result1}
 }
 
-func (fake *FabricTxSubmitter) Invocations() map[string][][]interface{} {
+func (fake *UDOTxSubmitter) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
 	fake.submitMutex.RLock()
@@ -100,7 +100,7 @@ func (fake *FabricTxSubmitter) Invocations() map[string][][]interface{} {
 	return copiedInvocations
 }
 
-func (fake *FabricTxSubmitter) recordInvocation(key string, args []interface{}) {
+func (fake *UDOTxSubmitter) recordInvocation(key string, args []interface{}) {
 	fake.invocationsMutex.Lock()
 	defer fake.invocationsMutex.Unlock()
 	if fake.invocations == nil {
@@ -112,4 +112,4 @@ func (fake *FabricTxSubmitter) recordInvocation(key string, args []interface{}) 
 	fake.invocations[key] = append(fake.invocations[key], args)
 }
 
-var _ client.FabricTxSubmitter = new(FabricTxSubmitter)
+var _ client.UDOTxSubmitter = new(UDOTxSubmitter)

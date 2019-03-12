@@ -10,6 +10,6 @@ package metadata
 var Version string = "latest"
 var CommitSHA string = "development build"
 var BaseVersion string = "0.4.14"
-var BaseDockerLabel string = "org.hyperledger.fabric"
+var BaseDockerLabel string = "org.hyperledger.udo"
 var DockerNamespace string = "hyperledger"
 var BaseDockerNamespace string = "hyperledger"

@@ -7,15 +7,15 @@ SPDX-License-Identifier: Apache-2.0
 package valimpl
 
 import (
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/internal"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/statebasedval"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/validator"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/validator/internal"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/validator/statebasedval"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/protos/common"
 )
 
 var logger = flogging.MustGetLogger("valimpl")

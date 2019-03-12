@@ -22,12 +22,12 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes/timestamp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/bccsp/factory"
+	commonledger "github.com/hyperledger/udo/common/ledger"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	logging "github.com/op/go-logging"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
@@ -1029,7 +1029,7 @@ func (stub *ChaincodeStub) SetEvent(name string, payload []byte) error {
 // As independent programs, Go language chaincodes can use any logging
 // methodology they choose, from simple fmt.Printf() to os.Stdout, to
 // decorated logs created by the author's favorite logging package. The
-// chaincode "shim" interface, however, is defined by the Hyperledger fabric
+// chaincode "shim" interface, however, is defined by the Hyperledger udo
 // and implements its own logging methodology. This methodology currently
 // includes severity-based logging control and a standard way of decorating
 // the logs.
@@ -1041,7 +1041,7 @@ func (stub *ChaincodeStub) SetEvent(name string, payload []byte) error {
 // other package requirements. The lack of package requirements is especially
 // important because even if the chaincode happened to explicitly use the same
 // logging package as the shim, unless the chaincode is physically included as
-// part of the hyperledger fabric source code tree it could actually end up
+// part of the hyperledger udo source code tree it could actually end up
 // using a distinct binary instance of the logging package, with different
 // formats and severity levels than the binary package used by the shim.
 //

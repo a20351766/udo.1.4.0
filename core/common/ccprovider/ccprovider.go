@@ -16,11 +16,11 @@ import (
 	"unicode"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/ledger"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/chaincode"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/common/privdata"
+	"github.com/hyperledger/udo/core/ledger"
+	pb "github.com/hyperledger/udo/protos/peer"
 	"github.com/pkg/errors"
 )
 

@@ -23,17 +23,17 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/common/ledger/blkstorage/fsblkstorage"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/util"
-	lgr "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgerconfig"
-	"github.com/hyperledger/fabric/core/ledger/mock"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	configtxtest "github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/common/ledger/blkstorage/fsblkstorage"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/util"
+	lgr "github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/ledgerconfig"
+	"github.com/hyperledger/udo/core/ledger/mock"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -185,8 +185,8 @@ func TestMultipleLedgerBasicRW(t *testing.T) {
 
 func TestLedgerBackup(t *testing.T) {
 	ledgerid := "TestLedger"
-	originalPath := "/tmp/fabric/ledgertests/kvledger1"
-	restorePath := "/tmp/fabric/ledgertests/kvledger2"
+	originalPath := "/tmp/udo/ledgertests/kvledger1"
+	restorePath := "/tmp/udo/ledgertests/kvledger2"
 	viper.Set("ledger.history.enableHistoryDatabase", true)
 
 	// create and populate a ledger in the original environment

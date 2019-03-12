@@ -12,21 +12,21 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/golang"
-	"github.com/hyperledger/fabric/core/common/sysccprovider"
-	"github.com/hyperledger/fabric/core/common/validation"
-	"github.com/hyperledger/fabric/core/ledger"
-	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/configtx"
+	commonerrors "github.com/hyperledger/udo/common/errors"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/golang"
+	"github.com/hyperledger/udo/core/common/sysccprovider"
+	"github.com/hyperledger/udo/core/common/validation"
+	"github.com/hyperledger/udo/core/ledger"
+	ledgerUtil "github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	mspprotos "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 
@@ -656,7 +656,7 @@ func (ds *dynamicCapabilities) CollectionUpgrade() bool {
 	return ds.support.Capabilities().CollectionUpgrade()
 }
 
-// FabToken returns true if fabric token function is supported.
+// FabToken returns true if udo token function is supported.
 func (ds *dynamicCapabilities) FabToken() bool {
 	return ds.support.Capabilities().FabToken()
 }

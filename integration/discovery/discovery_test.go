@@ -15,14 +15,14 @@ import (
 
 	"github.com/fsouza/go-dockerclient"
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/discovery"
-	pm "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	"github.com/hyperledger/udo/integration/nwo"
+	"github.com/hyperledger/udo/integration/nwo/commands"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/discovery"
+	pm "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/utils"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -102,7 +102,7 @@ var _ = Describe("DiscoveryService", func() {
 		chaincode := nwo.Chaincode{
 			Name:    "mycc",
 			Version: "1.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `OR (AND ('Org1MSP.member','Org2MSP.member'), AND ('Org1MSP.member','Org3MSP.member'), AND ('Org2MSP.member','Org3MSP.member'))`,
 		}
@@ -157,7 +157,7 @@ var _ = Describe("DiscoveryService", func() {
 		nwo.DeployChaincode(network, "testchannel", orderer, nwo.Chaincode{
 			Name:    "mycc2",
 			Version: "1.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `AND ('Org1MSP.member', 'Org2MSP.member', 'Org3MSP.member')`,
 		})
@@ -214,7 +214,7 @@ var _ = Describe("DiscoveryService", func() {
 		chaincode := nwo.Chaincode{
 			Name:    "mycc",
 			Version: "1.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `OR ('Org1MSP.member','Org2MSP.member', 'Org3MSP.member')`,
 		}
@@ -253,13 +253,13 @@ var _ = Describe("DiscoveryService", func() {
 			org := network.Organization(o.Organization)
 			mspConfig, err := msp.GetVerifyingMspConfig(network.OrdererOrgMSPDir(org), org.MSPID, "bccsp")
 			Expect(err).NotTo(HaveOccurred())
-			Expect(discoveredConfig.Msps[org.MSPID]).To(Equal(unmarshalFabricMSPConfig(mspConfig)))
+			Expect(discoveredConfig.Msps[org.MSPID]).To(Equal(unmarshalUDOMSPConfig(mspConfig)))
 		}
 		for _, p := range network.Peers {
 			org := network.Organization(p.Organization)
 			mspConfig, err := msp.GetVerifyingMspConfig(network.PeerOrgMSPDir(org), org.MSPID, "bccsp")
 			Expect(err).NotTo(HaveOccurred())
-			Expect(discoveredConfig.Msps[org.MSPID]).To(Equal(unmarshalFabricMSPConfig(mspConfig)))
+			Expect(discoveredConfig.Msps[org.MSPID]).To(Equal(unmarshalUDOMSPConfig(mspConfig)))
 		}
 
 		By("validating  the orderers")
@@ -319,9 +319,9 @@ func peersWithChaincode(discover func() []nwo.DiscoveredPeer, ccName string) fun
 	}
 }
 
-func unmarshalFabricMSPConfig(c *pm.MSPConfig) *pm.FabricMSPConfig {
-	fabricConfig := &pm.FabricMSPConfig{}
-	err := proto.Unmarshal(c.Config, fabricConfig)
+func unmarshalUDOMSPConfig(c *pm.MSPConfig) *pm.UDOMSPConfig {
+	udoConfig := &pm.UDOMSPConfig{}
+	err := proto.Unmarshal(c.Config, udoConfig)
 	Expect(err).NotTo(HaveOccurred())
-	return fabricConfig
+	return udoConfig
 }

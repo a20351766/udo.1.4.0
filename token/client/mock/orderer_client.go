@@ -6,7 +6,7 @@ import (
 	"crypto/tls"
 	"sync"
 
-	"github.com/hyperledger/fabric/token/client"
+	"github.com/hyperledger/udo/token/client"
 	"google.golang.org/grpc"
 )
 

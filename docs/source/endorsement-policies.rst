@@ -54,7 +54,7 @@ Setting chaincode-level endorsement policies
 
 Chaincode-level endorsement policies can be specified at instantiate time using
 either the SDK (for some sample code on how to do this, click
-`here <https://github.com/hyperledger/fabric-sdk-node/blob/f8ffa90dc1b61a4a60a6fa25de760c647587b788/test/integration/e2e/e2eUtils.js#L178>`_)
+`here <https://github.com/hyperledger/udo-sdk-node/blob/f8ffa90dc1b61a4a60a6fa25de760c647587b788/test/integration/e2e/e2eUtils.js#L178>`_)
 or in the peer CLI using the ``-P`` switch followed by the policy.
 
 .. note:: Don't worry about the policy syntax (``'Org1.member'``, et all) right
@@ -167,7 +167,7 @@ following functions apply:
 To help set endorsement policies and marshal them into validation
 parameter byte arrays, the Go shim provides an extension with convenience
 functions that allow the chaincode developer to deal with endorsement policies
-in terms of the MSP identifiers of organizations, see `KeyEndorsementPolicy <https://godoc.org/github.com/hyperledger/fabric/core/chaincode/shim/ext/statebased#KeyEndorsementPolicy>`_:
+in terms of the MSP identifiers of organizations, see `KeyEndorsementPolicy <https://godoc.org/github.com/hyperledger/udo/core/chaincode/shim/ext/statebased#KeyEndorsementPolicy>`_:
 
 .. code-block:: Go
 

@@ -20,7 +20,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/sw"
+	"github.com/hyperledger/udo/bccsp/sw"
 	"github.com/stretchr/testify/assert"
 )
 

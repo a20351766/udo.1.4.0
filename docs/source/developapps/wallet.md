@@ -80,7 +80,7 @@ File  system, In-memory, Hardware Security Module (HSM) and CouchDB.*
   default choice for wallets.
 
   Use the `FileSystemWallet`
-  [class](https://fabric-sdk-node.github.io/master/module-fabric-network.FileSystemWallet.html)
+  [class](https://udo-sdk-node.github.io/master/module-udo-network.FileSystemWallet.html)
   to manage file system wallets.
 
 
@@ -91,7 +91,7 @@ File  system, In-memory, Hardware Security Module (HSM) and CouchDB.*
   normally or crashes.
 
   Use the `InMemoryWallet`
-  [class](https://fabric-sdk-node.github.io/master/module-fabric-network.InMemoryWallet.html)
+  [class](https://udo-sdk-node.github.io/master/module-udo-network.InMemoryWallet.html)
   to manage in-memory wallets.
 
 
@@ -103,9 +103,9 @@ File  system, In-memory, Hardware Security Module (HSM) and CouchDB.*
   encryption with private keys, such that the private key never leave the HSM.
 
   Currently you should use the `FileSystemWallet`
-  [class](https://fabric-sdk-node.github.io/master/module-fabric-network.FileSystemWallet.html)
+  [class](https://udo-sdk-node.github.io/master/module-udo-network.FileSystemWallet.html)
   in combination with the
-  [HSMWalletMixin](https://fabric-sdk-node.github.io/master/module-fabric-network.HSMWalletMixin.html)
+  [HSMWalletMixin](https://udo-sdk-node.github.io/master/module-udo-network.HSMWalletMixin.html)
   class to manage HSM wallets.
 
 
@@ -115,7 +115,7 @@ File  system, In-memory, Hardware Security Module (HSM) and CouchDB.*
   recovery.
 
   Use the `CouchDBWallet`
-  [class](https://fabric-sdk-node.github.io/master/module-fabric-network.CouchDBWallet.html)
+  [class](https://udo-sdk-node.github.io/master/module-udo-network.CouchDBWallet.html)
   to manage CouchDB wallets.
 
 ## Structure
@@ -123,12 +123,12 @@ File  system, In-memory, Hardware Security Module (HSM) and CouchDB.*
 A single wallet can hold multiple identities, each issued by a particular
 Certificate Authority. Each identity has a standard structure comprising a
 descriptive label, an X.509 certificate containing a public key, a private key,
-and some Fabric-specific metadata. Different [wallet types](#types) map this
+and some UDO-specific metadata. Different [wallet types](#types) map this
 structure appropriately to their storage mechanism.
 
-![wallet.structure](./develop.diagram.11.png) *A Fabric wallet can hold multiple
+![wallet.structure](./develop.diagram.11.png) *A UDO wallet can hold multiple
 identities with certificates issued by a different Certificate Authority.
-Identities comprise certificate, private key and Fabric metadata.*
+Identities comprise certificate, private key and UDO metadata.*
 
 There's a couple of key class methods that make it easy to manage wallets and
 identities:
@@ -140,7 +140,7 @@ await wallet.import(identityLabel, identity);
 ```
 
  See how the `X509WalletMixin.createIdentity()`
-[method](https://fabric-sdk-node.github.io/master/module-fabric-network.X509WalletMixin.html)
+[method](https://udo-sdk-node.github.io/master/module-udo-network.X509WalletMixin.html)
 creates an `identity` that has metadata `Org1MSP`, a `certificate` and a private
 `key`. See how `wallet.import()` adds this identity to the wallet with a
 particular `identityLabel`.
@@ -180,7 +180,7 @@ manipulate these data.
 ## Operations
 
 The different wallet classes are derived from a common
-[Wallet](https://fabric-sdk-node.github.io/master/module-fabric-network.Wallet.html)
+[Wallet](https://udo-sdk-node.github.io/master/module-udo-network.Wallet.html)
 base class which provides a standard set of APIs to manage identities. It means
 that applications can be made independent of the underlying wallet storage
 mechanism; for example, File system and HSM wallets are handled in a very
@@ -194,7 +194,7 @@ An application can use a wallet according to a simple lifecycle. Wallets can be
 opened or created, and subsequently identities can be added, read, updated,
 deleted and exported. Spend a little time on the different `Wallet` methods in
 the
-[JSDOC](https://fabric-sdk-node.github.io/master/module-fabric-network.Wallet.html)
+[JSDOC](https://udo-sdk-node.github.io/master/module-udo-network.Wallet.html)
 to see how they work; the commercial paper tutorial provides a nice example in
 `addToWallet.js`:
 
@@ -224,7 +224,7 @@ Notice how:
   `User1@org1.example.com`.
 
 That's everything you need to know about wallets. You've seen how they hold
-identities that are used by applications on behalf of users to access Fabric
+identities that are used by applications on behalf of users to access UDO
 network resources. There are different types of wallets available depending on
 your application and security needs, and a simple set of APIs to help
 applications manage wallets and the identities within them.

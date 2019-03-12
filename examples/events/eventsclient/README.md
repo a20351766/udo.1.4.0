@@ -25,7 +25,7 @@ This sample demonstrates connecting to both of these services.
 
 # General use
 ```sh
-cd fabric/examples/events/eventsclient
+cd udo/examples/events/eventsclient
 go build
 ```
 You will see the executable **eventsclient** if there are no compilation errors.
@@ -34,13 +34,13 @@ Next, to start receiving block events from a peer with TLS enabled, run the
 following command:
 
 ```sh
-FABRIC_CFG_PATH=<path to config> CORE_PEER_LOCALMSPID=<msp-id> CORE_PEER_MSPCONFIGPATH=<path to MSP folder> ./eventsclient -channelID=<channel-id> -filtered=<true or false> -tls=true -clientKey=<path to the client key> -clientCert=<path to the client TLS certificate> -rootCert=<path to the server root CA certificate>
+UDO_CFG_PATH=<path to config> CORE_PEER_LOCALMSPID=<msp-id> CORE_PEER_MSPCONFIGPATH=<path to MSP folder> ./eventsclient -channelID=<channel-id> -filtered=<true or false> -tls=true -clientKey=<path to the client key> -clientCert=<path to the client TLS certificate> -rootCert=<path to the server root CA certificate>
 ```
 
 If the peer is not using TLS you can run:
 
 ```bash
-FABRIC_CFG_PATH=<path to config> CORE_PEER_LOCALMSPID=<msp-id> CORE_PEER_MSPCONFIGPATH=<path to MSP folder> ./eventsclient -channelID=<channel-id> -filtered=<true or false> -tls=false
+UDO_CFG_PATH=<path to config> CORE_PEER_LOCALMSPID=<msp-id> CORE_PEER_MSPCONFIGPATH=<path to MSP folder> ./eventsclient -channelID=<channel-id> -filtered=<true or false> -tls=false
 ```
 
 The peer will begin delivering block events and print the output to the console.
@@ -75,23 +75,23 @@ the following:
 * If TLS is enabled:
   * to receive full blocks:
 ```sh
-FABRIC_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=false -tls=true -clientKey=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.key -clientCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.crt -rootCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/ca.crt
+UDO_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=false -tls=true -clientKey=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.key -clientCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.crt -rootCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/ca.crt
 ```
 
   * to receive filtered blocks:
 ```sh
-FABRIC_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=true -tls=true -clientKey=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.key -clientCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.crt -rootCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/ca.crt
+UDO_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=true -tls=true -clientKey=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.key -clientCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/client.crt -rootCert=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/users/Admin@Org1.example.com/tls/ca.crt
 ```
 
 * If TLS is disabled:
   * to receive full blocks:
 ```sh
-FABRIC_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=false -tls=false
+UDO_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=false -tls=false
 ```
 
   * to receive filtered blocks:
 ```sh
-FABRIC_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=true -tls=false
+UDO_CFG_PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/config CORE_PEER_LOCALMSPID=Org1MSP CORE_PEER_MSPCONFIGPATH=$GOPATH/src/github.com/hyperledger/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.Org1.example.com/msp ./eventsclient -server=peer0.org1.example.com:7051 -channelID=mychannel -filtered=true -tls=false
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

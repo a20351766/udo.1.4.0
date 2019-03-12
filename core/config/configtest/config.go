@@ -50,7 +50,7 @@ func GetDevConfigDir() (string, error) {
 	}
 
 	for _, p := range filepath.SplitList(gopath) {
-		devPath := filepath.Join(p, "src/github.com/hyperledger/fabric/sampleconfig")
+		devPath := filepath.Join(p, "src/github.com/hyperledger/udo/sampleconfig")
 		if !dirExists(devPath) {
 			continue
 		}
@@ -73,25 +73,25 @@ func GetDevMspDir() (string, error) {
 	return filepath.Join(devDir, "msp"), nil
 }
 
-func SetDevFabricConfigPath(t *testing.T) (cleanup func()) {
+func SetDevUDOConfigPath(t *testing.T) (cleanup func()) {
 	t.Helper()
 
-	oldFabricCfgPath, resetFabricCfgPath := os.LookupEnv("FABRIC_CFG_PATH")
+	oldUDOCfgPath, resetUDOCfgPath := os.LookupEnv("UDO_CFG_PATH")
 	devConfigDir, err := GetDevConfigDir()
 	if err != nil {
 		t.Fatalf("failed to get dev config dir: %s", err)
 	}
 
-	err = os.Setenv("FABRIC_CFG_PATH", devConfigDir)
-	if resetFabricCfgPath {
+	err = os.Setenv("UDO_CFG_PATH", devConfigDir)
+	if resetUDOCfgPath {
 		return func() {
-			err := os.Setenv("FABRIC_CFG_PATH", oldFabricCfgPath)
+			err := os.Setenv("UDO_CFG_PATH", oldUDOCfgPath)
 			assert.NoError(t, err)
 		}
 	}
 
 	return func() {
-		err := os.Unsetenv("FABRIC_CFG_PATH")
+		err := os.Unsetenv("UDO_CFG_PATH")
 		assert.NoError(t, err)
 	}
 }

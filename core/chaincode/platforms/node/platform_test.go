@@ -17,9 +17,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/spf13/viper"
 )
 
@@ -126,8 +126,8 @@ func TestGetDeploymentPayload(t *testing.T) {
 
 func TestGenerateDockerfile(t *testing.T) {
 	str, _ := platform.GenerateDockerfile()
-	if !strings.Contains(str, "/fabric-baseimage:") {
-		t.Fatalf("should have generated a docker file using the fabric-baseimage, but got %s", str)
+	if !strings.Contains(str, "/udo-baseimage:") {
+		t.Fatalf("should have generated a docker file using the udo-baseimage, but got %s", str)
 	}
 
 	if !strings.Contains(str, "ADD binpackage.tar /usr/local/src") {
@@ -143,7 +143,7 @@ func TestGenerateDockerBuild(t *testing.T) {
 
 	content := []byte(`
 		{
-		  "name": "fabric-shim-test",
+		  "name": "udo-shim-test",
 		  "version": "1.0.0-snapshot",
 	      "script": {
 	        "start": "node chaincode.js"
@@ -161,7 +161,7 @@ func TestGenerateDockerBuild(t *testing.T) {
 	}
 
 	content = []byte(`
-		const shim = require('fabric-shim');
+		const shim = require('udo-shim');
 
 		var chaincode = {};
 		chaincode.Init = function(stub) {

@@ -14,9 +14,9 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/protos/orderer"
 	"github.com/pkg/errors"
 )
 
@@ -82,7 +82,7 @@ type MembersByChannel map[string]MemberMapping
 type Comm struct {
 	shutdown     bool
 	Lock         sync.RWMutex
-	Logger       *flogging.FabricLogger
+	Logger       *flogging.UDOLogger
 	ChanExt      ChannelExtractor
 	H            Handler
 	Connections  *ConnectionStore

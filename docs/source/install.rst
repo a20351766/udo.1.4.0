@@ -1,11 +1,11 @@
 Install Samples, Binaries and Docker Images
 ===========================================
 
-While we work on developing real installers for the Hyperledger Fabric
+While we work on developing real installers for the Hyperledger UDO
 binaries, we provide a script that will download and install samples and
 binaries to your system. We think that you'll find the sample applications
 installed useful to learn more about the capabilities and operations of
-Hyperledger Fabric.
+Hyperledger UDO.
 
 
 .. note:: If you are running on **Windows** you will want to make use of the
@@ -32,23 +32,23 @@ command that follows will perform the following steps:
 
 #. If needed, clone the `hyperledger/fabric-samples <https://github.com/hyperledger/fabric-samples>`_ repository
 #. Checkout the appropriate version tag
-#. Install the Hyperledger Fabric platform-specific binaries and config files
+#. Install the Hyperledger UDO platform-specific binaries and config files
    for the version specified into the /bin and /config directories of fabric-samples
-#. Download the Hyperledger Fabric docker images for the version specified
+#. Download the Hyperledger UDO docker images for the version specified
 
 Once you are ready, and in the directory into which you will install the
-Fabric Samples and binaries, go ahead and execute the following command:
+UDO Samples and binaries, go ahead and execute the following command:
 
 .. code:: bash
 
   curl -sSL http://bit.ly/2ysbOFE | bash -s 1.4.0
 
-.. note:: If you want to download different versions for Fabric, Fabric-ca and thirdparty
+.. note:: If you want to download different versions for UDO, UDO-ca and thirdparty
           Docker images, you must pass the version identifier for each.
 
 .. code:: bash
 
-  curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
+  curl -sSL http://bit.ly/2ysbOFE | bash -s <udo> <fabric-ca> <thirdparty>
   curl -sSL http://bit.ly/2ysbOFE | bash -s 1.4.0 1.4.0 0.4.14
 
 .. note:: If you get an error running the above curl command, you may
@@ -59,10 +59,10 @@ Fabric Samples and binaries, go ahead and execute the following command:
 	  information on where to find the latest version of curl and
 	  get the right environment. Alternately, you can substitute
 	  the un-shortened URL:
-	  https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh
+	  https://raw.githubusercontent.com/hyperledger/udo/master/scripts/bootstrap.sh
 
 .. note:: You can use the command above for any published version of Hyperledger
-          Fabric. Simply replace `1.4.0` with the version identifier
+          UDO. Simply replace `1.4.0` with the version identifier
           of the version you wish to install.
 
 The command above downloads and executes a bash script
@@ -89,14 +89,14 @@ can be picked up without fully qualifying the path to each binary. e.g.:
 
   export PATH=<path to download location>/bin:$PATH
 
-Finally, the script will download the Hyperledger Fabric docker images from
+Finally, the script will download the Hyperledger UDO docker images from
 `Docker Hub <https://hub.docker.com/u/hyperledger/>`__ into
 your local Docker registry and tag them as 'latest'.
 
 The script lists out the Docker images installed upon conclusion.
 
 Look at the names for each image; these are the components that will ultimately
-comprise our Hyperledger Fabric network.  You will also notice that you have
+comprise our Hyperledger UDO network.  You will also notice that you have
 two instances of the same image ID - one tagged as "amd64-1.x.x" and
 one tagged as "latest". Prior to 1.2.0, the image being downloaded was determined
 by ``uname -m`` and showed as "x86_64-1.x.x".

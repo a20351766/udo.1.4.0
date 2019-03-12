@@ -10,9 +10,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/chaincode/shim/ext/statebased"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/chaincode/shim/ext/statebased"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
 /*

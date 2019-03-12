@@ -22,10 +22,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	mspproto "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	mspproto "github.com/hyperledger/udo/protos/msp"
 )
 
 type MockChannelPolicyManagerGetter struct {

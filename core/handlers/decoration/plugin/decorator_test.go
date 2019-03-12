@@ -9,7 +9,7 @@ package main
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/stretchr/testify/assert"
 )
 

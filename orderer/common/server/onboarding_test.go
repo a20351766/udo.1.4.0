@@ -15,18 +15,18 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/blockledger/ram"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/orderer/common/cluster/mocks"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/blockledger/ram"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/orderer/common/cluster/mocks"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -129,7 +129,7 @@ func TestReplicateIfNeeded(t *testing.T) {
 
 	flogging.ActivateSpec("testReplicateIfNeeded=debug")
 
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	blockBytes, err := ioutil.ReadFile(filepath.Join("testdata", "genesis.block"))

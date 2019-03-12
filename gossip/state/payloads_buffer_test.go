@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/gossip/util"
-	proto "github.com/hyperledger/fabric/protos/gossip"
+	"github.com/hyperledger/udo/gossip/util"
+	proto "github.com/hyperledger/udo/protos/gossip"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -156,7 +156,7 @@ func TestPayloadsBufferImpl_Interleave(t *testing.T) {
 	//
 	// First two sequences arrives and the buffer is emptied without interleave.
 	//
-	// This is also an example of the produce/consumer pattern in Fabric.
+	// This is also an example of the produce/consumer pattern in UDO.
 	// Producer:
 	//
 	// Payloads are pushed into the buffer. These payloads can be out of order.

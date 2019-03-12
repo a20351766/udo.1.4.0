@@ -11,7 +11,7 @@ detail, you can read the
 
 ![commercialpaper.tutorial](./commercial_paper.diagram.1.png) *In this tutorial
 two organizations, MagnetoCorp and DigiBank, trade commercial paper with each
-other using PaperNet, a Hyperledger Fabric blockchain network.*
+other using PaperNet, a Hyperledger UDO blockchain network.*
 
 Once you've set up a basic network, you'll act as Isabella, an employee of
 MagnetoCorp, who will issue a commercial paper on its behalf. You'll then switch
@@ -22,7 +22,7 @@ MagnetoCorp for a small profit.
 You'll act as an developer, end user, and administrator, each in different
 organizations, performing the following steps designed to help you understand
 what it's like to collaborate as two different organizations working
-independently, but according to mutually agreed rules in a Hyperledger Fabric
+independently, but according to mutually agreed rules in a Hyperledger UDO
 network.
 
 * [Set up machine](#prerequisites) and [download samples](#download-samples)
@@ -60,7 +60,7 @@ You **must** have the following technologies installed:
 
   * [**Docker**](https://www.docker.com/get-started) version 18.06, or higher.
     Docker help developers and administrators create standard environments for
-    building and running applications and smart contracts. Hyperledger Fabric is
+    building and running applications and smart contracts. Hyperledger UDO is
     provided as a set of Docker images, and the PaperNet smart contract will run
     in a docker container. Install Docker
     [here](https://www.docker.com/get-started).
@@ -87,7 +87,7 @@ requirement to install these when you first run the tutorial:
 
 ## Download samples
 
-The commercial paper tutorial is one of the Hyperledger Fabric
+The commercial paper tutorial is one of the Hyperledger UDO
 [samples](https://github.com/hyperledger/fabric-samples) held in a public
 [GitHub](https://www.github.com) repository called `fabric-samples`. As you're
 going to run the tutorial on your machine, your first task is to download the
@@ -96,7 +96,7 @@ going to run the tutorial on your machine, your first task is to download the
 ![commercialpaper.download](./commercial_paper.diagram.2.png) *Download the
 `fabric-samples` GitHub repository to your local machine.*
 
-`$GOPATH` is an important environment variable in Hyperledger Fabric; it
+`$GOPATH` is an important environment variable in Hyperledger UDO; it
 identifies the root directory for installation. It is important to get right no
 matter which programming language you're using! Open a new terminal window and
 check your `$GOPATH` is set using the `env` command:
@@ -173,14 +173,14 @@ PaperNet. For now, this network is sufficient to show you how to develop an
 application and smart contract.
 
 ![commercialpaper.network](./commercial_paper.diagram.3.png) *The Hyperledger
-Fabric basic network comprises a peer and its ledger database, an orderer and a
+UDO basic network comprises a peer and its ledger database, an orderer and a
 certificate authority (CA). Each of these components runs as a docker
 container.*
 
 The peer, its [ledger](../ledger/ledger.html#world-state-database-options), the
 orderer and the CA each run in the their own docker container. In production
 environments, organizations typically use existing CAs that are shared with
-other systems; they're not dedicated to the Fabric network.
+other systems; they're not dedicated to the UDO network.
 
 You can manage the basic network using the commands and configuration included
 in the `fabric-samples\basic-network` directory. Let's start the network on your
@@ -197,18 +197,18 @@ latest: Pulling from hyperledger/fabric-ca
 3b37166ec614: Pull complete
 504facff238f: Pull complete
 (...)
-Pulling orderer.example.com (hyperledger/fabric-orderer:)...
-latest: Pulling from hyperledger/fabric-orderer
+Pulling orderer.example.com (hyperledger/udo-orderer:)...
+latest: Pulling from hyperledger/udo-orderer
 3b37166ec614: Already exists
 504facff238f: Already exists
 (...)
-Pulling couchdb (hyperledger/fabric-couchdb:)...
-latest: Pulling from hyperledger/fabric-couchdb
+Pulling couchdb (hyperledger/udo-couchdb:)...
+latest: Pulling from hyperledger/udo-couchdb
 3b37166ec614: Already exists
 504facff238f: Already exists
 (...)
-Pulling peer0.org1.example.com (hyperledger/fabric-peer:)...
-latest: Pulling from hyperledger/fabric-peer
+Pulling peer0.org1.example.com (hyperledger/udo-peer:)...
+latest: Pulling from hyperledger/udo-peer
 3b37166ec614: Already exists
 504facff238f: Already exists
 (...)
@@ -222,9 +222,9 @@ Creating peer0.org1.example.com ... done
 ```
 
 Notice how the `docker-compose -f docker-compose.yml up -d ca.example.com...`
-command pulls the four Hyperledger Fabric container images from
+command pulls the four Hyperledger UDO container images from
 [DockerHub](https://hub.docker.com/), and then starts them. These containers
-have the most up-to-date version of the software for these Hyperledger Fabric
+have the most up-to-date version of the software for these Hyperledger UDO
 components. Feel free to explore the `basic-network` directory -- we'll use
 much of its contents during this tutorial.
 
@@ -235,9 +235,9 @@ using the `docker ps` command:
 $ docker ps
 
 CONTAINER ID        IMAGE                        COMMAND                  CREATED              STATUS              PORTS                                            NAMES
-ada3d078989b        hyperledger/fabric-peer      "peer node start"        About a minute ago   Up About a minute   0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
-1fa1fd107bfb        hyperledger/fabric-orderer   "orderer"                About a minute ago   Up About a minute   0.0.0.0:7050->7050/tcp                           orderer.example.com
-53fe614274f7        hyperledger/fabric-couchdb   "tini -- /docker-ent…"   About a minute ago   Up About a minute   4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
+ada3d078989b        hyperledger/udo-peer      "peer node start"        About a minute ago   Up About a minute   0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
+1fa1fd107bfb        hyperledger/udo-orderer   "orderer"                About a minute ago   Up About a minute   0.0.0.0:7050->7050/tcp                           orderer.example.com
+53fe614274f7        hyperledger/udo-couchdb   "tini -- /docker-ent…"   About a minute ago   Up About a minute   4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
 469201085a20        hyperledger/fabric-ca        "sh -c 'fabric-ca-se…"   About a minute ago   Up About a minute   0.0.0.0:7054->7054/tcp                           ca.example.com
 ```
 
@@ -284,7 +284,7 @@ $ docker network inspect net_basic
 See how the four containers use different IP addresses, while being part of a
 single docker network. (We've abbreviated the output for clarity.)
 
-To recap: you've downloaded the Hyperledger Fabric samples repository from
+To recap: you've downloaded the Hyperledger UDO samples repository from
 GitHub and you've got the basic network running on your local machine. Let's now
 start to play the role of MagnetoCorp, who wish to trade commercial paper.
 
@@ -328,9 +328,9 @@ interact with the network.
 administrator interacts with the network via a docker container.*
 
 To interact with PaperNet, a MagnetoCorp administrator needs to use the
-Hyperledger Fabric `peer` commands. Conveniently, these are available pre-built
-in the `hyperledger/fabric-tools`
-[docker image](https://hub.docker.com/r/hyperledger/fabric-tools/).
+Hyperledger UDO `peer` commands. Conveniently, these are available pre-built
+in the `hyperledger/udo-tools`
+[docker image](https://hub.docker.com/r/hyperledger/udo-tools/).
 
 Let's start a MagnetoCorp-specific docker container for the administrator using
 the `docker-compose` [command](https://docs.docker.com/compose/overview/):
@@ -339,27 +339,27 @@ the `docker-compose` [command](https://docs.docker.com/compose/overview/):
 (magnetocorp admin)$ cd commercial-paper/organization/magnetocorp/configuration/cli/
 (magnetocorp admin)$ docker-compose -f docker-compose.yml up -d cliMagnetoCorp
 
-Pulling cliMagnetoCorp (hyperledger/fabric-tools:)...
-latest: Pulling from hyperledger/fabric-tools
+Pulling cliMagnetoCorp (hyperledger/udo-tools:)...
+latest: Pulling from hyperledger/udo-tools
 3b37166ec614: Already exists
 (...)
 Digest: sha256:058cff3b378c1f3ebe35d56deb7bf33171bf19b327d91b452991509b8e9c7870
-Status: Downloaded newer image for hyperledger/fabric-tools:latest
+Status: Downloaded newer image for hyperledger/udo-tools:latest
 Creating cliMagnetoCorp ... done
 ```
 
-Again, see how the `hyperledger/fabric-tools` docker image was retrieved from
+Again, see how the `hyperledger/udo-tools` docker image was retrieved from
 Docker Hub and added to the network:
 
 ```
 (magnetocorp admin)$ docker ps
 
 CONTAINER ID        IMAGE                        COMMAND                  CREATED              STATUS              PORTS                                            NAMES
-562a88b25149        hyperledger/fabric-tools     "/bin/bash"              About a minute ago   Up About a minute                                                    cliMagnetoCorp
+562a88b25149        hyperledger/udo-tools     "/bin/bash"              About a minute ago   Up About a minute                                                    cliMagnetoCorp
 b7f3586e5d02        gliderlabs/logspout          "/bin/logspout"          7 minutes ago        Up 7 minutes        127.0.0.1:8000->80/tcp                           logspout
-ada3d078989b        hyperledger/fabric-peer      "peer node start"        29 minutes ago       Up 29 minutes       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
-1fa1fd107bfb        hyperledger/fabric-orderer   "orderer"                29 minutes ago       Up 29 minutes       0.0.0.0:7050->7050/tcp                           orderer.example.com
-53fe614274f7        hyperledger/fabric-couchdb   "tini -- /docker-ent…"   29 minutes ago       Up 29 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
+ada3d078989b        hyperledger/udo-peer      "peer node start"        29 minutes ago       Up 29 minutes       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp   peer0.org1.example.com
+1fa1fd107bfb        hyperledger/udo-orderer   "orderer"                29 minutes ago       Up 29 minutes       0.0.0.0:7050->7050/tcp                           orderer.example.com
+53fe614274f7        hyperledger/udo-couchdb   "tini -- /docker-ent…"   29 minutes ago       Up 29 minutes       4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp       couchdb
 469201085a20        hyperledger/fabric-ca        "sh -c 'fabric-ca-se…"   29 minutes ago       Up 29 minutes       0.0.0.0:7054->7054/tcp                           ca.example.com
 ```
 
@@ -396,18 +396,18 @@ editor displaying the commercial paper smart contract in `papercontract.js`*
 `papercontract.js` is a JavaScript program designed to run in the node.js
 environment. Note the following key program lines:
 
-* `const { Contract, Context } = require('fabric-contract-api');`
+* `const { Contract, Context } = require('udo-contract-api');`
 
-  This statement brings into scope two key Hyperledger Fabric classes that will
+  This statement brings into scope two key Hyperledger UDO classes that will
   be used extensively by the smart contract  -- `Contract` and `Context`. You
   can learn more about these classes in the
-  [`fabric-shim` JSDOCS](https://fabric-shim.github.io/).
+  [`udo-shim` JSDOCS](https://udo-shim.github.io/).
 
 
 * `class CommercialPaperContract extends Contract {`
 
   This defines the smart contract class `CommercialPaperContract` based on the
-  built-in Fabric `Contract` class.  The methods which implement the key
+  built-in UDO `Contract` class.  The methods which implement the key
   transactions to `issue`, `buy` and `redeem` commercial paper are defined
   within this class.
 
@@ -459,7 +459,7 @@ authority.
 administrator installs a copy of the `papercontract` onto a MagnetoCorp peer.*
 
 Smart contracts are the focus of application development, and are contained
-within a Hyperledger Fabric artifact called [chaincode](../chaincode.html). One
+within a Hyperledger UDO artifact called [chaincode](../chaincode.html). One
 or more smart contracts can be defined within a single chaincode, and installing
 a chaincode will allow them to be consumed by the different organizations in
 PaperNet.  It means that only administrators need to worry about chaincode;
@@ -471,10 +471,10 @@ file system within the target peer's docker container. Once the smart contract
 is installed on the peer and instantiated on a channel,
 `papercontract` can be invoked by applications, and interact with the ledger
 database via the
-[putState()](https://fabric-shim.github.io/release-1.3/fabric-shim.ChaincodeStub.html#putState__anchor)
+[putState()](https://udo-shim.github.io/release-1.3/udo-shim.ChaincodeStub.html#putState__anchor)
 and
-[getState()](https://fabric-shim.github.io/release-1.3/fabric-shim.ChaincodeStub.html#getState__anchor)
-Fabric APIs. Examine how these APIs are used by `StateList` class within
+[getState()](https://udo-shim.github.io/release-1.3/udo-shim.ChaincodeStub.html#getState__anchor)
+UDO APIs. Examine how these APIs are used by `StateList` class within
 `ledger-api\statelist.js`.
 
 Let's now install `papercontract` as the MagnetoCorp administrator. In the
@@ -594,11 +594,11 @@ starts by retrieving Isabella's X.509 certificate from her
 system or a Hardware Security Module
 [HSM](https://en.wikipedia.org/wiki/Hardware_security_module). The `issue`
 application is then able to utilize the gateway to submit transactions on the
-channel. The Hyperledger Fabric SDK provides a
+channel. The Hyperledger UDO SDK provides a
 [gateway](../developapps/gateway.html) abstraction so that applications can
 focus on application logic while delegating network interaction to the
 gateway. Gateways and wallets make it straightforward to write Hyperledger
-Fabric applications.
+UDO applications.
 
 So let's examine the `issue` application that Isabella is going to use. open a
 separate terminal window for her, and in `fabric-samples` locate the MagnetoCorp
@@ -631,9 +631,9 @@ displaying the contents of the commercial paper application directory.*
 
 Note the following key program lines in `issue.js`:
 
-* `const { FileSystemWallet, Gateway } = require('fabric-network');`
+* `const { FileSystemWallet, Gateway } = require('udo-network');`
 
-  This statement brings two key Hyperledger Fabric SDK classes into scope --
+  This statement brings two key Hyperledger UDO SDK classes into scope --
   `Wallet` and `Gateway`. Because Isabella's X.509 certificate is in the local
   file system, the application uses `FileSystemWallet`.
 
@@ -696,13 +696,13 @@ As is common practice, MagnetoCorp's application is built on many
 external node packages -- to improve quality and speed of development. Consider
 how `issue.js` includes the `js-yaml`
 [package](https://www.npmjs.com/package/js-yaml) to process the YAML gateway
-connection profile, or the `fabric-network`
-[package](https://www.npmjs.com/package/fabric-network) to access the `Gateway`
+connection profile, or the `udo-network`
+[package](https://www.npmjs.com/package/udo-network) to access the `Gateway`
 and `Wallet` classes:
 
 ```JavaScript
 const yaml = require('js-yaml');
-const { FileSystemWallet, Gateway } = require('fabric-network');
+const { FileSystemWallet, Gateway } = require('udo-network');
 ```
 
 These packages have to be downloaded from [npm](https://www.npmjs.com/) to the
@@ -715,7 +715,7 @@ download and their exact versions:
 
 ```json
   "dependencies": {
-    "fabric-network": "^1.4.0-beta",
+    "udo-network": "^1.4.0-beta",
     "fabric-client": "^1.4.0-beta",
     "js-yaml": "^3.12.0"
   },
@@ -745,7 +745,7 @@ issue.js	      	package-lock.json
 ```
 
 Examine the `node_modules` directory to see the packages that have been
-installed. There are lots, because `js-yaml` and `fabric-network` are themselves
+installed. There are lots, because `js-yaml` and `udo-network` are themselves
 built on other npm packages! Helpfully, the `package-lock.json`
 [file](https://docs.npmjs.com/files/package-lock.json) identifies the exact
 versions installed, which can prove invaluable if you want to exactly reproduce
@@ -817,7 +817,7 @@ Notice:
 
   Learn more about certificates
   [here](../identity/identity.html#digital-certificates). In practice, the
-  certificate file also contains some Fabric-specific metadata such as
+  certificate file also contains some UDO-specific metadata such as
   Isabella's organization and role -- read more in the
   [wallet](../developapps/wallet.html) topic.
 
@@ -829,14 +829,14 @@ MagnetoCorp commercial paper `00001`:
 ```
 (isabella)$ node issue.js
 
-Connect to Fabric gateway.
+Connect to UDO gateway.
 Use network channel: mychannel.
 Use org.papernet.commercialpaper smart contract.
 Submit commercial paper issue transaction.
 Process issue transaction response.
 MagnetoCorp commercial paper : 00001 successfully issued for value 5000000
 Transaction complete.
-Disconnect from Fabric gateway.
+Disconnect from UDO gateway.
 Issue program complete.
 ```
 
@@ -848,12 +848,12 @@ As you've seen, to achieve this, the application invokes the `issue` transaction
 defined in the `CommercialPaper` smart contract within `papercontract.js`. This
 had been installed and instantiated in the network by the MagnetoCorp
 administrator. It's the smart contract which interacts with the ledger via the
-Fabric APIs, most notably `putState()` and `getState()`, to represent the new
+UDO APIs, most notably `putState()` and `getState()`, to represent the new
 commercial paper as a vector state within the world state. We'll see how this
 vector state is subsequently manipulated by the `buy` and `redeem` transactions
 also defined within the smart contract.
 
-All the time, the underlying Fabric SDK handles the transaction endorsement,
+All the time, the underlying UDO SDK handles the transaction endorsement,
 ordering and notification process, making the application's logic
 straightforward; the SDK uses a [gateway](../developapps/gateway.html) to
 abstract away network details and
@@ -899,7 +899,7 @@ with the network:
 
 ```(digibank admin)$ docker ps
 CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORT         NAMES
-858c2d2961d4        hyperledger/fabric-tools         "/bin/bash"              18 seconds ago      Up 18 seconds                    cliDigiBank
+858c2d2961d4        hyperledger/udo-tools         "/bin/bash"              18 seconds ago      Up 18 seconds                    cliDigiBank
 ```
 
 In this tutorial, you'll use the command line container named `cliDigiBank` to
@@ -1017,14 +1017,14 @@ Run the `buy` application in Balaji's window:
 ```
 (balaji)$ node buy.js
 
-Connect to Fabric gateway.
+Connect to UDO gateway.
 Use network channel: mychannel.
 Use org.papernet.commercialpaper smart contract.
 Submit commercial paper buy transaction.
 Process buy transaction response.
 MagnetoCorp commercial paper : 00001 successfully purchased by DigiBank
 Transaction complete.
-Disconnect from Fabric gateway.
+Disconnect from UDO gateway.
 Buy program complete.
 ```
 
@@ -1032,7 +1032,7 @@ You can see the program output that MagnetoCorp commercial paper 00001 was
 successfully purchased by Balaji on behalf of DigiBank. `buy.js` invoked the
 `buy` transaction defined in the `CommercialPaper` smart contract which updated
 commercial paper `00001` within the world state using the `putState()` and
-`getState()` Fabric APIs. As you've seen, the application logic to buy and issue
+`getState()` UDO APIs. As you've seen, the application logic to buy and issue
 commercial paper is very similar, as is the smart contract logic.
 
 ## Redeem application
@@ -1046,14 +1046,14 @@ Run the `redeem` transaction in Balaji's window:
 ```
 (balaji)$ node redeem.js
 
-Connect to Fabric gateway.
+Connect to UDO gateway.
 Use network channel: mychannel.
 Use org.papernet.commercialpaper smart contract.
 Submit commercial paper redeem transaction.
 Process redeem transaction response.
 MagnetoCorp commercial paper : 00001 successfully redeemed with MagnetoCorp
 Transaction complete.
-Disconnect from Fabric gateway.
+Disconnect from UDO gateway.
 Redeem program complete.
 ```
 

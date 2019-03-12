@@ -6,9 +6,9 @@ Testing
 
 Unit test
 ~~~~~~~~~
-See `building Hyperledger Fabric <http://hyperledger-fabric.readthedocs.io/en/latest/dev-setup/build.html>` for unit testing instructions.
+See `building Hyperledger UDO <http://hyperledger-udo.readthedocs.io/en/latest/dev-setup/build.html>` for unit testing instructions.
 
-See `Unit test coverage reports <https://jenkins.hyperledger.org/view/fabric/job/fabric-merge-x86_64/>`__
+See `Unit test coverage reports <https://jenkins.hyperledger.org/view/udo/job/udo-merge-x86_64/>`__
 
 To see coverage for a package and all sub-packages, execute the test with the ``-cover`` switch:
 
@@ -27,8 +27,8 @@ code annotated by coverage:
 
 Integration test
 ~~~~~~~~~~~~~~~~
-See `Hyperledger Fabric Integration tests <https://github.com/hyperledger/fabric/blob/master/integration/README.rst>`__
-for Hyperledger Fabric integration test details.
+See `Hyperledger UDO Integration tests <https://github.com/hyperledger/udo/blob/master/integration/README.rst>`__
+for Hyperledger UDO integration test details.
 
 Integration tests cover testing between components, e.g., tests between peers and an orderer, and are used to
 show that a feature is working as expected across different interfaces. They ensure that components and
@@ -56,7 +56,7 @@ See `IT Weekly Results <https://jenkins.hyperledger.org/view/Weekly/>`__
 Interoperability test
 ~~~~~~~~~~~~~~~~~~~~~
 Interoperability tests are higher-level integration tests that span across repositories to test the compatibility
-between fabric, fabric-ca and fabric-sdk-*. This test suite contains a very limited number of tests, which are
+between udo, fabric-ca and udo-sdk-*. This test suite contains a very limited number of tests, which are
 executed after a merge is performed in any of the repositories. These tests are not feature based and do not need
 to be updated often. They use a maximum number of assets in order to verify compatibility between commits. Once
 these Interoperability tests pass, a build combination is considered good and the new build artifacts may be
@@ -65,7 +65,7 @@ published for use with other repositories.
 
 System test
 ~~~~~~~~~~~
-See `System Testing Hyperledger Fabric <https://github.com/hyperledger/fabric-test/blob/master/README.md>`__
+See `System Testing Hyperledger UDO <https://github.com/hyperledger/udo-test/blob/master/README.md>`__
 for details on system testing.
 
 System testing includes the following categories:
@@ -83,13 +83,13 @@ System testing includes the following categories:
 
 * Functional (only for regression purposes)
 
-See `SVT Daily Results <https://jenkins.hyperledger.org/view/fabric-test/job/fabric-test-daily-results-x86_64/test_results_analyzer/>`__
+See `SVT Daily Results <https://jenkins.hyperledger.org/view/udo-test/job/udo-test-daily-results-x86_64/test_results_analyzer/>`__
 
-See `SVT Weekly Results <https://jenkins.hyperledger.org/view/fabric-test/job/fabric-test-weekly-results-x86_64/test_results_analyzer/>`__
+See `SVT Weekly Results <https://jenkins.hyperledger.org/view/udo-test/job/udo-test-weekly-results-x86_64/test_results_analyzer/>`__
 
 See `SVT Performance Test Results Graphs With Testviewer <https://testviewer.mybluemix.net>`__
 
-See `SVT Performance TestViewer Details <https://github.com/hyperledger/fabric-test/blob/master/tools/Testviewer/README.md>`__
+See `SVT Performance TestViewer Details <https://github.com/hyperledger/udo-test/blob/master/tools/Testviewer/README.md>`__
 
 
 .. Licensed under Creative Commons Attribution 4.0 International License

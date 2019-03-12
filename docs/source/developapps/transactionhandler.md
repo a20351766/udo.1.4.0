@@ -29,19 +29,19 @@ of the interaction between an application and a smart contract:
 
   * **Before handler**: is called before every smart contract transaction is
     invoked. The handler will usually modify the transaction context to be used
-    by the transaction. The handler has access to the full range of Fabric APIs;
+    by the transaction. The handler has access to the full range of UDO APIs;
     for example, it can issue `getState()` and `putState()`.
 
 
   * **After handler**: is called after every smart contract transaction is
     invoked. The handler will usually perform post-processing common to all
-    transactions, and also has full access to the Fabric APIs.
+    transactions, and also has full access to the UDO APIs.
 
 
   * **Unknown handler**: is called if an attempt is made to invoke a transaction
     that is not defined in a smart contract. Typically, the handler will record
     the failure for subsequent processing by an administrator. The handler has
-    full access to the Fabric APIs.
+    full access to the UDO APIs.
 
 
 ## Defining a handler

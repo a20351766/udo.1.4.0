@@ -9,9 +9,9 @@ package privacyenabledstate
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/ledger/kvledger/bookkeeping"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb/mock"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
+	"github.com/hyperledger/udo/core/ledger/kvledger/bookkeeping"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb/mock"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
 	"github.com/stretchr/testify/assert"
 )
 

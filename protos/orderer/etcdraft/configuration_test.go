@@ -12,7 +12,7 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/protos/orderer/etcdraft"
+	"github.com/hyperledger/udo/protos/orderer/etcdraft"
 	"github.com/stretchr/testify/require"
 )
 

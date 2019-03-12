@@ -37,7 +37,7 @@ also want to open a few extra terminals for ease of use.
 
 First, use the ``byfn.sh`` script to tidy up. This command will kill any active
 or stale docker containers and remove previously generated artifacts. It is by no
-means **necessary** to bring down a Fabric network in order to perform channel
+means **necessary** to bring down a UDO network in order to perform channel
 configuration update tasks. However, for the sake of this tutorial, we want to operate
 from a known initial state. Therefore let's run the following command to clean up any
 previous environments:
@@ -105,7 +105,7 @@ show you each command for making a channel update and what it does.
 Bring Org3 into the Channel Manually
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. note:: The manual steps outlined below assume that the ``FABRIC_LOGGING_SPEC``
+.. note:: The manual steps outlined below assume that the ``UDO_LOGGING_SPEC``
           in the ``cli`` and ``Org3cli`` containers is set to ``DEBUG``.
 
           For the ``cli`` container, you can set this by modifying the
@@ -116,14 +116,14 @@ Bring Org3 into the Channel Manually
 
             cli:
               container_name: cli
-              image: hyperledger/fabric-tools:$IMAGE_TAG
+              image: hyperledger/udo-tools:$IMAGE_TAG
               tty: true
               stdin_open: true
               environment:
                 - GOPATH=/opt/gopath
                 - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-                #- FABRIC_LOGGING_SPEC=INFO
-                - FABRIC_LOGGING_SPEC=DEBUG
+                #- UDO_LOGGING_SPEC=INFO
+                - UDO_LOGGING_SPEC=DEBUG
 
           For the ``Org3cli`` container, you can set this by modifying the
           ``docker-compose-org3.yaml`` file in the ``first-network`` directory.
@@ -133,14 +133,14 @@ Bring Org3 into the Channel Manually
 
             Org3cli:
               container_name: Org3cli
-              image: hyperledger/fabric-tools:$IMAGE_TAG
+              image: hyperledger/udo-tools:$IMAGE_TAG
               tty: true
               stdin_open: true
               environment:
                 - GOPATH=/opt/gopath
                 - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-                #- FABRIC_LOGGING_SPEC=INFO
-                - FABRIC_LOGGING_SPEC=DEBUG
+                #- UDO_LOGGING_SPEC=INFO
+                - UDO_LOGGING_SPEC=DEBUG
 
 If you've used the ``eyfn.sh`` script, you'll need to bring your network down.
 This can be done by issuing:
@@ -199,7 +199,7 @@ current directory for the ``configtx.yaml`` file that it needs to ingest.
 
 .. code:: bash
 
-    export FABRIC_CFG_PATH=$PWD && ../../bin/configtxgen -printOrg Org3MSP > ../channel-artifacts/org3.json
+    export UDO_CFG_PATH=$PWD && ../../bin/configtxgen -printOrg Org3MSP > ../channel-artifacts/org3.json
 
 The above command creates a JSON file -- ``org3.json`` -- and outputs it into the
 ``channel-artifacts`` subdirectory at the root of ``first-network``. This
@@ -224,7 +224,7 @@ Prepare the CLI Environment
 
 The update process makes use of the configuration translator tool -- ``configtxlator``.
 This tool provides a stateless REST API independent of the SDK. Additionally it
-provides a CLI, to simplify configuration tasks in Fabric networks. The tool allows
+provides a CLI, to simplify configuration tasks in UDO networks. The tool allows
 for the easy conversion between different equivalent data representations/formats
 (in this case, between protobufs and JSON). Additionally, the tool can compute a
 configuration update transaction based on the differences between two channel
@@ -244,7 +244,7 @@ Export the ``ORDERER_CA`` and ``CHANNEL_NAME`` variables:
 
 .. code:: bash
 
-  export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  && export CHANNEL_NAME=mychannel
+  export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  && export CHANNEL_NAME=mychannel
 
 Check to make sure the variables have been properly set:
 
@@ -384,7 +384,7 @@ earlier. We'll name this file ``org3_update_in_envelope.json``:
 
 Using our properly formed JSON -- ``org3_update_in_envelope.json`` -- we will
 leverage the ``configtxlator`` tool one last time and convert it into the
-fully fledged protobuf format that Fabric requires. We'll name our final update
+fully fledged protobuf format that UDO requires. We'll name our final update
 object ``org3_update_in_envelope.pb``:
 
 .. code:: bash
@@ -417,7 +417,7 @@ The final step is to switch the CLI container's identity to reflect the Org2 Adm
 user. We do this by exporting four environment variables specific to the Org2 MSP.
 
 .. note:: Switching between organizations to sign a config transaction (or to do anything
-          else) is not reflective of a real-world Fabric operation. A single container
+          else) is not reflective of a real-world UDO operation. A single container
           would never be mounted with an entire network's crypto material. Rather, the
           config update would need to be securely passed out-of-band to an Org2
           Admin for inspection and approval.
@@ -430,9 +430,9 @@ Export the Org2 environment variables:
 
   export CORE_PEER_LOCALMSPID="Org2MSP"
 
-  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 
-  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
 
   export CORE_PEER_ADDRESS=peer0.org2.example.com:7051
 
@@ -555,7 +555,7 @@ variables: ``ORDERER_CA`` and ``CHANNEL_NAME``:
 
 .. code:: bash
 
-  export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem && export CHANNEL_NAME=mychannel
+  export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem && export CHANNEL_NAME=mychannel
 
 Check to make sure the variables have been properly set:
 
@@ -595,7 +595,7 @@ and reissue the ``peer channel join command``:
 
 .. code:: bash
 
-  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/tls/ca.crt && export CORE_PEER_ADDRESS=peer1.org3.example.com:7051
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/tls/ca.crt && export CORE_PEER_ADDRESS=peer1.org3.example.com:7051
 
   peer channel join -b mychannel.block
 
@@ -637,9 +637,9 @@ Flip to the ``peer0.org1`` identity:
 
   export CORE_PEER_LOCALMSPID="Org1MSP"
 
-  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+  export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 
-  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+  export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
 
   export CORE_PEER_ADDRESS=peer0.org1.example.com:7051
 

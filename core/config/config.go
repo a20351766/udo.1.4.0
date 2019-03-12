@@ -61,11 +61,11 @@ func TranslatePathInPlace(base string, p *string) {
 //----------------------------------------------------------------------------------
 // GetPath allows configuration strings that specify a (config-file) relative path
 //
-// For example: Assume our config is located in /etc/hyperledger/fabric/core.yaml with
+// For example: Assume our config is located in /etc/hyperledger/udo/core.yaml with
 // a key "msp.configPath" = "msp/config.yaml".
 //
 // This function will return:
-//      GetPath("msp.configPath") -> /etc/hyperledger/fabric/msp/config.yaml
+//      GetPath("msp.configPath") -> /etc/hyperledger/udo/msp/config.yaml
 //
 //----------------------------------------------------------------------------------
 func GetPath(key string) string {
@@ -77,7 +77,7 @@ func GetPath(key string) string {
 	return TranslatePath(filepath.Dir(viper.ConfigFileUsed()), p)
 }
 
-const OfficialPath = "/etc/hyperledger/fabric"
+const OfficialPath = "/etc/hyperledger/udo"
 
 //----------------------------------------------------------------------------------
 // InitViper()
@@ -88,13 +88,13 @@ const OfficialPath = "/etc/hyperledger/fabric"
 // Viper instance
 //----------------------------------------------------------------------------------
 func InitViper(v *viper.Viper, configName string) error {
-	var altPath = os.Getenv("FABRIC_CFG_PATH")
+	var altPath = os.Getenv("UDO_CFG_PATH")
 	if altPath != "" {
 		// If the user has overridden the path with an envvar, its the only path
 		// we will consider
 
 		if !dirExists(altPath) {
-			return fmt.Errorf("FABRIC_CFG_PATH %s does not exist", altPath)
+			return fmt.Errorf("UDO_CFG_PATH %s does not exist", altPath)
 		}
 
 		AddConfigPath(v, altPath)
@@ -102,7 +102,7 @@ func InitViper(v *viper.Viper, configName string) error {
 		// If we get here, we should use the default paths in priority order:
 		//
 		// *) CWD
-		// *) /etc/hyperledger/fabric
+		// *) /etc/hyperledger/udo
 
 		// CWD
 		AddConfigPath(v, "./")

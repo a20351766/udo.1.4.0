@@ -15,35 +15,35 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	ctxt "github.com/hyperledger/fabric/common/configtx/test"
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	ledger2 "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	mockconfig "github.com/hyperledger/fabric/common/mocks/config"
-	"github.com/hyperledger/fabric/common/mocks/scc"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/committer/txvalidator"
-	"github.com/hyperledger/fabric/core/committer/txvalidator/mocks"
-	"github.com/hyperledger/fabric/core/committer/txvalidator/testdata"
-	ccp "github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/handlers/validation/api"
-	"github.com/hyperledger/fabric/core/handlers/validation/builtin"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	lutils "github.com/hyperledger/fabric/core/ledger/util"
-	mocktxvalidator "github.com/hyperledger/fabric/core/mocks/txvalidator"
-	mocks2 "github.com/hyperledger/fabric/discovery/support/mocks"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/msp/mgmt/testtools"
-	"github.com/hyperledger/fabric/protos/common"
-	mb "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/peer"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/token"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	ctxt "github.com/hyperledger/udo/common/configtx/test"
+	commonerrors "github.com/hyperledger/udo/common/errors"
+	ledger2 "github.com/hyperledger/udo/common/ledger"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	mockconfig "github.com/hyperledger/udo/common/mocks/config"
+	"github.com/hyperledger/udo/common/mocks/scc"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/committer/txvalidator"
+	"github.com/hyperledger/udo/core/committer/txvalidator/mocks"
+	"github.com/hyperledger/udo/core/committer/txvalidator/testdata"
+	ccp "github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/handlers/validation/api"
+	"github.com/hyperledger/udo/core/handlers/validation/builtin"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	lutils "github.com/hyperledger/udo/core/ledger/util"
+	mocktxvalidator "github.com/hyperledger/udo/core/mocks/txvalidator"
+	mocks2 "github.com/hyperledger/udo/discovery/support/mocks"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/msp/mgmt/testtools"
+	"github.com/hyperledger/udo/protos/common"
+	mb "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/peer"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/token"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -109,7 +109,7 @@ func setupLedgerAndValidatorWithCapabilities(t *testing.T, c *mockconfig.MockApp
 }
 
 func setupLedgerAndValidatorExplicitWithMSP(t *testing.T, cpb *mockconfig.MockApplicationCapabilities, plugin validation.Plugin, mspMgr msp.MSPManager) (ledger.PeerLedger, txvalidator.Validator) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/validatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/validatortest")
 	ledgermgmt.InitializeTestEnv()
 	gb, err := ctxt.MakeGenesisBlock("TestLedger")
 	assert.NoError(t, err)
@@ -571,7 +571,7 @@ func (fake *mockMSP) GetVersion() msp.MSPVersion {
 }
 
 func (fake *mockMSP) GetType() msp.ProviderType {
-	return msp.FABRIC
+	return msp.UDO
 }
 
 func (fake *mockMSP) GetIdentifier() (string, error) {
@@ -1714,7 +1714,7 @@ func (exec *mockQueryExecutor) GetPrivateDataMetadata(namespace, collection, key
 }
 
 func createCustomSupportAndLedger(t *testing.T) (*mocktxvalidator.Support, ledger.PeerLedger) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/validatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/validatortest")
 	ledgermgmt.InitializeTestEnv()
 	gb, err := ctxt.MakeGenesisBlock("TestLedger")
 	assert.NoError(t, err)

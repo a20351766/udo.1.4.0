@@ -7,19 +7,19 @@ SPDX-License-Identifier: Apache-2.0
 package capabilities
 
 import (
-	cb "github.com/hyperledger/fabric/protos/common"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 const (
 	applicationTypeName = "Application"
 
-	// ApplicationV1_1 is the capabilties string for standard new non-backwards compatible fabric v1.1 application capabilities.
+	// ApplicationV1_1 is the capabilties string for standard new non-backwards compatible udo v1.1 application capabilities.
 	ApplicationV1_1 = "V1_1"
 
-	// ApplicationV1_2 is the capabilties string for standard new non-backwards compatible fabric v1.2 application capabilities.
+	// ApplicationV1_2 is the capabilties string for standard new non-backwards compatible udo v1.2 application capabilities.
 	ApplicationV1_2 = "V1_2"
 
-	// ApplicationV1_3 is the capabilties string for standard new non-backwards compatible fabric v1.3 application capabilities.
+	// ApplicationV1_3 is the capabilties string for standard new non-backwards compatible udo v1.3 application capabilities.
 	ApplicationV1_3 = "V1_3"
 
 	// ApplicationPvtDataExperimental is the capabilties string for private data using the experimental feature of collections/sideDB.
@@ -102,7 +102,7 @@ func (ap *ApplicationProvider) V1_3Validation() bool {
 
 // MetadataLifecycle indicates whether the peer should use the deprecated and problematic
 // v1.0/v1.1/v1.2 lifecycle, or whether it should use the newer per channel peer local chaincode
-// metadata package approach planned for release with Fabric v1.3
+// metadata package approach planned for release with UDO v1.3
 func (ap *ApplicationProvider) MetadataLifecycle() bool {
 	return false
 }
@@ -113,7 +113,7 @@ func (ap *ApplicationProvider) KeyLevelEndorsement() bool {
 	return ap.v13
 }
 
-// FabToken returns true if support for fabric token functions is enabled.
+// FabToken returns true if support for udo token functions is enabled.
 func (ap *ApplicationProvider) FabToken() bool {
 	return ap.v14FabTokenExperimental
 }

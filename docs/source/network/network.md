@@ -1,10 +1,10 @@
 # Blockchain network
 
-This topic will describe, **at a conceptual level**, how Hyperledger Fabric
+This topic will describe, **at a conceptual level**, how Hyperledger UDO
 allows organizations to collaborate in the formation of blockchain networks.  If
 you're an architect, administrator or developer, you can use this topic to get a
 solid understanding of the major structure and process components in a
-Hyperledger Fabric blockchain network. This topic will use a manageable worked
+Hyperledger UDO blockchain network. This topic will use a manageable worked
 example that introduces all of the major components in a blockchain network.
 After understanding this example you can read more detailed information about
 these components elsewhere in the documentation, or try
@@ -12,10 +12,10 @@ these components elsewhere in the documentation, or try
 
 After reading this topic and understanding the concept of policies, you will
 have a solid understanding of the decisions that organizations need to make to
-establish the policies that control a deployed Hyperledger Fabric network.
+establish the policies that control a deployed Hyperledger UDO network.
 You'll also understand how organizations manage network evolution using
-declarative policies -- a key feature of Hyperledger Fabric. In a nutshell,
-you'll understand the major technical components of Hyperledger Fabric and the
+declarative policies -- a key feature of Hyperledger UDO. In a nutshell,
+you'll understand the major technical components of Hyperledger UDO and the
 decisions organizations need to make about them.
 
 ## What is a blockchain network?
@@ -51,7 +51,7 @@ contract services provided by the blockchain network.
 ![network.structure](./network.diagram.1.png)
 
 *Four organizations, R1, R2, R3 and R4 have jointly decided, and written into an
-agreement, that they will set up and exploit a Hyperledger Fabric
+agreement, that they will set up and exploit a Hyperledger UDO
 network. R4 has been assigned to be the network initiator  -- it has been given
 the power to set up the initial version of the network. R4 has no intention to
 perform business transactions on the network. R1 and R2 have a need for a
@@ -110,7 +110,7 @@ identify themselves to each other as being from a particular organization.
 That's why there is usually more than one CA supporting a blockchain network --
 different organizations often use different CAs. We're going to use four CAs in
 our network; one of for each organization. Indeed, CAs are so important that
-Hyperledger Fabric provides you with a built-in one (called *Fabric-CA*) to help
+Hyperledger UDO provides you with a built-in one (called *UDO-CA*) to help
 you get going, though in practice, organizations will choose to use their own
 CA.
 
@@ -212,11 +212,11 @@ larger set of organizations.  We could have started it this way, with R1, R2 and
 R4 having shared control, but this build up makes it easier to understand.
 
 We're now going to use consortium X1 to create a really important part of a
-Hyperledger Fabric blockchain -- **a channel**.
+Hyperledger UDO blockchain -- **a channel**.
 
 ## Creating a channel for a consortium
 
-So let's create this key part of the Fabric blockchain network -- **a channel**.
+So let's create this key part of the UDO blockchain network -- **a channel**.
 A channel is a primary communications mechanism by which the members of a
 consortium can communicate with each other. There can be multiple channels in a
 network, but for now, we'll start with one.
@@ -257,7 +257,7 @@ must, and can only, be authorized by R1 or R2.
 Why are channels so important? Channels are useful because they provide a
 mechanism for private communications and private data between the members of a
 consortium. Channels provide privacy from other channels, and from the network.
-Hyperledger Fabric is powerful in this regard, as it allows organizations to
+Hyperledger UDO is powerful in this regard, as it allows organizations to
 share infrastructure and keep it private at the same time.  There's no
 contradiction here -- different consortia within the network will have a need
 for different information and processes to be appropriately shared, and channels
@@ -332,7 +332,7 @@ can connect to both peer node P1 and orderer node O4. Again, see how channels
 are central to the communication between network and organization components.
 Just like peers and orderers, a client application will have an identity that
 associates it with an organization.  In our example, client application A1 is
-associated with organization R1; and although it is outside the Fabric
+associated with organization R1; and although it is outside the UDO
 blockchain network, it is connected to it via the channel C1.
 
 It might now appear that A1 can access the ledger L1 directly via P1, but in
@@ -473,7 +473,7 @@ lot more about transactions, ledgers, smart contracts in other topics.
 
 ### Types of peers
 
-In Hyperledger Fabric, while all peers are the same, they can assume multiple
+In Hyperledger UDO, while all peers are the same, they can assume multiple
 roles depending on how the network is configured.  We now have enough
 understanding of a typical network topology to describe these roles.
 
@@ -621,7 +621,7 @@ in the network configuration policy, NC4, as having the appropriate rights to do
 so, i.e. R1 or R4. This is an example of a policy which separates organizations
 that can manage resources at the network level versus those who can manage
 resources at the channel level. Seeing these policies at work helps us
-understand why Hyperledger Fabric has a sophisticated **tiered** policy
+understand why Hyperledger UDO has a sophisticated **tiered** policy
 structure.
 
 In practice, consortium definition X2 has been added to the network
@@ -654,7 +654,7 @@ or R3.
 
 Note how the channel configurations CC1 and CC2 remain completely separate from
 each other, and completely separate from the network configuration, NC4. Again
-we're seeing the de-centralized nature of a Hyperledger Fabric network; once
+we're seeing the de-centralized nature of a Hyperledger UDO network; once
 channel C2 has been created, it is managed by organizations R2 and R3
 independently to other network elements. Channel policies always remain separate
 from each other and can only be changed by the organizations authorized to do so
@@ -744,13 +744,13 @@ Likewise, these transactions are used to maintain a consistent copy of the
 channel configuration at each peer node.
 
 This balance between objects that are logically singular, by being physically
-distributed is a common pattern in Hyperledger Fabric. Objects like network
+distributed is a common pattern in Hyperledger UDO. Objects like network
 configurations, that are logically single, turn out to be physically replicated
 among a set of ordering services nodes for example. We also see it with channel
 configurations, ledgers, and to some extent smart contracts which are installed
 in multiple places but whose interfaces exist logically at the channel level.
-It's a pattern you see repeated time and again in Hyperledger Fabric, and
-enables Hyperledger Fabric to be both de-centralized and yet manageable at the
+It's a pattern you see repeated time and again in Hyperledger UDO, and
+enables Hyperledger UDO to be both de-centralized and yet manageable at the
 same time.
 
 ## Adding another peer
@@ -892,11 +892,11 @@ point for network resources according to the policies defined in network
 configuration NC4. Notice again how these roles are defined by different
 policies within the channel and network configurations respectively. This should
 reinforce to you the importance of declarative policy based configuration in
-Hyperledger Fabric. Policies both define, and are used to control, the agreed
+Hyperledger UDO. Policies both define, and are used to control, the agreed
 behaviours by each and every member of a consortium.
 
 We can see that the ordering service, like the other components in Hyperledger
-Fabric, is a fully de-centralized component. Whether acting as a network
+UDO, is a fully de-centralized component. Whether acting as a network
 management point, or as a distributor of blocks in a channel, its nodes can be
 distributed as required throughout the multiple organizations in a network.
 
@@ -908,14 +908,14 @@ discussed a few of the available policies, but there are many that can be
 declaratively defined to control every aspect of behaviour. These individual
 policies are discussed elsewhere in the documentation.
 
-Most importantly of all, Hyperledger Fabric provides a uniquely powerful policy
+Most importantly of all, Hyperledger UDO provides a uniquely powerful policy
 that allows network and channel administrators to manage policy change itself!
 The underlying philosophy is that policy change is a constant, whether it occurs
 within or between organizations, or whether it is imposed by external
 regulators. For example, new organizations may join a channel, or existing
 organizations may have their permissions increased or decreased. Let's
 investigate a little more how change policy is implemented in Hyperledger
-Fabric.
+UDO.
 
 They key point of understanding is that policy change is managed by a
 policy within the policy itself.  The **modification policy**, or
@@ -967,7 +967,7 @@ better accommodates larger topologies:
 
 ![network.finalnetwork2](./network.diagram.14.png)
 
-*In this diagram we see that the Fabric blockchain network consists of two
+*In this diagram we see that the UDO blockchain network consists of two
 application channels and one ordering channel. The organizations R1 and R4 are
 responsible for the ordering channel, R1 and R2 are responsible for the blue
 application channel while R2 and R3 are responsible for the red application
@@ -978,7 +978,7 @@ application channel has its own channel configuration, in this case CC1 and
 CC2. The channel configuration of the system channel is part of the network
 configuration, NC4.*
 
-We're at the end of our conceptual journey to build a sample Hyperledger Fabric
+We're at the end of our conceptual journey to build a sample Hyperledger UDO
 blockchain network. We've created a four organization network with two channels
 and three peer nodes, with two smart contracts and an ordering service.  It is
 supported by four certificate authorities. It provides ledger and smart contract
@@ -1003,7 +1003,7 @@ Here's a quick summary of the network components we've discussed:
 ## Network summary
 
 In this topic, we've seen how different organizations share their infrastructure
-to provide an integrated Hyperledger Fabric blockchain network.  We've seen how
+to provide an integrated Hyperledger UDO blockchain network.  We've seen how
 the collective infrastructure can be organized into channels that provide
 private communications mechanisms that are independently managed.  We've seen
 how actors such as client applications, administrators, peers and orderers are

@@ -16,20 +16,20 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/localmsp"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/common/tools/protolator"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/comm"
-	config2 "github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/msp"
-	common2 "github.com/hyperledger/fabric/peer/common"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/orderer"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/localmsp"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/common/tools/protolator"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/comm"
+	config2 "github.com/hyperledger/udo/core/config"
+	"github.com/hyperledger/udo/msp"
+	common2 "github.com/hyperledger/udo/peer/common"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/orderer"
+	"github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 )
 
@@ -255,7 +255,7 @@ func initMSP() {
 	var mspID = viper.GetString("peer.localMspId")
 	var mspType = viper.GetString("peer.localMspType")
 	if mspType == "" {
-		mspType = msp.ProviderTypeToString(msp.FABRIC)
+		mspType = msp.ProviderTypeToString(msp.UDO)
 	}
 	err := common2.InitCrypto(mspMgrConfigDir, mspID, mspType)
 	if err != nil { // Handle errors reading the config file

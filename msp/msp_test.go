@@ -21,11 +21,11 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/bccsp/utils"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/sw"
+	"github.com/hyperledger/udo/bccsp/utils"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/protos/msp"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -73,7 +73,7 @@ func TestMSPSetupNoCryptoConf(t *testing.T) {
 		os.Exit(-1)
 	}
 
-	mspconf := &msp.FabricMSPConfig{}
+	mspconf := &msp.UDOMSPConfig{}
 	err = proto.Unmarshal(conf.Config, mspconf)
 	assert.NoError(t, err)
 
@@ -118,7 +118,7 @@ func TestMSPSetupNoCryptoConf(t *testing.T) {
 
 func TestGetters(t *testing.T) {
 	typ := localMsp.GetType()
-	assert.Equal(t, typ, FABRIC)
+	assert.Equal(t, typ, UDO)
 	assert.NotNil(t, localMsp.GetTLSRootCerts())
 	assert.NotNil(t, localMsp.GetTLSIntermediateCerts())
 }
@@ -203,7 +203,7 @@ func TestGetSigningIdentityFromVerifyingMSP(t *testing.T) {
 		os.Exit(-1)
 	}
 
-	conf, err = GetVerifyingMspConfig(mspDir, "SampleOrg", ProviderTypeToString(FABRIC))
+	conf, err = GetVerifyingMspConfig(mspDir, "SampleOrg", ProviderTypeToString(UDO))
 	if err != nil {
 		fmt.Printf("Setup should have succeeded, got err %s instead", err)
 		os.Exit(-1)
@@ -1343,8 +1343,8 @@ func TestAnonymityIdentityFail(t *testing.T) {
 }
 
 func TestProviderTypeToString(t *testing.T) {
-	// Check that the provider type is found for FABRIC
-	pt := ProviderTypeToString(FABRIC)
+	// Check that the provider type is found for UDO
+	pt := ProviderTypeToString(UDO)
 	assert.Equal(t, "bccsp", pt)
 
 	// Check that the provider type is found for IDEMIX

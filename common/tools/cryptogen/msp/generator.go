@@ -12,11 +12,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/ca"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/csp"
-	fabricmsp "github.com/hyperledger/fabric/msp"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/tools/cryptogen/ca"
+	"github.com/hyperledger/udo/common/tools/cryptogen/csp"
+	udomsp "github.com/hyperledger/udo/msp"
 	"gopkg.in/yaml.v2"
 )
 
@@ -249,14 +249,14 @@ func pemExport(path, pemType string, bytes []byte) error {
 }
 
 func exportConfig(mspDir, caFile string, enable bool) error {
-	var config = &fabricmsp.Configuration{
-		NodeOUs: &fabricmsp.NodeOUs{
+	var config = &udomsp.Configuration{
+		NodeOUs: &udomsp.NodeOUs{
 			Enable: enable,
-			ClientOUIdentifier: &fabricmsp.OrganizationalUnitIdentifiersConfiguration{
+			ClientOUIdentifier: &udomsp.OrganizationalUnitIdentifiersConfiguration{
 				Certificate:                  caFile,
 				OrganizationalUnitIdentifier: CLIENTOU,
 			},
-			PeerOUIdentifier: &fabricmsp.OrganizationalUnitIdentifiersConfiguration{
+			PeerOUIdentifier: &udomsp.OrganizationalUnitIdentifiersConfiguration{
 				Certificate:                  caFile,
 				OrganizationalUnitIdentifier: PEEROU,
 			},

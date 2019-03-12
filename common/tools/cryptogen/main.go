@@ -14,10 +14,10 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/hyperledger/fabric/common/tools/cryptogen/ca"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/csp"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/metadata"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/msp"
+	"github.com/hyperledger/udo/common/tools/cryptogen/ca"
+	"github.com/hyperledger/udo/common/tools/cryptogen/csp"
+	"github.com/hyperledger/udo/common/tools/cryptogen/metadata"
+	"github.com/hyperledger/udo/common/tools/cryptogen/msp"
 	"gopkg.in/alecthomas/kingpin.v2"
 	"gopkg.in/yaml.v2"
 )
@@ -118,7 +118,7 @@ PeerOrgs:
     #    Country: US
     #    Province: California
     #    Locality: San Francisco
-    #    OrganizationalUnit: Hyperledger Fabric
+    #    OrganizationalUnit: Hyperledger UDO
     #    StreetAddress: address for org # default nil
     #    PostalCode: postalCode for org # default nil
 
@@ -198,7 +198,7 @@ PeerOrgs:
 
 //command line flags
 var (
-	app = kingpin.New("cryptogen", "Utility for generating Hyperledger Fabric key material")
+	app = kingpin.New("cryptogen", "Utility for generating Hyperledger UDO key material")
 
 	gen           = app.Command("generate", "Generate key material")
 	outputDir     = gen.Flag("output", "The output directory in which to place artifacts").Default("crypto-config").String()

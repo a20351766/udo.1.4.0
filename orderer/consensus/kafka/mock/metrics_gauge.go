@@ -4,7 +4,7 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/metrics"
+	"github.com/hyperledger/udo/common/metrics"
 )
 
 type MetricsGauge struct {

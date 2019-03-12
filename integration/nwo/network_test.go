@@ -13,8 +13,8 @@ import (
 	"syscall"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
+	"github.com/hyperledger/udo/integration/nwo"
+	"github.com/hyperledger/udo/integration/nwo/commands"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -59,7 +59,7 @@ var _ = Describe("Network", func() {
 			network.GenerateConfigTree()
 			network.Bootstrap()
 
-			// Start all of the fabric processes
+			// Start all of the udo processes
 			networkRunner := network.NetworkGroupRunner()
 			process = ifrit.Invoke(networkRunner)
 			Eventually(process.Ready(), network.EventuallyTimeout).Should(BeClosed())
@@ -79,7 +79,7 @@ var _ = Describe("Network", func() {
 			chaincode := nwo.Chaincode{
 				Name:    "mycc",
 				Version: "0.0",
-				Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+				Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 				Ctor:    `{"Args":["init","a","100","b","200"]}`,
 				Policy:  `AND ('Org1ExampleCom.member','Org2ExampleCom.member')`,
 			}
@@ -166,7 +166,7 @@ var _ = Describe("Network", func() {
 			chaincode := nwo.Chaincode{
 				Name:    "mycc",
 				Version: "0.0",
-				Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+				Path:    "github.com/hyperledger/udo/integration/chaincode/simple/cmd",
 				Ctor:    `{"Args":["init","a","100","b","200"]}`,
 				Policy:  `AND ('Org1ExampleCom.member','Org2ExampleCom.member')`,
 			}

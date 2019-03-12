@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/orderer/consensus"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 var logger = flogging.MustGetLogger("orderer.consensus.solo")

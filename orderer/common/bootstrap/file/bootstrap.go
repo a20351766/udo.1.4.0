@@ -21,8 +21,8 @@ import (
 	"io/ioutil"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/orderer/common/bootstrap"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/orderer/common/bootstrap"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 type fileBootstrapper struct {

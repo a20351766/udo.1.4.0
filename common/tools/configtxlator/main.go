@@ -15,17 +15,17 @@ import (
 	"reflect"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/tools/configtxlator/metadata"
-	"github.com/hyperledger/fabric/common/tools/configtxlator/rest"
-	"github.com/hyperledger/fabric/common/tools/configtxlator/update"
-	"github.com/hyperledger/fabric/common/tools/protolator"
-	_ "github.com/hyperledger/fabric/protos/common"
-	cb "github.com/hyperledger/fabric/protos/common" // Import these to register the proto types
-	_ "github.com/hyperledger/fabric/protos/msp"
-	_ "github.com/hyperledger/fabric/protos/orderer"
-	_ "github.com/hyperledger/fabric/protos/orderer/etcdraft"
-	_ "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/tools/configtxlator/metadata"
+	"github.com/hyperledger/udo/common/tools/configtxlator/rest"
+	"github.com/hyperledger/udo/common/tools/configtxlator/update"
+	"github.com/hyperledger/udo/common/tools/protolator"
+	_ "github.com/hyperledger/udo/protos/common"
+	cb "github.com/hyperledger/udo/protos/common" // Import these to register the proto types
+	_ "github.com/hyperledger/udo/protos/msp"
+	_ "github.com/hyperledger/udo/protos/orderer"
+	_ "github.com/hyperledger/udo/protos/orderer/etcdraft"
+	_ "github.com/hyperledger/udo/protos/peer"
 
 	"github.com/gorilla/handlers"
 	"github.com/pkg/errors"
@@ -34,7 +34,7 @@ import (
 
 // command line flags
 var (
-	app = kingpin.New("configtxlator", "Utility for generating Hyperledger Fabric channel configurations")
+	app = kingpin.New("configtxlator", "Utility for generating Hyperledger UDO channel configurations")
 
 	start    = app.Command("start", "Start the configtxlator REST server")
 	hostname = start.Flag("hostname", "The hostname or IP on which the REST server will listen").Default("0.0.0.0").String()

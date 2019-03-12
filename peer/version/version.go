@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/hyperledger/fabric/common/metadata"
+	"github.com/hyperledger/udo/common/metadata"
 	"github.com/spf13/cobra"
 )
 
@@ -24,8 +24,8 @@ func Cmd() *cobra.Command {
 
 var cobraCommand = &cobra.Command{
 	Use:   "version",
-	Short: "Print fabric peer version.",
-	Long:  `Print current version of the fabric peer server.`,
+	Short: "Print udo peer version.",
+	Long:  `Print current version of the udo peer server.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 0 {
 			return fmt.Errorf("trailing args detected")

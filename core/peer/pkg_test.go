@@ -19,15 +19,15 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/comm"
-	testpb "github.com/hyperledger/fabric/core/comm/testdata/grpc"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/core/peer"
-	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mspproto "github.com/hyperledger/fabric/protos/msp"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	configtxtest "github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/core/comm"
+	testpb "github.com/hyperledger/udo/core/comm/testdata/grpc"
+	"github.com/hyperledger/udo/core/ledger/util"
+	"github.com/hyperledger/udo/core/peer"
+	"github.com/hyperledger/udo/msp"
+	cb "github.com/hyperledger/udo/protos/common"
+	mspproto "github.com/hyperledger/udo/protos/msp"
+	pb "github.com/hyperledger/udo/protos/peer"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -85,7 +85,7 @@ func invokeEmptyCall(address string, dialOptions []grpc.DialOption) (*testpb.Emp
 func createMSPConfig(rootCerts, tlsRootCerts, tlsIntermediateCerts [][]byte,
 	mspID string) (*mspproto.MSPConfig, error) {
 
-	fmspconf := &mspproto.FabricMSPConfig{
+	fmspconf := &mspproto.UDOMSPConfig{
 		RootCerts:            rootCerts,
 		TlsRootCerts:         tlsRootCerts,
 		TlsIntermediateCerts: tlsIntermediateCerts,
@@ -96,7 +96,7 @@ func createMSPConfig(rootCerts, tlsRootCerts, tlsIntermediateCerts [][]byte,
 	if err != nil {
 		return nil, err
 	}
-	mspconf := &mspproto.MSPConfig{Config: fmpsjs, Type: int32(msp.FABRIC)}
+	mspconf := &mspproto.MSPConfig{Config: fmpsjs, Type: int32(msp.UDO)}
 	return mspconf, nil
 }
 

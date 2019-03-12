@@ -13,15 +13,15 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/comm"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	peercommon "github.com/hyperledger/fabric/peer/common"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/comm"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	peercommon "github.com/hyperledger/udo/peer/common"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 
@@ -87,7 +87,7 @@ func NewTxSubmitter(config *ClientConfig) (*TxSubmitter, error) {
 	}, nil
 }
 
-// SubmitTransaction submits a token transaction to fabric.
+// SubmitTransaction submits a token transaction to udo.
 // It takes TokenTransaction bytes and waitTimeInSeconds as input parameters.
 // The 'waitTimeInSeconds' indicates how long to wait for transaction commit event.
 // If it is 0, the function will not wait for transaction to be committed.
@@ -107,7 +107,7 @@ func (s *TxSubmitter) SubmitTransaction(txEnvelope *common.Envelope, waitTimeInS
 	}
 }
 
-// SubmitTransactionWithChan submits a token transaction to fabric with an event channel.
+// SubmitTransactionWithChan submits a token transaction to udo with an event channel.
 // This function does not wait for transaction commit and returns as soon as the orderer client receives the response.
 // The application will be notified on transaction completion by reading events from the eventCh.
 // When the transaction is committed or failed, an event will be added to eventCh so that the application will be notified.

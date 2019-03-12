@@ -35,16 +35,16 @@ mspmap.cli        := $(USERS_PATH)/Admin@org1.net
 RELEASE ?= latest
 CA_RELEASE ?= $(RELEASE)
 COUCH_RELEASE ?= $(RELEASE)
-FABRIC_RELEASE ?= $(RELEASE)
+UDO_RELEASE ?= $(RELEASE)
 DOCKER_NS ?= hyperledger
 TLS ?= true
 
 CRYPTOGEN=build/bin/cryptogen
 CONFIGTXGEN=build/bin/configtxgen
 
-FABRICPKG=github.com/hyperledger/fabric
-pkgmap.cryptogen      := $(FABRICPKG)/common/tools/cryptogen
-pkgmap.configtxgen    := $(FABRICPKG)/common/tools/configtxgen
+UDOPKG=github.com/hyperledger/udo
+pkgmap.cryptogen      := $(UDOPKG)/common/tools/cryptogen
+pkgmap.configtxgen    := $(UDOPKG)/common/tools/configtxgen
 
 help:
 	@cat usage.txt
@@ -65,19 +65,19 @@ $(CRYPTOOUTPUT): config/cryptogen.yaml $(CRYPTOGEN)
 
 %/genesis.block: build/configtx.yaml build/core.yaml $(CONFIGTXGEN)
 	@mkdir -p ${@D}
-	FABRIC_CFG_PATH=build $(CONFIGTXGEN) -profile SampleOrg -outputBlock $@
+	UDO_CFG_PATH=build $(CONFIGTXGEN) -profile SampleOrg -outputBlock $@
 
 %.tx: build/configtx.yaml build/core.yaml $(CONFIGTXGEN)
 
 %/channel.tx:
 	@mkdir -p ${@D}
-	FABRIC_CFG_PATH=build $(CONFIGTXGEN) -profile SampleChannel \
+	UDO_CFG_PATH=build $(CONFIGTXGEN) -profile SampleChannel \
 		-channelID ${CHANNEL_NAME} \
 		-outputCreateChannelTx $@
 
 %/anchor.tx:
 	@mkdir -p ${@D}
-	FABRIC_CFG_PATH=build $(CONFIGTXGEN) -profile SampleChannel \
+	UDO_CFG_PATH=build $(CONFIGTXGEN) -profile SampleChannel \
 		-channelID ${CHANNEL_NAME} \
 		-outputAnchorPeersUpdate $@ \
 		-asOrg Org1MSP
@@ -118,7 +118,7 @@ build/docker-compose.yaml: compose/docker-compose.yaml.in
 		| sed -e 's/_DOCKER_NS_/${DOCKER_NS}/g' \
 		| sed -e 's/_CA_RELEASE_/${CA_RELEASE}/g' \
 		| sed -e 's/_COUCH_RELEASE_/${COUCH_RELEASE}/g' \
-		| sed -e 's/_FABRIC_RELEASE_/${FABRIC_RELEASE}/g' \
+		| sed -e 's/_UDO_RELEASE_/${UDO_RELEASE}/g' \
 		> $@
 
 build/compose-up.sh: compose/compose-up.sh.in

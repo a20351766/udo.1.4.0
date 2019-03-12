@@ -7,19 +7,19 @@ SPDX-License-Identifier: Apache-2.0
 package server
 
 import (
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/orderer/consensus/etcdraft"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 )
 
 type replicationInitiator struct {
-	logger         *flogging.FabricLogger
+	logger         *flogging.UDOLogger
 	secOpts        *comm.SecureOptions
 	conf           *localconfig.TopLevel
 	bootstrapBlock *common.Block

@@ -9,13 +9,13 @@ package chaincode_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode"
-	"github.com/hyperledger/fabric/core/chaincode/accesscontrol"
-	"github.com/hyperledger/fabric/core/chaincode/mock"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/container"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/chaincode"
+	"github.com/hyperledger/udo/core/chaincode/accesscontrol"
+	"github.com/hyperledger/udo/core/chaincode/mock"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/container"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	pb "github.com/hyperledger/udo/protos/peer"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )
@@ -82,9 +82,9 @@ func TestContainerRuntimeLaunchConfigEnv(t *testing.T) {
 	}
 	enabledTLSEnv := []string{
 		"CORE_PEER_TLS_ENABLED=true",
-		"CORE_TLS_CLIENT_KEY_PATH=/etc/hyperledger/fabric/client.key",
-		"CORE_TLS_CLIENT_CERT_PATH=/etc/hyperledger/fabric/client.crt",
-		"CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer.crt",
+		"CORE_TLS_CLIENT_KEY_PATH=/etc/hyperledger/udo/client.key",
+		"CORE_TLS_CLIENT_CERT_PATH=/etc/hyperledger/udo/client.crt",
+		"CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/udo/peer.crt",
 	}
 
 	certGenerator := &mock.CertGenerator{}
@@ -130,9 +130,9 @@ func TestContainerRuntimeLaunchConfigFiles(t *testing.T) {
 	lc, err := cr.LaunchConfig("chaincode-name", pb.ChaincodeSpec_GOLANG.String())
 	assert.NoError(t, err)
 	assert.Equal(t, map[string][]byte{
-		"/etc/hyperledger/fabric/client.crt": []byte("certificate"),
-		"/etc/hyperledger/fabric/client.key": []byte("key"),
-		"/etc/hyperledger/fabric/peer.crt":   []byte("peer-ca-cert"),
+		"/etc/hyperledger/udo/client.crt": []byte("certificate"),
+		"/etc/hyperledger/udo/client.key": []byte("key"),
+		"/etc/hyperledger/udo/peer.crt":   []byte("peer-ca-cert"),
 	}, lc.Files)
 }
 

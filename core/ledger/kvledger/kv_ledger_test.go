@@ -11,17 +11,17 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/util"
-	lgr "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/ledgerconfig"
-	ledgertestutil "github.com/hyperledger/fabric/core/ledger/testutil"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/ledger/queryresult"
-	"github.com/hyperledger/fabric/protos/peer"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/util"
+	lgr "github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/hyperledger/udo/core/ledger/ledgerconfig"
+	ledgertestutil "github.com/hyperledger/udo/core/ledger/testutil"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/ledger/queryresult"
+	"github.com/hyperledger/udo/protos/peer"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -29,7 +29,7 @@ import (
 func TestMain(m *testing.M) {
 	ledgertestutil.SetupCoreYAMLConfig()
 	flogging.ActivateSpec("lockbasedtxmgr,statevalidator,valimpl,confighistory,pvtstatepurgemgmt=debug")
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/kvledger")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/kvledger")
 	viper.Set("ledger.history.enableHistoryDatabase", true)
 	os.Exit(m.Run())
 }

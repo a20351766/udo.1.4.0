@@ -21,10 +21,10 @@ import (
 	"time"
 
 	"github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/helpers"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/integration/nwo/fabricconfig"
-	"github.com/hyperledger/fabric/integration/runner"
+	"github.com/hyperledger/udo/integration/helpers"
+	"github.com/hyperledger/udo/integration/nwo/commands"
+	"github.com/hyperledger/udo/integration/nwo/udoconfig"
+	"github.com/hyperledger/udo/integration/runner"
 	"github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
@@ -126,7 +126,7 @@ type Profile struct {
 	Organizations []string `yaml:"organizations,omitempty"`
 }
 
-// Network holds information about a fabric network.
+// Network holds information about a udo network.
 type Network struct {
 	RootDir           string
 	StartPort         uint16
@@ -255,8 +255,8 @@ func (n *Network) OrdererConfigPath(o *Orderer) string {
 
 // ReadOrdererConfig  unmarshals an orderer's orderer.yaml and returns an
 // object approximating its contents.
-func (n *Network) ReadOrdererConfig(o *Orderer) *fabricconfig.Orderer {
-	var orderer fabricconfig.Orderer
+func (n *Network) ReadOrdererConfig(o *Orderer) *udoconfig.Orderer {
+	var orderer udoconfig.Orderer
 	ordererBytes, err := ioutil.ReadFile(n.OrdererConfigPath(o))
 	Expect(err).NotTo(HaveOccurred())
 
@@ -268,7 +268,7 @@ func (n *Network) ReadOrdererConfig(o *Orderer) *fabricconfig.Orderer {
 
 // WriteOrdererConfig serializes the provided configuration as the specified
 // orderer's orderer.yaml document.
-func (n *Network) WriteOrdererConfig(o *Orderer, config *fabricconfig.Orderer) {
+func (n *Network) WriteOrdererConfig(o *Orderer, config *udoconfig.Orderer) {
 	ordererBytes, err := yaml.Marshal(config)
 	Expect(err).NotTo(HaveOccurred())
 
@@ -290,8 +290,8 @@ func (n *Network) PeerConfigPath(p *Peer) string {
 
 // ReadPeerConfig unmarshals a peer's core.yaml and returns an object
 // approximating its contents.
-func (n *Network) ReadPeerConfig(p *Peer) *fabricconfig.Core {
-	var core fabricconfig.Core
+func (n *Network) ReadPeerConfig(p *Peer) *udoconfig.Core {
+	var core udoconfig.Core
 	coreBytes, err := ioutil.ReadFile(n.PeerConfigPath(p))
 	Expect(err).NotTo(HaveOccurred())
 
@@ -303,7 +303,7 @@ func (n *Network) ReadPeerConfig(p *Peer) *fabricconfig.Core {
 
 // WritePeerConfig serializes the provided configuration as the specified
 // peer's core.yaml document.
-func (n *Network) WritePeerConfig(p *Peer, config *fabricconfig.Core) {
+func (n *Network) WritePeerConfig(p *Peer, config *udoconfig.Core) {
 	coreBytes, err := yaml.Marshal(config)
 	Expect(err).NotTo(HaveOccurred())
 
@@ -505,7 +505,7 @@ func (n *Network) CACertsBundlePath() string {
 }
 
 // GenerateConfigTree generates the configuration documents required to
-// bootstrap a fabric network. A configuration file will be generated for
+// bootstrap a udo network. A configuration file will be generated for
 // cryptogen, configtxgen, and for each peer and orderer. The contents of the
 // documents will be based on the Config used to create the Network.
 //
@@ -532,7 +532,7 @@ func (n *Network) GenerateConfigTree() {
 }
 
 // Bootstrap generates the cryptographic material, orderer system channel
-// genesis block, and create channel transactions needed to run a fabric
+// genesis block, and create channel transactions needed to run a udo
 // network.
 //
 // The cryptogen tool is used to create crypto material from the contents of
@@ -845,7 +845,7 @@ func (n *Network) BrokerRunner(id int, zookeepers []string) *runner.Kafka {
 }
 
 // BrokerGroupRunner returns a runner that manages the processes that make up
-// the kafka broker network for fabric.
+// the kafka broker network for udo.
 func (n *Network) BrokerGroupRunner() ifrit.Runner {
 	members := grouper.Members{}
 	zookeepers := []string{}
@@ -869,7 +869,7 @@ func (n *Network) BrokerGroupRunner() ifrit.Runner {
 func (n *Network) OrdererRunner(o *Orderer) *ginkgomon.Runner {
 	cmd := exec.Command(n.Components.Orderer())
 	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, fmt.Sprintf("FABRIC_CFG_PATH=%s", n.OrdererDir(o)))
+	cmd.Env = append(cmd.Env, fmt.Sprintf("UDO_CFG_PATH=%s", n.OrdererDir(o)))
 
 	config := ginkgomon.Config{
 		AnsiColorCode:     n.nextColor(),
@@ -902,7 +902,7 @@ func (n *Network) OrdererGroupRunner() ifrit.Runner {
 func (n *Network) PeerRunner(p *Peer) *ginkgomon.Runner {
 	cmd := n.peerCommand(
 		commands.NodeStart{PeerID: p.ID()},
-		fmt.Sprintf("FABRIC_CFG_PATH=%s", n.PeerDir(p)),
+		fmt.Sprintf("UDO_CFG_PATH=%s", n.PeerDir(p)),
 	)
 
 	return ginkgomon.New(ginkgomon.Config{
@@ -925,7 +925,7 @@ func (n *Network) PeerGroupRunner() ifrit.Runner {
 }
 
 // NetworkGroupRunner returns a runner that can be used to start and stop an
-// entire fabric network.
+// entire udo network.
 func (n *Network) NetworkGroupRunner() ifrit.Runner {
 	members := grouper.Members{
 		{Name: "brokers", Runner: n.BrokerGroupRunner()},
@@ -979,7 +979,7 @@ func (n *Network) PeerAdminSession(p *Peer, command Command) (*gexec.Session, er
 func (n *Network) PeerUserSession(p *Peer, user string, command Command) (*gexec.Session, error) {
 	cmd := n.peerCommand(
 		command,
-		fmt.Sprintf("FABRIC_CFG_PATH=%s", n.PeerDir(p)),
+		fmt.Sprintf("UDO_CFG_PATH=%s", n.PeerDir(p)),
 		fmt.Sprintf("CORE_PEER_MSPCONFIGPATH=%s", n.PeerUserMSPDir(p, user)),
 	)
 	return n.StartSession(cmd, command.SessionName())
@@ -991,7 +991,7 @@ func (n *Network) OrdererAdminSession(o *Orderer, p *Peer, command Command) (*ge
 	cmd := n.peerCommand(
 		command,
 		"CORE_PEER_LOCALMSPID=OrdererMSP",
-		fmt.Sprintf("FABRIC_CFG_PATH=%s", n.PeerDir(p)),
+		fmt.Sprintf("UDO_CFG_PATH=%s", n.PeerDir(p)),
 		fmt.Sprintf("CORE_PEER_MSPCONFIGPATH=%s", n.OrdererUserMSPDir(o, "Admin")),
 	)
 	return n.StartSession(cmd, command.SessionName())

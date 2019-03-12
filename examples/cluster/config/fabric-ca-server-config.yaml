@@ -20,9 +20,9 @@
 #         note the '-' separator character.
 #   2) environment variable
 #      Examples:
-#      a) FABRIC_CA_SERVER_PORT=443
+#      a) UDO_CA_SERVER_PORT=443
 #         To set the listening port
-#      b) FABRIC_CA_SERVER_CA_KEYFILE="../mykey.pem"
+#      b) UDO_CA_SERVER_CA_KEYFILE="../mykey.pem"
 #         To set the "keyfile" element in the "ca" section below;
 #         note the '_' separator character.
 #   3) configuration file
@@ -90,7 +90,7 @@ ca:
 #     (also known as an enrollment ID and secret).
 #  2) once authenticated, retrieves the identity's attribute names and
 #     values which the fabric-ca-server optionally puts into TCerts
-#     which it issues for transacting on the Hyperledger Fabric blockchain.
+#     which it issues for transacting on the Hyperledger UDO blockchain.
 #     These attributes are useful for making access control decisions in
 #     chaincode.
 #  There are two main configuration options:
@@ -191,7 +191,7 @@ csr:
         ST: "North Carolina"
         L:
         O: Hyperledger
-        OU: Fabric
+        OU: UDO
    hosts:
      - 2008f00aff38
    ca:

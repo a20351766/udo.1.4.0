@@ -12,11 +12,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -32,7 +32,7 @@ type testEnv struct {
 }
 
 func initialize(t *testing.T) (*testEnv, *jsonLedger) {
-	name, err := ioutil.TempDir("", "hyperledger_fabric")
+	name, err := ioutil.TempDir("", "hyperledger_udo")
 	if err != nil {
 		t.Fatalf("Error creating temp dir: %s", err)
 	}

@@ -9,12 +9,12 @@ package channelconfig
 import (
 	"time"
 
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/msp"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
 // Org stores the common organizational config
@@ -154,7 +154,7 @@ type ApplicationCapabilities interface {
 
 	// MetadataLifecycle indicates whether the peer should use the deprecated and problematic
 	// v1.0/v1.1 lifecycle, or whether it should use the newer per channel peer local chaincode
-	// metadata package approach planned for release with Fabric v1.2
+	// metadata package approach planned for release with UDO v1.2
 	MetadataLifecycle() bool
 
 	// KeyLevelEndorsement returns true if this channel supports endorsement

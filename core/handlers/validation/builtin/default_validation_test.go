@@ -9,12 +9,12 @@ package builtin
 import (
 	"testing"
 
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	"github.com/hyperledger/fabric/core/committer/txvalidator"
-	. "github.com/hyperledger/fabric/core/handlers/validation/api"
-	vmocks "github.com/hyperledger/fabric/core/handlers/validation/builtin/mocks"
-	"github.com/hyperledger/fabric/core/handlers/validation/builtin/v12/mocks"
-	"github.com/hyperledger/fabric/protos/common"
+	commonerrors "github.com/hyperledger/udo/common/errors"
+	"github.com/hyperledger/udo/core/committer/txvalidator"
+	. "github.com/hyperledger/udo/core/handlers/validation/api"
+	vmocks "github.com/hyperledger/udo/core/handlers/validation/builtin/mocks"
+	"github.com/hyperledger/udo/core/handlers/validation/builtin/v12/mocks"
+	"github.com/hyperledger/udo/protos/common"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/udo/core/config/configtest"
 	"github.com/spf13/viper"
 )
 

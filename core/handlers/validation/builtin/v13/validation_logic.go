@@ -10,17 +10,17 @@ import (
 	"fmt"
 	"regexp"
 
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/ccmetadata"
-	. "github.com/hyperledger/fabric/core/common/validation/statebased"
-	. "github.com/hyperledger/fabric/core/handlers/validation/api/capabilities"
-	. "github.com/hyperledger/fabric/core/handlers/validation/api/identities"
-	. "github.com/hyperledger/fabric/core/handlers/validation/api/policies"
-	. "github.com/hyperledger/fabric/core/handlers/validation/api/state"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	commonerrors "github.com/hyperledger/udo/common/errors"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/chaincode/platforms/ccmetadata"
+	. "github.com/hyperledger/udo/core/common/validation/statebased"
+	. "github.com/hyperledger/udo/core/handlers/validation/api/capabilities"
+	. "github.com/hyperledger/udo/core/handlers/validation/api/identities"
+	. "github.com/hyperledger/udo/core/handlers/validation/api/policies"
+	. "github.com/hyperledger/udo/core/handlers/validation/api/state"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 )
 
 var logger = flogging.MustGetLogger("vscc")

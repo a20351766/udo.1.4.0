@@ -13,12 +13,12 @@ import (
 	"encoding/pem"
 	"time"
 
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/pkg/errors"
 )
 
@@ -75,7 +75,7 @@ type ChannelLister interface {
 type Replicator struct {
 	SystemChannel    string
 	ChannelLister    ChannelLister
-	Logger           *flogging.FabricLogger
+	Logger           *flogging.UDOLogger
 	Puller           *BlockPuller
 	BootBlock        *common.Block
 	AmIPartOfChannel selfMembershipPredicate
@@ -306,7 +306,7 @@ type ChainPuller interface {
 
 // ChainInspector walks over a chain
 type ChainInspector struct {
-	Logger          *flogging.FabricLogger
+	Logger          *flogging.UDOLogger
 	Puller          ChainPuller
 	LastConfigBlock *common.Block
 }

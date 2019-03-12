@@ -14,7 +14,7 @@ import (
 	"github.com/coreos/etcd/snap"
 	"github.com/coreos/etcd/wal"
 	"github.com/coreos/etcd/wal/walpb"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/common/flogging"
 	"github.com/pkg/errors"
 )
 
@@ -35,7 +35,7 @@ type MemoryStorage interface {
 type RaftStorage struct {
 	SnapshotCatchUpEntries uint64
 
-	lg *flogging.FabricLogger
+	lg *flogging.UDOLogger
 
 	ram  MemoryStorage
 	wal  *wal.WAL
@@ -45,7 +45,7 @@ type RaftStorage struct {
 // CreateStorage attempts to create a storage to persist etcd/raft data.
 // If data presents in specified disk, they are loaded to reconstruct storage state.
 func CreateStorage(
-	lg *flogging.FabricLogger,
+	lg *flogging.UDOLogger,
 	applied uint64,
 	walDir string,
 	snapDir string,
@@ -104,7 +104,7 @@ func createSnapshotter(snapDir string) (*snap.Snapshotter, error) {
 
 }
 
-func createWAL(lg *flogging.FabricLogger, walDir string, applied uint64, snapshot *raftpb.Snapshot) (*wal.WAL, error) {
+func createWAL(lg *flogging.UDOLogger, walDir string, applied uint64, snapshot *raftpb.Snapshot) (*wal.WAL, error) {
 	hasWAL := wal.Exist(walDir)
 	if !hasWAL && applied != 0 {
 		return nil, errors.Errorf("applied index is not zero but no WAL data found")

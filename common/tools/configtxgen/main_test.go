@@ -23,10 +23,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/configtxgentest"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/tools/configtxgen/configtxgentest"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/core/config/configtest"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -140,7 +140,7 @@ func TestConfigTxFlags(t *testing.T) {
 		flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 	}()
 
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	devConfigDir, err := configtest.GetDevConfigDir()
 	assert.NoError(t, err, "failed to get dev config dir")
@@ -176,7 +176,7 @@ func TestBlockFlags(t *testing.T) {
 		"-outputBlock=" + blockDest,
 		"-inspectBlock=" + blockDest,
 	}
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	main()

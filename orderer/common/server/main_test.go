@@ -14,34 +14,34 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/floggingtest"
-	"github.com/hyperledger/fabric/common/localmsp"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/common/metrics/prometheus"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/flogging/floggingtest"
+	"github.com/hyperledger/udo/common/localmsp"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/metrics/prometheus"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/orderer/common/cluster"
+	"github.com/hyperledger/udo/orderer/common/localconfig"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestInitializeLogging(t *testing.T) {
-	origEnvValue := os.Getenv("FABRIC_LOGGING_SPEC")
-	os.Setenv("FABRIC_LOGGING_SPEC", "foo=debug")
+	origEnvValue := os.Getenv("UDO_LOGGING_SPEC")
+	os.Setenv("UDO_LOGGING_SPEC", "foo=debug")
 	initializeLogging()
 	assert.Equal(t, "debug", flogging.Global.Level("foo").String())
-	os.Setenv("FABRIC_LOGGING_SPEC", origEnvValue)
+	os.Setenv("UDO_LOGGING_SPEC", origEnvValue)
 }
 
 func TestInitializeProfilingService(t *testing.T) {
-	origEnvValue := os.Getenv("FABRIC_LOGGING_SPEC")
-	defer os.Setenv("FABRIC_LOGGING_SPEC", origEnvValue)
-	os.Setenv("FABRIC_LOGGING_SPEC", "debug")
+	origEnvValue := os.Getenv("UDO_LOGGING_SPEC")
+	defer os.Setenv("UDO_LOGGING_SPEC", origEnvValue)
+	os.Setenv("UDO_LOGGING_SPEC", "debug")
 	// get a free random port
 	listenAddr := func() string {
 		l, _ := net.Listen("tcp", "localhost:0")
@@ -163,7 +163,7 @@ func TestInitializeServerConfig(t *testing.T) {
 }
 
 func TestInitializeBootstrapChannel(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	testCases := []struct {
@@ -255,7 +255,7 @@ func TestInitializeLocalMsp(t *testing.T) {
 }
 
 func TestInitializeMultiChainManager(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	conf := genesisConfig(t)
 	assert.NotPanics(t, func() {
@@ -292,7 +292,7 @@ func TestInitializeGrpcServer(t *testing.T) {
 }
 
 func TestUpdateTrustedRoots(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	initializeLocalMsp(genesisConfig(t))
 	// get a free random port

@@ -2,7 +2,7 @@ The Operations Service
 ======================
 
 The peer and the orderer host an HTTP server that offers a RESTful "operations"
-API. This API is unrelated to the Fabric network services and is intended to be
+API. This API is unrelated to the UDO network services and is intended to be
 used by operators, not administrators or "users" of the network.
 
 The API exposes the following capabilities:
@@ -107,7 +107,7 @@ Operations Security
 ~~~~~~~~~~~~~~~~~~~
 
 As the operations service is focused on operations and intentionally unrelated
-to the Fabric network, it does not use the Membership Services Provider for
+to the UDO network, it does not use the Membership Services Provider for
 access control. Instead, the operations service relies entirely on mutual TLS with
 client certificate authentication.
 
@@ -199,7 +199,7 @@ service unless ``requireClientAuth`` is set to ``true``.
 Metrics
 -------
 
-Some components of the Fabric peer and orderer expose metrics that can help
+Some components of the UDO peer and orderer expose metrics that can help
 provide insight into the behavior of the system. Operators and administrators
 can use this information to better understand how the system is performing
 over time.
@@ -207,7 +207,7 @@ over time.
 Configuring Metrics
 ~~~~~~~~~~~~~~~~~~~
 
-Fabric provides two ways to expose metrics: a **pull** model based on Prometheus
+UDO provides two ways to expose metrics: a **pull** model based on Prometheus
 and a **push** model based on StatsD.
 
 Prometheus
@@ -217,7 +217,7 @@ A typical Prometheus deployment scrapes metrics by requesting them from an HTTP
 endpoint exposed by instrumented targets. As Prometheus is responsible for
 requesting the metrics, it is considered a pull system.
 
-When configured, a Fabric peer or orderer will present a ``/metrics`` resource
+When configured, a UDO peer or orderer will present a ``/metrics`` resource
 on the operations service.
 
 Peer

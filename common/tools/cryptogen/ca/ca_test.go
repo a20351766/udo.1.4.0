@@ -13,8 +13,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/tools/cryptogen/ca"
-	"github.com/hyperledger/fabric/common/tools/cryptogen/csp"
+	"github.com/hyperledger/udo/common/tools/cryptogen/ca"
+	"github.com/hyperledger/udo/common/tools/cryptogen/csp"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -29,7 +29,7 @@ const (
 	testCountry            = "US"
 	testProvince           = "California"
 	testLocality           = "San Francisco"
-	testOrganizationalUnit = "Hyperledger Fabric"
+	testOrganizationalUnit = "Hyperledger UDO"
 	testStreetAddress      = "testStreetAddress"
 	testPostalCode         = "123456"
 )

@@ -50,20 +50,20 @@ X.509 technologies in detail in the technical section below.
 How to use Idemix
 -----------------
 
-To understand how to use Idemix with Hyperledger Fabric, we need to see which
-Fabric components correspond to the user, issuer, and verifier in Idemix.
+To understand how to use Idemix with Hyperledger UDO, we need to see which
+UDO components correspond to the user, issuer, and verifier in Idemix.
 
-* The Fabric Java SDK is the API for the **user**. In the future, other Fabric
+* The UDO Java SDK is the API for the **user**. In the future, other UDO
   SDKs will also support Idemix.
 
-* Fabric provides two possible Idemix **issuers**:
+* UDO provides two possible Idemix **issuers**:
 
-   a) Fabric CA for production environments or development, and
+   a) UDO CA for production environments or development, and
    b) the :doc:`idemixgen <idemixgen>` tool for development environments.
 
-* The **verifier** is an Idemix MSP in Fabric.
+* The **verifier** is an Idemix MSP in UDO.
 
-In order to use Idemix in Hyperledger Fabric, the following three basic steps
+In order to use Idemix in Hyperledger UDO, the following three basic steps
 are required:
 
 .. image:: images/idemix-three-steps.png
@@ -71,14 +71,14 @@ are required:
 
 1. Consider the issuer.
 
-   Fabric CA (version 1.3 or later) has been enhanced to automatically function
+   UDO CA (version 1.3 or later) has been enhanced to automatically function
    as an Idemix issuer. When ``fabric-ca-server`` is started (or initialized via
    the ``fabric-ca-server init`` command), the following two files are
    automatically created in the home directory of the ``fabric-ca-server``:
    ``IssuerPublicKey`` and ``IssuerRevocationPublicKey``. These files are
    required in step 2.
 
-   For a development environment and if you are not using Fabric CA, you may use
+   For a development environment and if you are not using UDO CA, you may use
    ``idemixgen``to create these files.
 
 2. Consider the verifier.
@@ -87,13 +87,13 @@ are required:
    ``IssuerRevocationPublicKey`` from step 1.
 
    For example, consider the following excerpt from
-   `configtx.yaml in the Hyperledger Java SDK sample <https://github.com/hyperledger/fabric-sdk-java/blob/master/src/test/fixture/sdkintegration/e2e-2Orgs/v1.3/configtx.yaml>`_:
+   `configtx.yaml in the Hyperledger Java SDK sample <https://github.com/hyperledger/udo-sdk-java/blob/master/src/test/fixture/sdkintegration/e2e-2Orgs/v1.3/configtx.yaml>`_:
 
    .. code:: bash
 
       - &Org1Idemix
           # defaultorg defines the organization which is used in the sampleconfig
-          # of the fabric.git development environment
+          # of the udo.git development environment
           name: idemixMSP1
 
           # id to load the msp definition as
@@ -114,18 +114,18 @@ are required:
 
    There is only a single additional API call required in order to use Idemix
    with the Java SDK: the ``idemixEnroll`` method of the
-   ``org.hyperledger.fabric_ca.sdk.HFCAClient`` class. For example, assume
+   ``org.hyperledger.udo_ca.sdk.HFCAClient`` class. For example, assume
    ``hfcaClient`` is your HFCAClient object and ``x509Enrollment`` is your
-   ``org.hyperledger.fabric.sdk.Enrollment`` associated with your X509 certificate.
+   ``org.hyperledger.udo.sdk.Enrollment`` associated with your X509 certificate.
 
-   The following call will return an ``org.hyperledger.fabric.sdk.Enrollment``
+   The following call will return an ``org.hyperledger.udo.sdk.Enrollment``
    object associated with your Idemix credential.
 
    .. code:: bash
 
       IdemixEnrollment idemixEnrollment = hfcaClient.idemixEnroll(x509enrollment, "idemixMSPID1");
 
-   Note also that ``IdemixEnrollment`` implements the ``org.hyperledger.fabric.sdk.Enrollment``
+   Note also that ``IdemixEnrollment`` implements the ``org.hyperledger.udo.sdk.Enrollment``
    interface and can, therefore, be used in the same way that one uses the X509
    enrollment object, except, of course, that this automatically provides the
    privacy enhancing features of Idemix.
@@ -136,24 +136,24 @@ Idemix and chaincode
 From a verifier perspective, there is one more actor to consider: chaincode.
 What can chaincode learn about the transactor when an Idemix credential is used?
 
-The `cid (Client Identity) library <https://github.com/hyperledger/fabric/tree/master/core/chaincode/shim/ext/cid>`_
+The `cid (Client Identity) library <https://github.com/hyperledger/udo/tree/master/core/chaincode/shim/ext/cid>`_
 (for golang only) has been extended to support the ``GetAttributeValue`` function
 when an Idemix credential is used. However, as mentioned in the "Current
 limitations" section below, there are only two attributes which are disclosed in
 the Idemix case: ``ou`` and ``role``.
 
-If Fabric CA is the credential issuer:
+If UDO CA is the credential issuer:
 
 * the value of the `ou` attribute is the identity's **affiliation** (e.g.
   "org1.department1");
 * the value of the ``role`` attribute will be either 'member' or 'admin'. A
   value of 'admin' means that the identity is an MSP administrator. By default,
-  identities created by Fabric CA will return the 'member' role. In order to
+  identities created by UDO CA will return the 'member' role. In order to
   create an 'admin' identity, register the identity with the ``role`` attribute
   and a value of ``2``.
 
 For an example of using the `cid` library to retrieve these attributes, see
-`this java SDK example <https://github.com/hyperledger/fabric-sdk-java/blob/master/src/test/fixture/sdkintegration/gocc/sampleIdemix/src/github.com/example_cc/example_cc.go>`_.
+`this java SDK example <https://github.com/hyperledger/udo-sdk-java/blob/master/src/test/fixture/sdkintegration/gocc/sampleIdemix/src/github.com/example_cc/example_cc.go>`_.
 
 Current limitations
 -------------------
@@ -184,7 +184,7 @@ The current version of Idemix does have a few limitations.
    - Usage: uniquely identify a user --- same in all enrollment credentials that
      belong to the same user (will be used for auditing in the future releases)
    - Type: BIG
-   - Revealed: never in the signature, only when generating an authentication token for Fabric CA
+   - Revealed: never in the signature, only when generating an authentication token for UDO CA
 
   4. Revocation Handle attribute
 
@@ -273,7 +273,7 @@ messages and efficient zero-knowledge proofs of signature possession. All of the
 cryptographic building blocks for Idemix were published at the top conferences
 and journals and verified by the scientific community.
 
-This particular Idemix implementation for Fabric uses a pairing-based
+This particular Idemix implementation for UDO uses a pairing-based
 signature scheme that was briefly proposed by `Camenisch and Lysyanskaya <https://link.springer.com/chapter/10.1007/978-3-540-28628-8_4>`_
 and described in detail by `Au et al. <https://link.springer.com/chapter/10.1007/11832072_8>`_.
 The ability to prove knowledge of a signature in a zero-knowledge proof

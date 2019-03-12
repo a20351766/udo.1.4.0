@@ -2,20 +2,20 @@ Writing Your First Application
 ==============================
 
 .. note:: If you're not yet familiar with the fundamental architecture of a
-          Fabric network, you may want to visit the :doc:`key_concepts` section
+          UDO network, you may want to visit the :doc:`key_concepts` section
           prior to continuing.
 
           It is also worth noting that this tutorial serves as an introduction
-          to Fabric applications and uses simple smart contracts and
-          applications. For a more in-depth look at Fabric applications and
+          to UDO applications and uses simple smart contracts and
+          applications. For a more in-depth look at UDO applications and
           smart contracts, check out our
           :doc:`developapps/developing_applications` section or the
           :doc:`tutorial/commercial_paper`.
 
 In this tutorial we'll be looking at a handful of sample programs to see how
-Fabric apps work. These applications and the smart contracts they use are
+UDO apps work. These applications and the smart contracts they use are
 collectively known as ``FabCar``. They provide a great starting point to
-understand a Hyperledger Fabric blockchain. You'll learn how to write an
+understand a Hyperledger UDO blockchain. You'll learn how to write an
 application and smart contract to query and update a ledger, and how to use a
 Certificate Authority to generate the X.509 certificates used by applications
 which interact with a permissioned blockchain.
@@ -45,7 +45,7 @@ We’ll go through three principle steps:
 
 After completing this tutorial you should have a basic understanding of how an
 application is programmed in conjunction with a smart contract to interact with
-the ledger hosted and replicated on the peers in a Fabric network.
+the ledger hosted and replicated on the peers in a UDO network.
 
 .. note:: These applications are also compatible with :doc:`discovery-overview`
           and :doc:`private-data/private-data`, though we won't explicitly show
@@ -67,7 +67,7 @@ tutorial, you must stop this network:
 
 If you have run through this tutorial before, use the following commands to
 kill any stale or active containers. Note, this will take down **all** of your
-containers whether they're Fabric related or not.
+containers whether they're UDO related or not.
 
 .. code:: bash
 
@@ -80,7 +80,7 @@ the necessary dependencies installed on your machine.
 
 Next, if you haven't done so already, visit the :doc:`install` page and follow
 the provided instructions. Return to this tutorial once you have cloned the
-``fabric-samples`` repository, and downloaded the latest stable Fabric images
+``fabric-samples`` repository, and downloaded the latest stable UDO images
 and available utilities.
 
 If you are using Mac OS and running Mojave, you will need to `install Xcode
@@ -92,7 +92,7 @@ Launch the network
 .. note:: This next section requires you to be in the ``fabcar``
           subdirectory within your local clone of the ``fabric-samples`` repo.
 
-Launch your network using the ``startFabric.sh`` shell script. This command will
+Launch your network using the ``startUDO.sh`` shell script. This command will
 spin up a blockchain network comprising peers, orderers, certificate
 authorities and more.  It will also install and instantiate a javascript version
 of the ``FabCar`` smart contract which will be used by our application to access
@@ -101,7 +101,7 @@ tutorial.
 
 .. code:: bash
 
-  ./startFabric.sh javascript
+  ./startUDO.sh javascript
 
 Alright, you’ve now got a sample network up and running, and the ``FabCar``
 smart contract installed and instantiated. Let’s install our application
@@ -114,7 +114,7 @@ Install the application
           ``fabcar/javascript`` subdirectory within your local clone of the
           ``fabric-samples`` repo.
 
-Run the following command to install the Fabric dependencies for the
+Run the following command to install the UDO dependencies for the
 applications. It will take about a minute to complete:
 
 .. code:: bash
@@ -122,12 +122,12 @@ applications. It will take about a minute to complete:
   npm install
 
 This process is installing the key application dependencies defined in
-``package.json``. The most important of which is the ``fabric-network`` class;
+``package.json``. The most important of which is the ``udo-network`` class;
 it enables an application to use identities, wallets, and gateways to connect to
 channels, submit transactions, and wait for notifications. This tutorial also
 uses the ``fabric-ca-client`` class to enroll users with their respective
 certificate authorities, generating a valid identity which is then used by
-``fabric-network`` class methods.
+``udo-network`` class methods.
 
 Once ``npm install`` completes, everything is in place to run the application.
 For this tutorial, you'll primarily be using the application JavaScript files in
@@ -247,13 +247,13 @@ Let's take a closer look at this program. Use an editor (e.g. atom or visual
 studio) and open ``query.js``.
 
 The application starts by bringing in scope two key classes from the
-``fabric-network`` module; ``FileSystemWallet`` and ``Gateway``. These classes
+``udo-network`` module; ``FileSystemWallet`` and ``Gateway``. These classes
 will be used to locate the ``user1`` identity in the wallet, and use it to
 connect to the network:
 
 .. code:: bash
 
-  const { FileSystemWallet, Gateway } = require('fabric-network');
+  const { FileSystemWallet, Gateway } = require('udo-network');
 
 The application connects to the network using a gateway:
 
@@ -354,7 +354,7 @@ Below is a representation of how an application would call different
 transactions in a smart contract. Each transaction uses a broad set of APIs such
 as ``getStateByRange`` to interact with the ledger. You can read more about
 these APIs in `detail
-<https://fabric-shim.github.io/master/index.html?redirect=true>`_.
+<https://udo-shim.github.io/master/index.html?redirect=true>`_.
 
 .. image:: images/RunningtheSample.png
 

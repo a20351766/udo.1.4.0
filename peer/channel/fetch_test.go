@@ -14,12 +14,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/peer/common"
-	"github.com/hyperledger/fabric/peer/common/mock"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/peer/common"
+	"github.com/hyperledger/udo/peer/common/mock"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
+	putils "github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -28,7 +28,7 @@ func TestFetch(t *testing.T) {
 	defer resetFlags()
 	InitMSP()
 	resetFlags()
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	mockchain := "mockchain"
@@ -111,7 +111,7 @@ func TestFetchNilCF(t *testing.T) {
 
 	InitMSP()
 	resetFlags()
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 
 	mockchain := "mockchain"

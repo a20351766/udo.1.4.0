@@ -10,10 +10,10 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	m "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	m "github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 )
 

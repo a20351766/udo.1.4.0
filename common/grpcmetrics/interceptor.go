@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/common/metrics"
+	"github.com/hyperledger/udo/common/metrics"
 	"google.golang.org/grpc"
 )
 

@@ -9,9 +9,9 @@ package mgmt
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/msp"
 	"github.com/stretchr/testify/assert"
 )
 

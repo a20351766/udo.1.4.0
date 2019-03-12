@@ -4,7 +4,7 @@ package mock
 import (
 	sync "sync"
 
-	common "github.com/hyperledger/fabric/protos/common"
+	common "github.com/hyperledger/udo/protos/common"
 )
 
 type BlockIterator struct {

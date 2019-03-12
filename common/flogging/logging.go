@@ -12,7 +12,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/hyperledger/fabric/common/flogging/fabenc"
+	"github.com/hyperledger/udo/common/flogging/fabenc"
 	logging "github.com/op/go-logging"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -41,7 +41,7 @@ type Config struct {
 	Writer io.Writer
 }
 
-// Logging maintains the state associated with the fabric logging system. It is
+// Logging maintains the state associated with the udo logging system. It is
 // intended to bridge between the legacy logging infrastructure built around
 // go-logging and the structured, level logging provided by zap.
 type Logging struct {
@@ -83,7 +83,7 @@ func (s *Logging) Apply(c Config) error {
 	}
 
 	if c.LogSpec == "" {
-		c.LogSpec = os.Getenv("FABRIC_LOGGING_SPEC")
+		c.LogSpec = os.Getenv("UDO_LOGGING_SPEC")
 	}
 	if c.LogSpec == "" {
 		c.LogSpec = defaultLevel.String()
@@ -214,9 +214,9 @@ func (s *Logging) ZapLogger(name string) *zap.Logger {
 	return NewZapLogger(core).Named(name)
 }
 
-// Logger instantiates a new FabricLogger with the specified name. The name is
+// Logger instantiates a new UDOLogger with the specified name. The name is
 // used to determine which log levels are enabled.
-func (s *Logging) Logger(name string) *FabricLogger {
+func (s *Logging) Logger(name string) *UDOLogger {
 	zl := s.ZapLogger(name)
-	return NewFabricLogger(zl)
+	return NewUDOLogger(zl)
 }

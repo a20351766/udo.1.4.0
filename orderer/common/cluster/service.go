@@ -10,9 +10,9 @@ import (
 	"context"
 	"io"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/protos/orderer"
 	"google.golang.org/grpc"
 )
 
@@ -37,8 +37,8 @@ type SubmitStream interface {
 // Service defines the raft Service
 type Service struct {
 	Dispatcher Dispatcher
-	Logger     *flogging.FabricLogger
-	StepLogger *flogging.FabricLogger
+	Logger     *flogging.UDOLogger
+	StepLogger *flogging.UDOLogger
 }
 
 // Step forwards a message to a raft FSM located in this server

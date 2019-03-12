@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package manager_test
 
 import (
-	"github.com/hyperledger/fabric/token/identity/mock"
-	"github.com/hyperledger/fabric/token/tms/manager"
-	"github.com/hyperledger/fabric/token/tms/plain"
+	"github.com/hyperledger/udo/token/identity/mock"
+	"github.com/hyperledger/udo/token/tms/manager"
+	"github.com/hyperledger/udo/token/tms/plain"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
@@ -58,16 +58,16 @@ var _ = Describe("Manager", func() {
 	})
 })
 
-var _ = Describe("FabricIdentityDeserializerManager", func() {
+var _ = Describe("UDOIdentityDeserializerManager", func() {
 	Describe("Get an IdentityDeserializer for a non-existent channel", func() {
 		var (
-			fabricIdentityDeserializerManager *manager.FabricIdentityDeserializerManager
+			udoIdentityDeserializerManager *manager.UDOIdentityDeserializerManager
 		)
 		BeforeEach(func() {
-			fabricIdentityDeserializerManager = &manager.FabricIdentityDeserializerManager{}
+			udoIdentityDeserializerManager = &manager.UDOIdentityDeserializerManager{}
 		})
 		It("returns an error", func() {
-			_, err := fabricIdentityDeserializerManager.Deserializer("boguschannel")
+			_, err := udoIdentityDeserializerManager.Deserializer("boguschannel")
 			Expect(err).To(MatchError("channel not found"))
 		})
 	})

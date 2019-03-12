@@ -1,5 +1,5 @@
 
-Using Private Data in Fabric
+Using Private Data in UDO
 ============================
 
 This tutorial will demonstrate the use of collections to provide storage
@@ -10,7 +10,7 @@ The information in this tutorial assumes knowledge of private data
 stores and their use cases. For more information, check out :doc:`private-data/private-data`.
 
 The tutorial will take you through the following steps to practice defining,
-configuring and using private data with Fabric:
+configuring and using private data with UDO:
 
 #. :ref:`pd-build-json`
 #. :ref:`pd-read-write-private-data`
@@ -112,7 +112,7 @@ The data to be secured by these policies is mapped in chaincode and will be
 shown later in the tutorial.
 
 This collection definition file is deployed on the channel when its associated
-chaincode is instantiated on the channel using the `peer chaincode instantiate command <http://hyperledger-fabric.readthedocs.io/en/latest/commands/peerchaincode.html#peer-chaincode-instantiate>`__.
+chaincode is instantiated on the channel using the `peer chaincode instantiate command <http://hyperledger-udo.readthedocs.io/en/latest/commands/peerchaincode.html#peer-chaincode-instantiate>`__.
 More details on this process are provided in Section 3 below.
 
 .. _pd-read-write-private-data:
@@ -152,7 +152,7 @@ Thus two different sets of private data are defined in the marbles private data
 sample. The mapping of this data to the collection policy which restricts its
 access is controlled by chaincode APIs. Specifically, reading and writing
 private data using a collection definition is performed by calling ``GetPrivateData()``
-and ``PutPrivateData()``, which can be found `here <https://github.com/hyperledger/fabric/blob/master/core/chaincode/shim/interfaces.go#L179>`_.
+and ``PutPrivateData()``, which can be found `here <https://github.com/hyperledger/udo/blob/master/core/chaincode/shim/interfaces.go#L179>`_.
 
 The following diagrams illustrate the private data model used by the marbles
 private data sample.
@@ -278,7 +278,7 @@ data.
 
     ./byfn.sh up -c mychannel -s couchdb
 
- This will create a simple Fabric network consisting of a single channel named
+ This will create a simple UDO network consisting of a single channel named
  ``mychannel`` with two organizations (each maintaining two peer nodes) and an
  ordering service while using CouchDB as the state database. Either LevelDB
  or CouchDB may be used with collections. CouchDB was chosen to demonstrate
@@ -312,7 +312,7 @@ with two peers each. Therefore the chaincode has to be installed on four peers:
 - peer0.org2.example.com
 - peer1.org2.example.com
 
-Use the `peer chaincode install <http://hyperledger-fabric.readthedocs.io/en/master/commands/peerchaincode.html?%20chaincode%20instantiate#peer-chaincode-install>`__ command to install the Marbles chaincode on each peer.
+Use the `peer chaincode install <http://hyperledger-udo.readthedocs.io/en/master/commands/peerchaincode.html?%20chaincode%20instantiate#peer-chaincode-install>`__ command to install the Marbles chaincode on each peer.
 
  :guilabel:`Try it yourself`
 
@@ -324,7 +324,7 @@ Use the `peer chaincode install <http://hyperledger-fabric.readthedocs.io/en/mas
 
  Your command prompt will change to something similar to:
 
- ``root@81eac8493633:/opt/gopath/src/github.com/hyperledger/fabric/peer#``
+ ``root@81eac8493633:/opt/gopath/src/github.com/hyperledger/udo/peer#``
 
  1. Use the following command to install the Marbles chaincode from the git
     repository onto the peer ``peer0.org1.example.com`` in your BYFN network.
@@ -356,9 +356,9 @@ Use the `peer chaincode install <http://hyperledger-fabric.readthedocs.io/en/mas
     .. code:: bash
 
        export CORE_PEER_LOCALMSPID=Org2MSP
-       export PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+       export PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
        export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
-       export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+       export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
 
  4. Switch the active peer to the first peer in Org2 and install the chaincode:
 
@@ -377,7 +377,7 @@ Use the `peer chaincode install <http://hyperledger-fabric.readthedocs.io/en/mas
 Instantiate the chaincode on the channel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the `peer chaincode instantiate <http://hyperledger-fabric.readthedocs.io/en/master/commands/peerchaincode.html?%20chaincode%20instantiate#peer-chaincode-instantiate>`__
+Use the `peer chaincode instantiate <http://hyperledger-udo.readthedocs.io/en/master/commands/peerchaincode.html?%20chaincode%20instantiate#peer-chaincode-instantiate>`__
 command to instantiate the marbles chaincode on a channel. To configure
 the chaincode collections on the channel, specify the flag ``--collections-config``
 along with the name of the collections JSON file, ``collections_config.json`` in our
@@ -390,7 +390,7 @@ example.
 
  .. code:: bash
 
-   export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+   export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
    peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile $ORDERER_CA -C mychannel -n marblesp -v 1.0 -c '{"Args":["init"]}' -P "OR('Org1MSP.member','Org2MSP.member')" --collections-config  $GOPATH/src/github.com/chaincode/marbles02_private/collections_config.json
 
  .. note:: When specifying the value of the ``--collections-config`` flag, you will
@@ -421,9 +421,9 @@ submit a request to add a marble:
 
     export CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     export CORE_PEER_LOCALMSPID=Org1MSP
-    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-    export PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    export PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 
  Invoke the marbles ``initMarble`` function which
  creates a marble with private data ---  name ``marble1`` owned by ``tom`` with a color
@@ -440,7 +440,7 @@ submit a request to add a marble:
  .. code:: bash
 
    export MARBLE=$(echo -n "{\"name\":\"marble1\",\"color\":\"blue\",\"size\":35,\"owner\":\"tom\",\"price\":99}" | base64)
-   peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}'  --transient "{\"marble\":\"$MARBLE\"}"
+   peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}'  --transient "{\"marble\":\"$MARBLE\"}"
 
  You should see results similar to:
 
@@ -566,9 +566,9 @@ the peer which is unauthorized to access the marbles ``price`` private data.
 
     export CORE_PEER_ADDRESS=peer0.org2.example.com:7051
     export CORE_PEER_LOCALMSPID=Org2MSP
-    export PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+    export PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
-    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
 
 Query private data Org2 is authorized to
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -655,9 +655,9 @@ price private data is purged.
 
     export CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     export CORE_PEER_LOCALMSPID=Org1MSP
-    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-    export PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    export PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/udo/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 
  Open a new terminal window and view the private data logs for this peer by
  running the following command:
@@ -701,7 +701,7 @@ price private data is purged.
  .. code:: bash
 
     export MARBLE=$(echo -n "{\"name\":\"marble2\",\"color\":\"blue\",\"size\":35,\"owner\":\"tom\",\"price\":99}" | base64)
-    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}' --transient "{\"marble\":\"$MARBLE\"}"
+    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}' --transient "{\"marble\":\"$MARBLE\"}"
 
  Switch back to the Terminal window and view the private data logs for this peer
  again. You should see the block height increase by 1.
@@ -730,7 +730,7 @@ price private data is purged.
  .. code:: bash
 
     export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"joe\"}" | base64)
-    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 
  Switch back to the Terminal window and view the private data logs for this peer
  again. You should see the block height increase by 1.
@@ -758,7 +758,7 @@ price private data is purged.
  .. code:: bash
 
     export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"tom\"}" | base64)
-    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 
  Switch back to the Terminal window and view the private data logs for this peer
  again. You should see the block height increase by 1.
@@ -787,7 +787,7 @@ price private data is purged.
  .. code:: bash
 
     export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"jerry\"}" | base64)
-    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+    peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/udo/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 
  Switch back to the Terminal window and view the private data logs for this peer
  again. You should see the block height increase by 1.

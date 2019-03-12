@@ -160,7 +160,7 @@ FileLedger:
 
     # The prefix to use when generating a ledger directory in temporary space.
     # Otherwise, this value is ignored.
-    Prefix: hyperledger-fabric-ordererledger
+    Prefix: hyperledger-udo-ordererledger
 
 ################################################################################
 #

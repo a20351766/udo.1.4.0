@@ -11,8 +11,8 @@ import (
 	"crypto/x509"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/metrics"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/metrics"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
 )
@@ -59,7 +59,7 @@ type ServerConfig struct {
 	// RPCs.  They are executed in order.
 	UnaryInterceptors []grpc.UnaryServerInterceptor
 	// Logger specifies the logger the server will use
-	Logger *flogging.FabricLogger
+	Logger *flogging.UDOLogger
 	// Metrics Provider
 	MetricsProvider metrics.Provider
 }

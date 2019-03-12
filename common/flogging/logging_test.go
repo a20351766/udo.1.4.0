@@ -13,8 +13,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/mock"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/flogging/mock"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap/zapcore"
 )
@@ -31,17 +31,17 @@ func TestNew(t *testing.T) {
 }
 
 func TestNewWithEnvironment(t *testing.T) {
-	oldSpec, set := os.LookupEnv("FABRIC_LOGGING_SPEC")
+	oldSpec, set := os.LookupEnv("UDO_LOGGING_SPEC")
 	if set {
-		defer os.Setenv("FABRIC_LOGGING_SPEC", oldSpec)
+		defer os.Setenv("UDO_LOGGING_SPEC", oldSpec)
 	}
 
-	os.Setenv("FABRIC_LOGGING_SPEC", "fatal")
+	os.Setenv("UDO_LOGGING_SPEC", "fatal")
 	logging, err := flogging.New(flogging.Config{})
 	assert.NoError(t, err)
 	assert.Equal(t, zapcore.FatalLevel, logging.DefaultLevel())
 
-	os.Unsetenv("FABRIC_LOGGING_SPEC")
+	os.Unsetenv("UDO_LOGGING_SPEC")
 	logging, err = flogging.New(flogging.Config{})
 	assert.NoError(t, err)
 	assert.Equal(t, zapcore.InfoLevel, logging.DefaultLevel())

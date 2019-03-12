@@ -11,8 +11,8 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/hyperledger/fabric/integration/helpers"
-	"github.com/hyperledger/fabric/integration/runner"
+	"github.com/hyperledger/udo/integration/helpers"
+	"github.com/hyperledger/udo/integration/runner"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
 )
@@ -22,7 +22,7 @@ type Components struct {
 }
 
 var RequiredImages = []string{
-	fmt.Sprintf("hyperledger/fabric-ccenv:%s-latest", runtime.GOARCH),
+	fmt.Sprintf("hyperledger/udo-ccenv:%s-latest", runtime.GOARCH),
 	runner.CouchDBDefaultImage,
 	runner.KafkaDefaultImage,
 	runner.ZooKeeperDefaultImage,
@@ -34,27 +34,27 @@ func (c *Components) Build(args ...string) {
 	if c.Paths == nil {
 		c.Paths = map[string]string{}
 	}
-	cryptogen, err := gexec.Build("github.com/hyperledger/fabric/common/tools/cryptogen", args...)
+	cryptogen, err := gexec.Build("github.com/hyperledger/udo/common/tools/cryptogen", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["cryptogen"] = cryptogen
 
-	idemixgen, err := gexec.Build("github.com/hyperledger/fabric/common/tools/idemixgen", args...)
+	idemixgen, err := gexec.Build("github.com/hyperledger/udo/common/tools/idemixgen", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["idemixgen"] = idemixgen
 
-	configtxgen, err := gexec.Build("github.com/hyperledger/fabric/common/tools/configtxgen", args...)
+	configtxgen, err := gexec.Build("github.com/hyperledger/udo/common/tools/configtxgen", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["configtxgen"] = configtxgen
 
-	orderer, err := gexec.Build("github.com/hyperledger/fabric/orderer", args...)
+	orderer, err := gexec.Build("github.com/hyperledger/udo/orderer", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["orderer"] = orderer
 
-	peer, err := gexec.Build("github.com/hyperledger/fabric/peer", args...)
+	peer, err := gexec.Build("github.com/hyperledger/udo/peer", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["peer"] = peer
 
-	discover, err := gexec.Build("github.com/hyperledger/fabric/cmd/discover", args...)
+	discover, err := gexec.Build("github.com/hyperledger/udo/cmd/discover", args...)
 	Expect(err).NotTo(HaveOccurred())
 	c.Paths["discover"] = discover
 }

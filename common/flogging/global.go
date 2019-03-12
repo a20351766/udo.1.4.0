@@ -19,7 +19,7 @@ const (
 )
 
 var Global *Logging
-var logger *FabricLogger
+var logger *UDOLogger
 
 func init() {
 	logging, err := New(Config{})
@@ -56,7 +56,7 @@ func GetLoggerLevel(loggerName string) string {
 
 // MustGetLogger creates a logger with the specified name. If an invalid name
 // is provided, the operation will panic.
-func MustGetLogger(loggerName string) *FabricLogger {
+func MustGetLogger(loggerName string) *UDOLogger {
 	return Global.Logger(loggerName)
 }
 

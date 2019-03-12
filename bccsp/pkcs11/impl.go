@@ -12,9 +12,9 @@ import (
 	"crypto/x509"
 	"os"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/sw"
+	"github.com/hyperledger/udo/common/flogging"
 	"github.com/miekg/pkcs11"
 	"github.com/pkg/errors"
 )
@@ -215,7 +215,7 @@ func (csp *impl) Verify(k bccsp.Key, signature, digest []byte, opts bccsp.Signer
 // Encrypt encrypts plaintext using key k.
 // The opts argument should be appropriate for the primitive used.
 func (csp *impl) Encrypt(k bccsp.Key, plaintext []byte, opts bccsp.EncrypterOpts) ([]byte, error) {
-	// TODO: Add PKCS11 support for encryption, when fabric starts requiring it
+	// TODO: Add PKCS11 support for encryption, when udo starts requiring it
 	return csp.BCCSP.Encrypt(k, plaintext, opts)
 }
 
@@ -233,7 +233,7 @@ func FindPKCS11Lib() (lib, pin, label string) {
 	lib = os.Getenv("PKCS11_LIB")
 	if lib == "" {
 		pin = "98765432"
-		label = "ForFabric"
+		label = "ForUDO"
 		possibilities := []string{
 			"/usr/lib/softhsm/libsofthsm2.so",                            //Debian
 			"/usr/lib/x86_64-linux-gnu/softhsm/libsofthsm2.so",           //Ubuntu

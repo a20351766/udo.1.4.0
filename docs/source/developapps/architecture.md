@@ -29,7 +29,7 @@ diagram for commercial paper. Commercial papers transition between **issued**,
 
 See how the state diagram describes how commercial papers change over time, and
 how specific transactions govern the life cycle transitions. In Hypledger
-Fabric, smart contracts implement transaction logic that transition commercial
+UDO, smart contracts implement transaction logic that transition commercial
 papers between their different states. Commercial paper states are actually held
 in the ledger world state; so let's take a closer look at them.
 
@@ -51,9 +51,9 @@ commercial paper states constitutes the ledger
 
 All ledger state share this form; each has a set of properties, each with a
 different value. This *multi-property* aspect of states is a powerful feature --
-it allows us to think of a Fabric state as a vector rather than a simple scalar.
+it allows us to think of a UDO state as a vector rather than a simple scalar.
 We then represent facts about whole objects as individual states, which
-subsequently undergo transitions controlled by transaction logic. A Fabric state
+subsequently undergo transitions controlled by transaction logic. A UDO state
 is implemented as a key/value pair, in which the value encodes the object
 properties in a format that captures the object's multiple properties, typically
 JSON. The [ledger
@@ -66,7 +66,7 @@ transitions according to different transaction stimuli:
 
 ![develop.paperstates](./develop.diagram.6.png) *A commercial paper state is
 brought into existence and transitions as a result of different transactions.
-Hyperledger Fabric states have multiple properties, making them vectors rather
+Hyperledger UDO states have multiple properties, making them vectors rather
 than scalars.*
 
 Notice how each individual paper starts with the empty state, which is
@@ -77,7 +77,7 @@ the **issue** transaction, and how it is subsequently updated as a result of the
 
 Notice how each state is self-describing; each property has a name and a value.
 Although all our commercial papers currently have the same properties, this need
-not be the case for all time, as Hyperledger Fabric supports different states
+not be the case for all time, as Hyperledger UDO supports different states
 having different properties. This allows the same ledger world state to contain
 different forms of the same asset as well as different types of asset. It also
 makes it possible to update a state's structure; imagine a new regulation that
@@ -93,7 +93,7 @@ PaperNet commercial paper is formed by a concatenation of the `Issuer` and
 
 A state key allows us to uniquely identify a paper; it is created as a result
 of the **issue** transaction and subsequently updated by **buy** and **redeem**.
-Hyperledger Fabric requires each state in a ledger to have a unique key.
+Hyperledger UDO requires each state in a ledger to have a unique key.
 
 When a unique key is not available from the available set of properties, an
 application-determined unique key is specified as an input to the transaction
@@ -135,11 +135,11 @@ applies equally well to smart contract [namespaces](./namespace.html).
 
 While it's correct to think of a single list of papers in PaperNet --
 `org.papernet.papers` -- lists are best implemented as a set of individual
-Fabric states, whose composite key associates the state with its list. In this
+UDO states, whose composite key associates the state with its list. In this
 way, each state's composite key is both unique and supports effective list query.
 
 ![develop.paperphysical](./develop.diagram.8.png) *Representing a list of
-PaperNet commercial papers as a set of distinct Hyperledger Fabric states*
+PaperNet commercial papers as a set of distinct Hyperledger UDO states*
 
 Notice how each paper in the list is represented by a vector state, with a
 unique **composite** key formed by the concatenation of `org.papernet.paper`,
@@ -152,14 +152,14 @@ unique **composite** key formed by the concatenation of `org.papernet.paper`,
     allegiance; we don't need a list of fans.
 
 
-  * Hyperlegder Fabric internally uses a concurrency control
+  * Hyperlegder UDO internally uses a concurrency control
     [mechanism](../arch-deep-dive.html#the-endorsing-peer-simulates-a-transaction-and-produces-an-endorsement-signature)
     to update a ledger, such that keeping papers in separate state vectors vastly
     reduces the opportunity for shared-state collisions. Such collisions require
     transaction re-submission, complicate application design, and decrease
     performance.
 
-This second point is actually a key take-away for Hyperledger Fabric; the
+This second point is actually a key take-away for Hyperledger UDO; the
 physical design of state vectors is **very important** to optimum performance
 and behaviour. Keep your states separate!
 

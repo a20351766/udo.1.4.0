@@ -24,9 +24,9 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/mocks"
-	"github.com/hyperledger/fabric/bccsp/utils"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/mocks"
+	"github.com/hyperledger/udo/bccsp/utils"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -474,7 +474,7 @@ func TestCBCEncryptWithIVCBCDecrypt(t *testing.T) {
 	}
 }
 
-// TestAESRelatedUtilFunctions tests various functions commonly used in fabric wrt AES
+// TestAESRelatedUtilFunctions tests various functions commonly used in udo wrt AES
 func TestAESRelatedUtilFunctions(t *testing.T) {
 	t.Parallel()
 

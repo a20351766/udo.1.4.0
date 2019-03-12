@@ -6,8 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-option go_package = "github.com/hyperledger/fabric/protos/orderer/etcdraft";
-option java_package = "org.hyperledger.fabric.protos.orderer.etcdraft";
+option go_package = "github.com/hyperledger/udo/protos/orderer/etcdraft";
+option java_package = "org.hyperledger.udo.protos.orderer.etcdraft";
 
 package etcdraft;
 

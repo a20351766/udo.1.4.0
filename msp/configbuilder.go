@@ -14,9 +14,9 @@ import (
 	"path/filepath"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 )
@@ -155,7 +155,7 @@ func SetupBCCSPKeystoreConfig(bccspConfig *factory.FactoryOpts, keystoreDir stri
 // directory, with the specified ID and type
 func GetLocalMspConfigWithType(dir string, bccspConfig *factory.FactoryOpts, ID, mspType string) (*msp.MSPConfig, error) {
 	switch mspType {
-	case ProviderTypeToString(FABRIC):
+	case ProviderTypeToString(UDO):
 		return GetLocalMspConfig(dir, bccspConfig, ID)
 	case ProviderTypeToString(IDEMIX):
 		return GetIdemixMspConfig(dir, ID)
@@ -193,7 +193,7 @@ func GetLocalMspConfig(dir string, bccspConfig *factory.FactoryOpts, ID string) 
 // GetVerifyingMspConfig returns an MSP config given directory, ID and type
 func GetVerifyingMspConfig(dir, ID, mspType string) (*msp.MSPConfig, error) {
 	switch mspType {
-	case ProviderTypeToString(FABRIC):
+	case ProviderTypeToString(UDO):
 		return getMspConfig(dir, ID, nil)
 	case ProviderTypeToString(IDEMIX):
 		return GetIdemixMspConfig(dir, ID)
@@ -255,8 +255,8 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 	// Load configuration file
 	// if the configuration file is there then load it
 	// otherwise skip it
-	var ouis []*msp.FabricOUIdentifier
-	var nodeOUs *msp.FabricNodeOUs
+	var ouis []*msp.UDOOUIdentifier
+	var nodeOUs *msp.UDONodeOUs
 	_, err = os.Stat(configFile)
 	if err == nil {
 		// load the file, if there is a failure in loading it then
@@ -281,7 +281,7 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 					return nil, errors.Wrapf(err, "failed loading OrganizationalUnit certificate at [%s]", f)
 				}
 
-				oui := &msp.FabricOUIdentifier{
+				oui := &msp.UDOOUIdentifier{
 					Certificate:                  raw,
 					OrganizationalUnitIdentifier: ouID.OrganizationalUnitIdentifier,
 				}
@@ -299,10 +299,10 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 				return nil, errors.New("Failed loading NodeOUs. PeerOU must be different from nil.")
 			}
 
-			nodeOUs = &msp.FabricNodeOUs{
+			nodeOUs = &msp.UDONodeOUs{
 				Enable:             configuration.NodeOUs.Enable,
-				ClientOuIdentifier: &msp.FabricOUIdentifier{OrganizationalUnitIdentifier: configuration.NodeOUs.ClientOUIdentifier.OrganizationalUnitIdentifier},
-				PeerOuIdentifier:   &msp.FabricOUIdentifier{OrganizationalUnitIdentifier: configuration.NodeOUs.PeerOUIdentifier.OrganizationalUnitIdentifier},
+				ClientOuIdentifier: &msp.UDOOUIdentifier{OrganizationalUnitIdentifier: configuration.NodeOUs.ClientOUIdentifier.OrganizationalUnitIdentifier},
+				PeerOuIdentifier:   &msp.UDOOUIdentifier{OrganizationalUnitIdentifier: configuration.NodeOUs.PeerOUIdentifier.OrganizationalUnitIdentifier},
 			}
 
 			// Read certificates, if defined
@@ -329,14 +329,14 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 		mspLogger.Debugf("MSP configuration file not found at [%s]: [%s]", configFile, err)
 	}
 
-	// Set FabricCryptoConfig
-	cryptoConfig := &msp.FabricCryptoConfig{
+	// Set UDOCryptoConfig
+	cryptoConfig := &msp.UDOCryptoConfig{
 		SignatureHashFamily:            bccsp.SHA2,
 		IdentityIdentifierHashFunction: bccsp.SHA256,
 	}
 
-	// Compose FabricMSPConfig
-	fmspconf := &msp.FabricMSPConfig{
+	// Compose UDOMSPConfig
+	fmspconf := &msp.UDOMSPConfig{
 		Admins:                        admincert,
 		RootCerts:                     cacerts,
 		IntermediateCerts:             intermediatecerts,
@@ -347,12 +347,12 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 		CryptoConfig:                  cryptoConfig,
 		TlsRootCerts:                  tlsCACerts,
 		TlsIntermediateCerts:          tlsIntermediateCerts,
-		FabricNodeOus:                 nodeOUs,
+		UDONodeOus:                 nodeOUs,
 	}
 
 	fmpsjs, _ := proto.Marshal(fmspconf)
 
-	mspconf := &msp.MSPConfig{Config: fmpsjs, Type: int32(FABRIC)}
+	mspconf := &msp.MSPConfig{Config: fmpsjs, Type: int32(UDO)}
 
 	return mspconf, nil
 }

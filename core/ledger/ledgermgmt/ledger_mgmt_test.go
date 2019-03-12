@@ -21,20 +21,20 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
+	"github.com/hyperledger/udo/common/metrics/disabled"
 
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/golang"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/cceventmgmt"
-	"github.com/hyperledger/fabric/core/ledger/mock"
+	"github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/golang"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/cceventmgmt"
+	"github.com/hyperledger/udo/core/ledger/mock"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/ledgermgmt")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/ledgermgmt")
 	os.Exit(m.Run())
 }
 

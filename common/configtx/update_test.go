@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"testing"
 
-	mockpolicies "github.com/hyperledger/fabric/common/mocks/policies"
-	cb "github.com/hyperledger/fabric/protos/common"
+	mockpolicies "github.com/hyperledger/udo/common/mocks/policies"
+	cb "github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/assert"
 )
 

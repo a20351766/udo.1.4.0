@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package server
 
 import (
-	"github.com/hyperledger/fabric/token/ledger"
-	"github.com/hyperledger/fabric/token/tms/plain"
+	"github.com/hyperledger/udo/token/ledger"
+	"github.com/hyperledger/udo/token/tms/plain"
 	"github.com/pkg/errors"
 )
 

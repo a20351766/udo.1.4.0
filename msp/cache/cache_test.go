@@ -10,9 +10,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mocks"
-	msp2 "github.com/hyperledger/fabric/protos/msp"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/msp/mocks"
+	msp2 "github.com/hyperledger/udo/protos/msp"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -48,8 +48,8 @@ func TestGetType(t *testing.T) {
 	i, err := New(mockMSP)
 	assert.NoError(t, err)
 
-	mockMSP.On("GetType").Return(msp.FABRIC)
-	assert.Equal(t, msp.FABRIC, i.GetType())
+	mockMSP.On("GetType").Return(msp.UDO)
+	assert.Equal(t, msp.UDO, i.GetType())
 	mockMSP.AssertExpectations(t)
 }
 

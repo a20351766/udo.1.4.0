@@ -13,8 +13,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/fabenc"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/flogging/fabenc"
 	"github.com/onsi/gomega/gbytes"
 	"go.uber.org/zap"
 	"go.uber.org/zap/buffer"
@@ -216,7 +216,7 @@ func AtLevel(level zapcore.Level) Option {
 	}
 }
 
-func NewTestLogger(tb testing.TB, options ...Option) (*flogging.FabricLogger, *Recorder) {
+func NewTestLogger(tb testing.TB, options ...Option) (*flogging.UDOLogger, *Recorder) {
 	enabler := zap.LevelEnablerFunc(func(l zapcore.Level) bool {
 		return zapcore.DebugLevel.Enabled(l)
 	})
@@ -243,5 +243,5 @@ func NewTestLogger(tb testing.TB, options ...Option) (*flogging.FabricLogger, *R
 		zl = o(recordingCore, zl)
 	}
 
-	return flogging.NewFabricLogger(zl, zap.AddCaller()), recorder
+	return flogging.NewUDOLogger(zl, zap.AddCaller()), recorder
 }

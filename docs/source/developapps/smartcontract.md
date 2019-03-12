@@ -62,12 +62,12 @@ contains the transaction definitions for commercial paper -- **issue**, **buy**
 and **redeem**. It's these transactions that bring commercial papers into
 existence and move them through their lifecycle. We'll examine these
 [transactions](#transaction-definition) soon, but for now notice how
-`CommericalPaperContract` extends the Hyperledger Fabric `Contract`
-[class](https://fabric-shim.github.io/release-1.4/fabric-contract-api.Contract.html).
+`CommericalPaperContract` extends the Hyperledger UDO `Contract`
+[class](https://udo-shim.github.io/release-1.4/udo-contract-api.Contract.html).
 This built-in class, and the `Context` class, were brought into scope earlier:
 
 ```JavaScript
-const { Contract, Context } = require('fabric-contract-api');
+const { Contract, Context } = require('udo-contract-api');
 ```
 
 Our commercial paper contract will use built-in features of these classes, such
@@ -123,7 +123,7 @@ The `issue` method is automatically given control by the contract whenever an
 application makes a request to issue a commercial paper. The transaction
 property values are made available to the method via the corresponding
 variables. See how an application submits a transaction using the Hyperledger
-Fabric SDK in the [application](./application.html) topic, using a sample
+UDO SDK in the [application](./application.html) topic, using a sample
 application program.
 
 You might have noticed an extra variable in the **issue** definition -- `ctx`.
@@ -381,7 +381,7 @@ class PaperList extends StateList {
 ```
 
 This utility class is used to manage all PaperNet commercial papers in
-Hyperledger Fabric state database. The PaperList data structures are described
+Hyperledger UDO state database. The PaperList data structures are described
 in more detail in the [architecture topic](./architecture.html).
 
 Like the `CommercialPaper` class, this class extends an application-defined
@@ -399,7 +399,7 @@ async addPaper(paper) {
 
 You can see in the `StateList.js`
 [file](https://github.com/hyperledger/fabric-samples/blob/master/commercial-paper/organization/magnetocorp/contract/ledger-api/statelist.js)
-how the `StateList` class uses the Fabric API `putState()` to write the
+how the `StateList` class uses the UDO API `putState()` to write the
 commercial paper as state data in the ledger:
 
 ```JavaScript
@@ -425,9 +425,9 @@ Every piece of state data in a ledger requires these two fundamental elements:
 
 
 Notice how a `StateList` doesn't store anything about an individual state or the
-total list of states -- it delegates all of that to the Fabric state database.
+total list of states -- it delegates all of that to the UDO state database.
 This is an important design pattern -- it reduces the opportunity for [ledger
-MVCC collisions](../readwrite.html) in Hyperledger Fabric.
+MVCC collisions](../readwrite.html) in Hyperledger UDO.
 
 The StateList `getState()` and `updateState()` methods work in similar ways:
 
@@ -448,14 +448,14 @@ async updateState(state) {
 }
 ```
 
-See how they use the Fabric APIs `putState()`, `getState()` and
+See how they use the UDO APIs `putState()`, `getState()` and
 `createCompositeKey()` to access the ledger. We'll expand this smart contract
 later to list all commercial papers in paperNet -- what might the method look
 like to implement this ledger retrieval?
 
 That's it! In this topic you've understood how to implement the smart contract
 for PaperNet.  You can move to the next sub topic to see how an application
-calls the smart contract using the Fabric SDK.
+calls the smart contract using the UDO SDK.
 
 <!--- Licensed under Creative Commons Attribution 4.0 International License
 https://creativecommons.org/licenses/by/4.0/ -->

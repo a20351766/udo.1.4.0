@@ -9,9 +9,9 @@ package persistence_test
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
-	"github.com/hyperledger/fabric/core/chaincode/persistence/mock"
+	"github.com/hyperledger/udo/common/chaincode"
+	"github.com/hyperledger/udo/core/chaincode/persistence"
+	"github.com/hyperledger/udo/core/chaincode/persistence/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"

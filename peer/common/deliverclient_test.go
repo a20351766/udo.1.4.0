@@ -12,11 +12,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp/mgmt/testtools"
-	"github.com/hyperledger/fabric/peer/common/mock"
-	cb "github.com/hyperledger/fabric/protos/common"
-	ab "github.com/hyperledger/fabric/protos/orderer"
+	"github.com/hyperledger/udo/core/config/configtest"
+	"github.com/hyperledger/udo/msp/mgmt/testtools"
+	"github.com/hyperledger/udo/peer/common/mock"
+	cb "github.com/hyperledger/udo/protos/common"
+	ab "github.com/hyperledger/udo/protos/orderer"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -90,7 +90,7 @@ func TestDeliverClientErrors(t *testing.T) {
 
 func TestNewOrdererDeliverClient(t *testing.T) {
 	defer viper.Reset()
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	InitMSP()
 
@@ -105,7 +105,7 @@ func TestNewOrdererDeliverClient(t *testing.T) {
 
 func TestNewDeliverClientForPeer(t *testing.T) {
 	defer viper.Reset()
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	InitMSP()
 

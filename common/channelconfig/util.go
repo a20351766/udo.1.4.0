@@ -10,11 +10,11 @@ import (
 	"math"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp"
-	cb "github.com/hyperledger/fabric/protos/common"
-	mspprotos "github.com/hyperledger/fabric/protos/msp"
-	ab "github.com/hyperledger/fabric/protos/orderer"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/bccsp"
+	cb "github.com/hyperledger/udo/protos/common"
+	mspprotos "github.com/hyperledger/udo/protos/msp"
+	ab "github.com/hyperledger/udo/protos/orderer"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
 const (

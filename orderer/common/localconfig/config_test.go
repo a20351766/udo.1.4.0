@@ -11,13 +11,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/viperutil"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/hyperledger/udo/common/viperutil"
+	"github.com/hyperledger/udo/core/config/configtest"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestLoadGoodConfig(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	cfg, err := Load()
 	assert.NotNil(t, cfg, "Could not load config")
@@ -25,8 +25,8 @@ func TestLoadGoodConfig(t *testing.T) {
 }
 
 func TestLoadMissingConfigFile(t *testing.T) {
-	envVar1 := "FABRIC_CFG_PATH"
-	envVal1 := "invalid fabric cfg path"
+	envVar1 := "UDO_CFG_PATH"
+	envVal1 := "invalid udo cfg path"
 	os.Setenv(envVar1, envVal1)
 	defer os.Unsetenv(envVar1)
 
@@ -36,7 +36,7 @@ func TestLoadMissingConfigFile(t *testing.T) {
 }
 
 func TestLoadMalformedConfigFile(t *testing.T) {
-	name, err := ioutil.TempDir("", "hyperledger_fabric")
+	name, err := ioutil.TempDir("", "hyperledger_udo")
 	assert.Nil(t, err, "Error creating temp dir: %s", err)
 	defer func() {
 		err = os.RemoveAll(name)
@@ -51,7 +51,7 @@ func TestLoadMalformedConfigFile(t *testing.T) {
 		assert.NoError(t, f.Close(), "Error closing file")
 	}
 
-	envVar1 := "FABRIC_CFG_PATH"
+	envVar1 := "UDO_CFG_PATH"
 	envVal1 := name
 	os.Setenv(envVar1, envVal1)
 	defer os.Unsetenv(envVar1)
@@ -74,7 +74,7 @@ func TestEnvInnerVar(t *testing.T) {
 	os.Setenv(envVar2, envVal2)
 	defer os.Unsetenv(envVar1)
 	defer os.Unsetenv(envVar2)
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	config, _ := Load()
 
@@ -133,7 +133,7 @@ func TestKafkaSASLPlain(t *testing.T) {
 }
 
 func TestSystemChannel(t *testing.T) {
-	cleanup := configtest.SetDevFabricConfigPath(t)
+	cleanup := configtest.SetDevUDOConfigPath(t)
 	defer cleanup()
 	conf, _ := Load()
 	assert.Equal(t, Defaults.General.SystemChannel, conf.General.SystemChannel,
@@ -141,7 +141,7 @@ func TestSystemChannel(t *testing.T) {
 }
 
 func TestConsensusConfig(t *testing.T) {
-	name, err := ioutil.TempDir("", "hyperledger_fabric")
+	name, err := ioutil.TempDir("", "hyperledger_udo")
 	assert.Nil(t, err, "Error creating temp dir: %s", err)
 	defer func() {
 		err = os.RemoveAll(name)
@@ -160,7 +160,7 @@ Consensus:
 	f.WriteString(content)
 	assert.NoError(t, f.Close(), "Error closing file")
 
-	envVar1 := "FABRIC_CFG_PATH"
+	envVar1 := "UDO_CFG_PATH"
 	envVal1 := name
 	os.Setenv(envVar1, envVal1)
 	defer os.Unsetenv(envVar1)

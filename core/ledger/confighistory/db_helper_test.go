@@ -34,7 +34,7 @@ func TestCompareEncodedHeight(t *testing.T) {
 }
 
 func TestQueries(t *testing.T) {
-	testDBPath := "/tmp/fabric/core/ledger/confighistory"
+	testDBPath := "/tmp/udo/core/ledger/confighistory"
 	deleteTestPath(t, testDBPath)
 	provider := newDBProvider(testDBPath)
 	defer deleteTestPath(t, testDBPath)

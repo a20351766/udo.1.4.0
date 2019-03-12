@@ -19,9 +19,9 @@ package localmsp
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/crypto"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/crypto"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 type mspSigner struct {

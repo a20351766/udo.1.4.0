@@ -15,17 +15,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	common_utils "github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/comm"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/election"
-	"github.com/hyperledger/fabric/gossip/filter"
-	"github.com/hyperledger/fabric/gossip/gossip/msgstore"
-	"github.com/hyperledger/fabric/gossip/gossip/pull"
-	"github.com/hyperledger/fabric/gossip/util"
-	proto "github.com/hyperledger/fabric/protos/gossip"
+	common_utils "github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/gossip/api"
+	"github.com/hyperledger/udo/gossip/comm"
+	"github.com/hyperledger/udo/gossip/common"
+	"github.com/hyperledger/udo/gossip/discovery"
+	"github.com/hyperledger/udo/gossip/election"
+	"github.com/hyperledger/udo/gossip/filter"
+	"github.com/hyperledger/udo/gossip/gossip/msgstore"
+	"github.com/hyperledger/udo/gossip/gossip/pull"
+	"github.com/hyperledger/udo/gossip/util"
+	proto "github.com/hyperledger/udo/protos/gossip"
 	"github.com/pkg/errors"
 )
 
@@ -724,7 +724,7 @@ func (gc *gossipChannel) verifyBlock(msg *proto.GossipMessage, sender common.PKI
 	rawBlock := payload.Data
 	err := gc.mcs.VerifyBlock(msg.Channel, seqNum, rawBlock)
 	if err != nil {
-		gc.logger.Warningf("Received fabricated block from %v in DataUpdate: %+v", sender, errors.WithStack(err))
+		gc.logger.Warningf("Received udoated block from %v in DataUpdate: %+v", sender, errors.WithStack(err))
 		return false
 	}
 	return true

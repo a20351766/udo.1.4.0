@@ -24,36 +24,36 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	bccsp "github.com/hyperledger/fabric/bccsp/utils"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	policiesmocks "github.com/hyperledger/fabric/common/mocks/policies"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/common/tools/configtxgen/encoder"
-	genesisconfig "github.com/hyperledger/fabric/common/tools/configtxgen/localconfig"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/cclifecycle"
-	lifecyclemocks "github.com/hyperledger/fabric/core/cclifecycle/mocks"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/discovery"
-	disc "github.com/hyperledger/fabric/discovery/client"
-	"github.com/hyperledger/fabric/discovery/endorsement"
-	discsupport "github.com/hyperledger/fabric/discovery/support"
-	discacl "github.com/hyperledger/fabric/discovery/support/acl"
-	ccsupport "github.com/hyperledger/fabric/discovery/support/chaincode"
-	"github.com/hyperledger/fabric/discovery/support/config"
-	"github.com/hyperledger/fabric/discovery/support/mocks"
-	"github.com/hyperledger/fabric/gossip/api"
-	gcommon "github.com/hyperledger/fabric/gossip/common"
-	gdisc "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	. "github.com/hyperledger/fabric/protos/discovery"
-	"github.com/hyperledger/fabric/protos/gossip"
-	msprotos "github.com/hyperledger/fabric/protos/msp"
-	"github.com/hyperledger/fabric/protos/utils"
+	bccsp "github.com/hyperledger/udo/bccsp/utils"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/crypto/tlsgen"
+	policiesmocks "github.com/hyperledger/udo/common/mocks/policies"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/common/tools/configtxgen/encoder"
+	genesisconfig "github.com/hyperledger/udo/common/tools/configtxgen/localconfig"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/cclifecycle"
+	lifecyclemocks "github.com/hyperledger/udo/core/cclifecycle/mocks"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/discovery"
+	disc "github.com/hyperledger/udo/discovery/client"
+	"github.com/hyperledger/udo/discovery/endorsement"
+	discsupport "github.com/hyperledger/udo/discovery/support"
+	discacl "github.com/hyperledger/udo/discovery/support/acl"
+	ccsupport "github.com/hyperledger/udo/discovery/support/chaincode"
+	"github.com/hyperledger/udo/discovery/support/config"
+	"github.com/hyperledger/udo/discovery/support/mocks"
+	"github.com/hyperledger/udo/gossip/api"
+	gcommon "github.com/hyperledger/udo/gossip/common"
+	gdisc "github.com/hyperledger/udo/gossip/discovery"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	. "github.com/hyperledger/udo/protos/discovery"
+	"github.com/hyperledger/udo/protos/gossip"
+	msprotos "github.com/hyperledger/udo/protos/msp"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/onsi/gomega/gexec"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
@@ -324,7 +324,7 @@ func (c *client) newConnection() (*grpc.ClientConn, error) {
 type mspWrapper struct {
 	deserializeIdentityCount uint32
 	msp.MSPManager
-	mspConfigs map[string]*msprotos.FabricMSPConfig
+	mspConfigs map[string]*msprotos.UDOMSPConfig
 	blocks     uint32
 }
 
@@ -389,7 +389,7 @@ func (s *sequenceWrapper) Sequence() uint64 {
 }
 
 func createSupport(t *testing.T, dir string, lc *lifeCycle) *support {
-	configs := make(map[string]*msprotos.FabricMSPConfig)
+	configs := make(map[string]*msprotos.UDOMSPConfig)
 	mspMgr := createMSPManager(t, dir, configs)
 	mspManagerWrapper := &mspWrapper{
 		MSPManager: mspMgr,
@@ -514,7 +514,7 @@ func createSigner(t *testing.T) *signer {
 	return signer
 }
 
-func createMSP(t *testing.T, dir, mspID string) (msp.MSP, *msprotos.FabricMSPConfig) {
+func createMSP(t *testing.T, dir, mspID string) (msp.MSP, *msprotos.UDOMSPConfig) {
 	channelMSP, err := msp.New(&msp.BCCSPNewOpts{
 		NewBaseOpts: msp.NewBaseOpts{Version: msp.MSPv1_1},
 	})
@@ -523,14 +523,14 @@ func createMSP(t *testing.T, dir, mspID string) (msp.MSP, *msprotos.FabricMSPCon
 	mspConf, err := msp.GetVerifyingMspConfig(dir, mspID, "bccsp")
 	assert.NoError(t, err)
 
-	fabConf := &msprotos.FabricMSPConfig{}
+	fabConf := &msprotos.UDOMSPConfig{}
 	proto.Unmarshal(mspConf.Config, fabConf)
 
 	channelMSP.Setup(mspConf)
 	return channelMSP, fabConf
 }
 
-func createMSPManager(t *testing.T, dir string, configs map[string]*msprotos.FabricMSPConfig) msp.MSPManager {
+func createMSPManager(t *testing.T, dir string, configs map[string]*msprotos.UDOMSPConfig) msp.MSPManager {
 	var mspsOfChannel []msp.MSP
 	for _, mspConf := range []struct {
 		mspID  string
@@ -586,12 +586,12 @@ func createPolicyManagerGetter(t *testing.T, mspMgr msp.MSPManager) *mocks.Chann
 
 func buildBinaries() error {
 	var err error
-	cryptogen, err = gexec.Build("github.com/hyperledger/fabric/common/tools/cryptogen")
+	cryptogen, err = gexec.Build("github.com/hyperledger/udo/common/tools/cryptogen")
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	idemixgen, err = gexec.Build("github.com/hyperledger/fabric/common/tools/idemixgen")
+	idemixgen, err = gexec.Build("github.com/hyperledger/udo/common/tools/idemixgen")
 	if err != nil {
 		return errors.WithStack(err)
 	}

@@ -10,13 +10,13 @@ import (
 	"sync"
 
 	"github.com/golang/protobuf/proto"
-	newchannelconfig "github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/common/util"
-	cb "github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/utils"
+	newchannelconfig "github.com/hyperledger/udo/common/channelconfig"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	"github.com/hyperledger/udo/common/util"
+	cb "github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/utils"
 )
 
 type blockWriterSupport interface {

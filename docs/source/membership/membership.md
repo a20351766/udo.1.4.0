@@ -235,7 +235,7 @@ Let's describe these folders in a little more detail and see why they are import
   issued to be considered members of the organization.
 
 
-* **Organizational Units (OUs):** These are listed in the `$FABRIC_CFG_PATH/msp/config.yaml`
+* **Organizational Units (OUs):** These are listed in the `$UDO_CFG_PATH/msp/config.yaml`
   file and contain a list of organizational units, whose members are considered
   to be part of the organization represented by this MSP. This is particularly
   useful when you want to restrict the members of an organization to the ones
@@ -333,7 +333,7 @@ Let's describe these folders in a little more detail and see why they are import
   For more information about TLS, click [here](../enable_tls.html).
 
 If you've read this doc as well as our doc on [Identity](../identity/identity.html)), you
-should have a pretty good grasp of how identities and membership work in Hyperledger Fabric.
+should have a pretty good grasp of how identities and membership work in Hyperledger UDO.
 You've seen how a PKI and MSPs are used to identify the actors collaborating in a blockchain
 network. You've learned how certificates, public/private keys, and roots of trust work,
 in addition to how MSPs are physically and logically structured.

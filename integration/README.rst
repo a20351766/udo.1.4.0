@@ -16,7 +16,7 @@ and non-technical or business participants in a software project. Feel free to r
 .. _BDD: https://semaphoreci.com/community/tutorials/getting-started-with-bdd-in-go-using-ginkgo
 
 
-This directory contains implementations of integration and feature testing for Hyperledger Fabric.
+This directory contains implementations of integration and feature testing for Hyperledger UDO.
 
 
 Pre-requisites
@@ -43,7 +43,7 @@ your machine.
 
 Caveats, Gotchas, and Good-To-Knows
 -----------------------------------
-* The tests in this repository only exercise components that originate in the Fabric repository.
+* The tests in this repository only exercise components that originate in the UDO repository.
 * Currently, docker is only used in the ginkgo tests when using chaincode, kafka, zookeeper,
   or couchdb images.
 
@@ -63,7 +63,7 @@ the ginkgo tooling will be the direction to go. (Hint: mocked interfaces allow m
 and run faster.)
 
 The "integration/" directory contains tests that will use multiple components from this repository.
-These tests include ensuring that transactions move through the Fabric system correctly.
+These tests include ensuring that transactions move through the UDO system correctly.
 
 The "integration/chaincode" directory contains the different chaincodes that are currently available
 for use in these tests.
@@ -111,9 +111,9 @@ description.
 
 Continuous Integration (CI) Execution
 -------------------------------------
-There is a target in the Hyperledger Fabric Makefile for executing `integration`_ tests.
+There is a target in the Hyperledger UDO Makefile for executing `integration`_ tests.
 
-.. _integration: https://jenkins.hyperledger.org/view/fabric/job/fabric-verify-integration-tests-x86_64
+.. _integration: https://jenkins.hyperledger.org/view/udo/job/udo-verify-integration-tests-x86_64
 
 To execute the integration tests using the Makefile, execute the following:
 
@@ -129,10 +129,10 @@ There are different ways to contribute in this area.
  * Writing helper functions
  * Writing test code
 
-To add your contributions to the Hyperledger Fabric project, please refer to the
-`Hyperledger Fabric Contribution`_ page for more details.
+To add your contributions to the Hyperledger UDO project, please refer to the
+`Hyperledger UDO Contribution`_ page for more details.
 
-.. _Hyperledger Fabric Contribution: http://hyperledger-fabric.readthedocs.io/en/latest/CONTRIBUTING.html
+.. _Hyperledger UDO Contribution: http://hyperledger-udo.readthedocs.io/en/latest/CONTRIBUTING.html
 
 
 .. Licensed under Creative Commons Attribution 4.0 International License

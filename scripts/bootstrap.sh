@@ -27,13 +27,13 @@ printHelp() {
   echo "would download docker images and binaries for version 1.4.0"
 }
 
-dockerFabricPull() {
-  local FABRIC_TAG=$1
+dockerUDOPull() {
+  local UDO_TAG=$1
   for IMAGES in peer orderer ccenv javaenv tools; do
-      echo "==> FABRIC IMAGE: $IMAGES"
+      echo "==> UDO IMAGE: $IMAGES"
       echo
-      docker pull hyperledger/fabric-$IMAGES:$FABRIC_TAG
-      docker tag hyperledger/fabric-$IMAGES:$FABRIC_TAG hyperledger/fabric-$IMAGES
+      docker pull hyperledger/udo-$IMAGES:$UDO_TAG
+      docker tag hyperledger/udo-$IMAGES:$UDO_TAG hyperledger/udo-$IMAGES
   done
 }
 
@@ -42,14 +42,14 @@ dockerThirdPartyImagesPull() {
   for IMAGES in couchdb kafka zookeeper; do
       echo "==> THIRDPARTY DOCKER IMAGE: $IMAGES"
       echo
-      docker pull hyperledger/fabric-$IMAGES:$THIRDPARTY_TAG
-      docker tag hyperledger/fabric-$IMAGES:$THIRDPARTY_TAG hyperledger/fabric-$IMAGES
+      docker pull hyperledger/udo-$IMAGES:$THIRDPARTY_TAG
+      docker tag hyperledger/udo-$IMAGES:$THIRDPARTY_TAG hyperledger/udo-$IMAGES
   done
 }
 
 dockerCaPull() {
       local CA_TAG=$1
-      echo "==> FABRIC CA IMAGE"
+      echo "==> UDO CA IMAGE"
       echo
       docker pull hyperledger/fabric-ca:$CA_TAG
       docker tag hyperledger/fabric-ca:$CA_TAG hyperledger/fabric-ca
@@ -133,11 +133,11 @@ binaryDownload() {
 }
 
 binariesInstall() {
-  echo "===> Downloading version ${FABRIC_TAG} platform specific fabric binaries"
-  binaryDownload ${BINARY_FILE} https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/${ARCH}-${VERSION}/${BINARY_FILE}
+  echo "===> Downloading version ${UDO_TAG} platform specific udo binaries"
+  binaryDownload ${BINARY_FILE} https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/udo/hyperledger-udo/${ARCH}-${VERSION}/${BINARY_FILE}
   if [ $? -eq 22 ]; then
      echo
-     echo "------> ${FABRIC_TAG} platform specific fabric binary is not available to download <----"
+     echo "------> ${UDO_TAG} platform specific udo binary is not available to download <----"
      echo
    fi
 
@@ -154,9 +154,9 @@ dockerInstall() {
   which docker >& /dev/null
   NODOCKER=$?
   if [ "${NODOCKER}" == 0 ]; then
-	  echo "===> Pulling fabric Images"
-	  dockerFabricPull ${FABRIC_TAG}
-	  echo "===> Pulling fabric ca Image"
+	  echo "===> Pulling udo Images"
+	  dockerUDOPull ${UDO_TAG}
+	  echo "===> Pulling udo ca Image"
 	  dockerCaPull ${CA_TAG}
 	  echo "===> Pulling thirdparty docker images"
 	  dockerThirdPartyImagesPull ${THIRDPARTY_TAG}
@@ -165,7 +165,7 @@ dockerInstall() {
 	  docker images | grep hyperledger*
   else
     echo "========================================================="
-    echo "Docker not installed, bypassing download of Fabric images"
+    echo "Docker not installed, bypassing download of UDO images"
     echo "========================================================="
   fi
 }
@@ -188,17 +188,17 @@ fi
 
 # prior to 1.2.0 architecture was determined by uname -m
 if [[ $VERSION =~ ^1\.[0-1]\.* ]]; then
-  export FABRIC_TAG=${MARCH}-${VERSION}
+  export UDO_TAG=${MARCH}-${VERSION}
   export CA_TAG=${MARCH}-${CA_VERSION}
   export THIRDPARTY_TAG=${MARCH}-${THIRDPARTY_IMAGE_VERSION}
 else
   # starting with 1.2.0, multi-arch images will be default
   : ${CA_TAG:="$CA_VERSION"}
-  : ${FABRIC_TAG:="$VERSION"}
+  : ${UDO_TAG:="$VERSION"}
   : ${THIRDPARTY_TAG:="$THIRDPARTY_IMAGE_VERSION"}
 fi
 
-BINARY_FILE=hyperledger-fabric-${ARCH}-${VERSION}.tar.gz
+BINARY_FILE=hyperledger-udo-${ARCH}-${VERSION}.tar.gz
 CA_BINARY_FILE=hyperledger-fabric-ca-${ARCH}-${CA_VERSION}.tar.gz
 
 # then parse opts
@@ -225,13 +225,13 @@ if [ "$SAMPLES" == "true" ]; then
 fi
 if [ "$BINARIES" == "true" ]; then
   echo
-  echo "Installing Hyperledger Fabric binaries"
+  echo "Installing Hyperledger UDO binaries"
   echo
   binariesInstall
 fi
 if [ "$DOCKER" == "true" ]; then
   echo
-  echo "Installing Hyperledger Fabric docker images"
+  echo "Installing Hyperledger UDO docker images"
   echo
   dockerInstall
 fi

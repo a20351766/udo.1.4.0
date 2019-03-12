@@ -85,7 +85,7 @@ const (
 	ARPHRD_ETHER                     = 0x1
 	ARPHRD_EUI64                     = 0x1b
 	ARPHRD_FCAL                      = 0x311
-	ARPHRD_FCFABRIC                  = 0x313
+	ARPHRD_FCUDO                  = 0x313
 	ARPHRD_FCPL                      = 0x312
 	ARPHRD_FCPP                      = 0x310
 	ARPHRD_FDDI                      = 0x306

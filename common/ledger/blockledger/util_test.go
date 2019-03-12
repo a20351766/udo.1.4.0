@@ -9,9 +9,9 @@ package blockledger_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/deliver/mock"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/deliver/mock"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	"github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/assert"
 )
 

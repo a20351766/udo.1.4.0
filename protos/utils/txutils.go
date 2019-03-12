@@ -11,12 +11,12 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/factory"
-	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/bccsp"
+	"github.com/hyperledger/udo/bccsp/factory"
+	"github.com/hyperledger/udo/common/crypto"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
 	"github.com/pkg/errors"
 )
 
@@ -380,11 +380,11 @@ func GetBytesProposalPayloadForTx(payload *peer.ChaincodeProposalPayload, visibi
 		return nil, err
 	}
 
-	// currently the fabric only supports full visibility: this means that
+	// currently the udo only supports full visibility: this means that
 	// there are no restrictions on which parts of the proposal payload will
 	// be visible in the final transaction; this default approach requires
 	// no additional instructions in the PayloadVisibility field; however
-	// the fabric may be extended to encode more elaborate visibility
+	// the udo may be extended to encode more elaborate visibility
 	// mechanisms that shall be encoded in this field (and handled
 	// appropriately by the peer)
 

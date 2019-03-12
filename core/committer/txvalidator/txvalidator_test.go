@@ -10,23 +10,23 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/mocks/config"
-	util2 "github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/common/sysccprovider"
-	ledger2 "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
-	mocktxvalidator "github.com/hyperledger/fabric/core/mocks/txvalidator"
-	"github.com/hyperledger/fabric/core/mocks/validator"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/msp/mgmt/testtools"
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/configtx/test"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/common/mocks/config"
+	util2 "github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/common/sysccprovider"
+	ledger2 "github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	"github.com/hyperledger/udo/core/ledger/util"
+	ledgerUtil "github.com/hyperledger/udo/core/ledger/util"
+	mocktxvalidator "github.com/hyperledger/udo/core/mocks/txvalidator"
+	"github.com/hyperledger/udo/core/mocks/validator"
+	"github.com/hyperledger/udo/msp"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/msp/mgmt/testtools"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/sync/semaphore"
@@ -99,7 +99,7 @@ func TestDetectTXIdDuplicates(t *testing.T) {
 }
 
 func TestBlockValidationDuplicateTXId(t *testing.T) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/txvalidatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/txvalidatortest")
 	ledgermgmt.InitializeTestEnv()
 	defer ledgermgmt.CleanupTestEnv()
 
@@ -159,7 +159,7 @@ func TestBlockValidationDuplicateTXId(t *testing.T) {
 }
 
 func TestBlockValidation(t *testing.T) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/txvalidatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/txvalidatortest")
 	ledgermgmt.InitializeTestEnv()
 	defer ledgermgmt.CleanupTestEnv()
 
@@ -173,7 +173,7 @@ func TestBlockValidation(t *testing.T) {
 }
 
 func TestParallelBlockValidation(t *testing.T) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/txvalidatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/txvalidatortest")
 	ledgermgmt.InitializeTestEnv()
 	defer ledgermgmt.CleanupTestEnv()
 
@@ -187,7 +187,7 @@ func TestParallelBlockValidation(t *testing.T) {
 }
 
 func TestVeryLargeParallelBlockValidation(t *testing.T) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/txvalidatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/txvalidatortest")
 	ledgermgmt.InitializeTestEnv()
 	defer ledgermgmt.CleanupTestEnv()
 
@@ -203,7 +203,7 @@ func TestVeryLargeParallelBlockValidation(t *testing.T) {
 }
 
 func TestTxValidationFailure_InvalidTxid(t *testing.T) {
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/txvalidatortest")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/txvalidatortest")
 	ledgermgmt.InitializeTestEnv()
 	defer ledgermgmt.CleanupTestEnv()
 

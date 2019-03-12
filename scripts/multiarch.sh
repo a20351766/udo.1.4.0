@@ -50,7 +50,7 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-IMAGES="fabric-peer fabric-orderer fabric-ccenv fabric-tools"
+IMAGES="udo-peer udo-orderer udo-ccenv udo-tools"
 
 # check that all images have been published
 for image in ${IMAGES}; do

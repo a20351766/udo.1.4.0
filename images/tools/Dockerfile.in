@@ -2,17 +2,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-FROM _BASE_NS_/fabric-baseimage:_BASE_TAG_ as builder
+FROM _BASE_NS_/udo-baseimage:_BASE_TAG_ as builder
 WORKDIR /opt/gopath
 RUN mkdir src && mkdir pkg && mkdir bin
-ADD . src/github.com/hyperledger/fabric
-WORKDIR /opt/gopath/src/github.com/hyperledger/fabric
+ADD . src/github.com/hyperledger/udo
+WORKDIR /opt/gopath/src/github.com/hyperledger/udo
 ENV EXECUTABLES go git curl
 RUN make configtxgen configtxlator cryptogen peer discover idemixgen
 
-FROM _BASE_NS_/fabric-baseimage:_BASE_TAG_
-ENV FABRIC_CFG_PATH /etc/hyperledger/fabric
+FROM _BASE_NS_/udo-baseimage:_BASE_TAG_
+ENV UDO_CFG_PATH /etc/hyperledger/udo
 RUN apt-get update && apt-get install -y jq
-VOLUME /etc/hyperledger/fabric
-COPY --from=builder /opt/gopath/src/github.com/hyperledger/fabric/.build/bin /usr/local/bin
-COPY --from=builder /opt/gopath/src/github.com/hyperledger/fabric/sampleconfig $FABRIC_CFG_PATH
+VOLUME /etc/hyperledger/udo
+COPY --from=builder /opt/gopath/src/github.com/hyperledger/udo/.build/bin /usr/local/bin
+COPY --from=builder /opt/gopath/src/github.com/hyperledger/udo/sampleconfig $UDO_CFG_PATH

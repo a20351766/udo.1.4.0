@@ -5,8 +5,8 @@ import (
 	"context"
 	"sync"
 
-	apichaincode "github.com/hyperledger/fabric/peer/chaincode/api"
-	"github.com/hyperledger/fabric/peer/common/api"
+	apichaincode "github.com/hyperledger/udo/peer/chaincode/api"
+	"github.com/hyperledger/udo/peer/common/api"
 	"google.golang.org/grpc"
 )
 

@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
 // PassthruChaincode passes thru invoke and query to another chaincode where

@@ -12,36 +12,36 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	cc "github.com/hyperledger/fabric/common/config"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/deliver"
-	"github.com/hyperledger/fabric/common/flogging"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	fileledger "github.com/hyperledger/fabric/common/ledger/blockledger/file"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/comm"
-	"github.com/hyperledger/fabric/core/committer"
-	"github.com/hyperledger/fabric/core/committer/txvalidator"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/common/sysccprovider"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/customtx"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/transientstore"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/service"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	"github.com/hyperledger/fabric/protos/common"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	"github.com/hyperledger/fabric/protos/utils"
-	"github.com/hyperledger/fabric/token/tms/manager"
-	"github.com/hyperledger/fabric/token/transaction"
+	"github.com/hyperledger/udo/common/channelconfig"
+	cc "github.com/hyperledger/udo/common/config"
+	"github.com/hyperledger/udo/common/configtx"
+	"github.com/hyperledger/udo/common/deliver"
+	"github.com/hyperledger/udo/common/flogging"
+	commonledger "github.com/hyperledger/udo/common/ledger"
+	"github.com/hyperledger/udo/common/ledger/blockledger"
+	fileledger "github.com/hyperledger/udo/common/ledger/blockledger/file"
+	"github.com/hyperledger/udo/common/metrics"
+	"github.com/hyperledger/udo/common/policies"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/comm"
+	"github.com/hyperledger/udo/core/committer"
+	"github.com/hyperledger/udo/core/committer/txvalidator"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/common/privdata"
+	"github.com/hyperledger/udo/core/common/sysccprovider"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/customtx"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	"github.com/hyperledger/udo/core/transientstore"
+	"github.com/hyperledger/udo/gossip/api"
+	"github.com/hyperledger/udo/gossip/service"
+	"github.com/hyperledger/udo/msp"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	"github.com/hyperledger/udo/protos/common"
+	pb "github.com/hyperledger/udo/protos/peer"
+	"github.com/hyperledger/udo/protos/utils"
+	"github.com/hyperledger/udo/token/tms/manager"
+	"github.com/hyperledger/udo/token/transaction"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"golang.org/x/sync/semaphore"
@@ -54,7 +54,7 @@ var peerServer *comm.GRPCServer
 var configTxProcessor = newConfigTxProcessor()
 var tokenTxProcessor = &transaction.Processor{
 	TMSManager: &manager.Manager{
-		IdentityDeserializerManager: &manager.FabricIdentityDeserializerManager{}}}
+		IdentityDeserializerManager: &manager.UDOIdentityDeserializerManager{}}}
 var ConfigTxProcessors = customtx.Processors{
 	common.HeaderType_CONFIG:            configTxProcessor,
 	common.HeaderType_TOKEN_TRANSACTION: tokenTxProcessor,
@@ -568,8 +568,8 @@ func buildTrustedRootsForChain(cm channelconfig.Resources) {
 	}
 	if err == nil {
 		for k, v := range msps {
-			// check to see if this is a FABRIC MSP
-			if v.GetType() == msp.FABRIC {
+			// check to see if this is a UDO MSP
+			if v.GetType() == msp.UDO {
 				for _, root := range v.GetTLSRootCerts() {
 					// check to see of this is an app org MSP
 					if _, ok := appOrgMSPs[k]; ok {

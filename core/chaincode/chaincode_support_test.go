@@ -21,36 +21,36 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	mc "github.com/hyperledger/fabric/common/mocks/config"
-	mocklgr "github.com/hyperledger/fabric/common/mocks/ledger"
-	mockpeer "github.com/hyperledger/fabric/common/mocks/peer"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/aclmgmt/mocks"
-	"github.com/hyperledger/fabric/core/aclmgmt/resources"
-	"github.com/hyperledger/fabric/core/chaincode/accesscontrol"
-	"github.com/hyperledger/fabric/core/chaincode/mock"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/golang"
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/core/container"
-	"github.com/hyperledger/fabric/core/container/dockercontroller"
-	"github.com/hyperledger/fabric/core/container/inproccontroller"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	cmp "github.com/hyperledger/fabric/core/mocks/peer"
-	"github.com/hyperledger/fabric/core/peer"
-	"github.com/hyperledger/fabric/core/policy"
-	"github.com/hyperledger/fabric/core/scc"
-	"github.com/hyperledger/fabric/core/scc/lscc"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
-	plgr "github.com/hyperledger/fabric/protos/ledger/queryresult"
-	pb "github.com/hyperledger/fabric/protos/peer"
-	putils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/udo/common/crypto/tlsgen"
+	commonledger "github.com/hyperledger/udo/common/ledger"
+	"github.com/hyperledger/udo/common/metrics/disabled"
+	mc "github.com/hyperledger/udo/common/mocks/config"
+	mocklgr "github.com/hyperledger/udo/common/mocks/ledger"
+	mockpeer "github.com/hyperledger/udo/common/mocks/peer"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/aclmgmt/mocks"
+	"github.com/hyperledger/udo/core/aclmgmt/resources"
+	"github.com/hyperledger/udo/core/chaincode/accesscontrol"
+	"github.com/hyperledger/udo/core/chaincode/mock"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/golang"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/config"
+	"github.com/hyperledger/udo/core/container"
+	"github.com/hyperledger/udo/core/container/dockercontroller"
+	"github.com/hyperledger/udo/core/container/inproccontroller"
+	"github.com/hyperledger/udo/core/ledger"
+	"github.com/hyperledger/udo/core/ledger/ledgermgmt"
+	cmp "github.com/hyperledger/udo/core/mocks/peer"
+	"github.com/hyperledger/udo/core/peer"
+	"github.com/hyperledger/udo/core/policy"
+	"github.com/hyperledger/udo/core/scc"
+	"github.com/hyperledger/udo/core/scc/lscc"
+	mspmgmt "github.com/hyperledger/udo/msp/mgmt"
+	plgr "github.com/hyperledger/udo/protos/ledger/queryresult"
+	pb "github.com/hyperledger/udo/protos/peer"
+	putils "github.com/hyperledger/udo/protos/utils"
 	. "github.com/onsi/gomega"
 	"github.com/stretchr/testify/assert"
 )
@@ -482,7 +482,7 @@ func initializeCC(t *testing.T, chainID, ccname string, ccSide *mockpeer.MockCCC
 	}
 
 	//we are not going to reach the chaincode and so won't get a response from it. processDone will not
-	//be triggered by the chaincode stream.  We just expect an error from fabric. Hence pass nil for done
+	//be triggered by the chaincode stream.  We just expect an error from udo. Hence pass nil for done
 	execCC(t, txParams, ccSide, badcccid, false, true, nil, cis, respSet, chaincodeSupport)
 
 	//---------try a successful init at last-------
@@ -1045,9 +1045,9 @@ func getLaunchConfigs(t *testing.T, cr *ContainerRuntime) {
 	gt.Expect(envs).To(ContainElement("CORE_CHAINCODE_LOGGING_SHIM=warning"))
 	gt.Expect(envs).To(ContainElement("CORE_CHAINCODE_ID_NAME=mycc:v0"))
 	gt.Expect(envs).To(ContainElement("CORE_PEER_TLS_ENABLED=true"))
-	gt.Expect(envs).To(ContainElement("CORE_TLS_CLIENT_KEY_PATH=/etc/hyperledger/fabric/client.key"))
-	gt.Expect(envs).To(ContainElement("CORE_TLS_CLIENT_CERT_PATH=/etc/hyperledger/fabric/client.crt"))
-	gt.Expect(envs).To(ContainElement("CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/peer.crt"))
+	gt.Expect(envs).To(ContainElement("CORE_TLS_CLIENT_KEY_PATH=/etc/hyperledger/udo/client.key"))
+	gt.Expect(envs).To(ContainElement("CORE_TLS_CLIENT_CERT_PATH=/etc/hyperledger/udo/client.crt"))
+	gt.Expect(envs).To(ContainElement("CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/udo/peer.crt"))
 
 	if len(filesToUpload) != 3 {
 		t.Fatalf("calling getLaunchConfigs() with TLS enabled should have returned an array of 3 elements for filesToUpload, but got %v", len(filesToUpload))

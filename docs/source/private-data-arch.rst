@@ -16,7 +16,7 @@ The collection definition gets deployed to the channel at the time of chaincode
 instantiation (or upgrade). If using the peer CLI to instantiate the chaincode, the
 collection definition file is passed to the chaincode instantiation
 using the ``--collections-config`` flag. If using a client SDK, check the `SDK
-documentation <https://fabric-sdk-node.github.io/>`_ for information on providing the collection
+documentation <https://udo-sdk-node.github.io/>`_ for information on providing the collection
 definition.
 
 Collection definitions are composed of the following properties:
@@ -169,7 +169,7 @@ properties will have ensured the private data is available on other peers.
 Referencing collections from chaincode
 --------------------------------------
 
-A set of `shim APIs <https://godoc.org/github.com/hyperledger/fabric/core/chaincode/shim>`_
+A set of `shim APIs <https://godoc.org/github.com/hyperledger/udo/core/chaincode/shim>`_
 are available for setting and retrieving private data.
 
 The same chaincode data operations can be applied to channel state data and
@@ -187,7 +187,7 @@ not to include private data in the main part of the chaincode proposal. A specia
 field in the chaincode proposal called the ``transient`` field can be used to pass
 private data from the client (or data that chaincode will use to generate private
 data), to chaincode invocation on the peer.  The chaincode can retrieve the
-``transient`` field by calling the `GetTransient() API <https://github.com/hyperledger/fabric/blob/8b3cbda97e58d1a4ff664219244ffd1d89d7fba8/core/chaincode/shim/interfaces.go#L315-L321>`_.
+``transient`` field by calling the `GetTransient() API <https://github.com/hyperledger/udo/blob/8b3cbda97e58d1a4ff664219244ffd1d89d7fba8/core/chaincode/shim/interfaces.go#L315-L321>`_.
 This ``transient`` field gets excluded from the channel transaction.
 
 Reconciliation
@@ -205,7 +205,7 @@ will also attempt to fetch private data that was committed before they joined
 the collection.
 
 Note that this private data reconciliation feature only works on peers running
-v1.4 or later of Fabric.
+v1.4 or later of UDO.
 
 Access control for private data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,7 +223,7 @@ configuration definitions and how to set them, refer back to the
           ``memberOnlyRead`` to false. You can then apply your own access
           control logic in chaincode, for example by calling the GetCreator()
           chaincode API or using the client identity
-          `chaincode library <https://github.com/hyperledger/fabric/tree/master/core/chaincode/shim/ext/cid>`__ .
+          `chaincode library <https://github.com/hyperledger/udo/tree/master/core/chaincode/shim/ext/cid>`__ .
 
 Considerations when using private data
 --------------------------------------

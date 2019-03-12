@@ -13,9 +13,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/hyperledger/fabric/common/metadata"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/mock"
+	"github.com/hyperledger/udo/common/metadata"
+	"github.com/hyperledger/udo/core/chaincode/platforms"
+	"github.com/hyperledger/udo/core/chaincode/platforms/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -114,11 +114,11 @@ var _ = Describe("Platforms", func() {
 			df, err := registry.GenerateDockerfile("fakeType", "cc-name", "cc-version")
 			Expect(err).NotTo(HaveOccurred())
 			expectedDockerfile := fmt.Sprintf(`docker-header
-LABEL org.hyperledger.fabric.chaincode.id.name="cc-name" \
-      org.hyperledger.fabric.chaincode.id.version="cc-version" \
-      org.hyperledger.fabric.chaincode.type="fakeType" \
-      org.hyperledger.fabric.version="%s" \
-      org.hyperledger.fabric.base.version="%s"
+LABEL org.hyperledger.udo.chaincode.id.name="cc-name" \
+      org.hyperledger.udo.chaincode.id.version="cc-version" \
+      org.hyperledger.udo.chaincode.type="fakeType" \
+      org.hyperledger.udo.version="%s" \
+      org.hyperledger.udo.base.version="%s"
 ENV CORE_CHAINCODE_BUILDLEVEL=%s`, metadata.Version, metadata.BaseVersion, metadata.Version)
 			Expect(df).To(Equal(expectedDockerfile))
 		})

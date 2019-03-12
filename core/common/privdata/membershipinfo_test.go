@@ -9,9 +9,9 @@ package privdata
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/common/cauthdsl"
+	"github.com/hyperledger/udo/msp"
+	"github.com/hyperledger/udo/protos/common"
 	"github.com/stretchr/testify/assert"
 )
 

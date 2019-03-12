@@ -7,17 +7,17 @@ SPDX-License-Identifier: Apache-2.0
 package capabilities
 
 import (
-	"github.com/hyperledger/fabric/msp"
-	cb "github.com/hyperledger/fabric/protos/common"
+	"github.com/hyperledger/udo/msp"
+	cb "github.com/hyperledger/udo/protos/common"
 )
 
 const (
 	channelTypeName = "Channel"
 
-	// ChannelV1_1 is the capabilties string for standard new non-backwards compatible fabric v1.1 channel capabilities.
+	// ChannelV1_1 is the capabilties string for standard new non-backwards compatible udo v1.1 channel capabilities.
 	ChannelV1_1 = "V1_1"
 
-	// ChannelV1_3 is the capabilties string for standard new non-backwards compatible fabric v1.3 channel capabilities.
+	// ChannelV1_3 is the capabilties string for standard new non-backwards compatible udo v1.3 channel capabilities.
 	ChannelV1_3 = "V1_3"
 )
 

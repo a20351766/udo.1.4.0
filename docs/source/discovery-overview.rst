@@ -30,7 +30,7 @@ The **discovery service** improves this process by having the peers compute
 the needed information dynamically and present it to the SDK in a consumable
 manner.
 
-How service discovery works in Fabric
+How service discovery works in UDO
 -------------------------------------
 
 The application is bootstrapped knowing about a group of peers which are

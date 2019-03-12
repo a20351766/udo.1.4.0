@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	pb "github.com/hyperledger/fabric/protos/peer"
+	pb "github.com/hyperledger/udo/protos/peer"
 )
 
 //SendPanicFailure

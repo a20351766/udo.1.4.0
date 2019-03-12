@@ -10,14 +10,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/container/inproccontroller"
-	"github.com/hyperledger/fabric/core/peer"
-	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/util"
+	"github.com/hyperledger/udo/core/chaincode/shim"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/container/ccintf"
+	"github.com/hyperledger/udo/core/container/inproccontroller"
+	"github.com/hyperledger/udo/core/peer"
+	pb "github.com/hyperledger/udo/protos/peer"
 	"github.com/spf13/viper"
 )
 
@@ -30,7 +30,7 @@ type Registrar interface {
 }
 
 // SystemChaincode defines the metadata needed to initialize system chaincode
-// when the fabric comes up. SystemChaincodes are installed by adding an
+// when the udo comes up. SystemChaincodes are installed by adding an
 // entry in importsysccs.go
 type SystemChaincode struct {
 	//Unique name of the system chaincode

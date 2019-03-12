@@ -12,7 +12,7 @@ import (
 	"errors"
 	"net"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/hyperledger/udo/common/flogging"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -32,7 +32,7 @@ var (
 // grpc/credentials.TransportCredentials
 func NewServerTransportCredentials(
 	serverConfig *tls.Config,
-	logger *flogging.FabricLogger) credentials.TransportCredentials {
+	logger *flogging.UDOLogger) credentials.TransportCredentials {
 
 	// NOTE: unlike the default grpc/credentials implementation, we do not
 	// clone the tls.Config which allows us to update it dynamically
@@ -48,7 +48,7 @@ func NewServerTransportCredentials(
 // serverCreds is an implementation of grpc/credentials.TransportCredentials.
 type serverCreds struct {
 	serverConfig *tls.Config
-	logger       *flogging.FabricLogger
+	logger       *flogging.UDOLogger
 }
 
 // ClientHandShake is not implemented for `serverCreds`.

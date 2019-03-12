@@ -14,8 +14,8 @@ import (
 	"time"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
+	"github.com/hyperledger/udo/integration/nwo"
+	"github.com/hyperledger/udo/integration/nwo/commands"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -43,7 +43,7 @@ var _ = Describe("SBE_E2E", func() {
 		chaincode = nwo.Chaincode{
 			Name:              "mycc",
 			Version:           "0.0",
-			Path:              "github.com/hyperledger/fabric/integration/chaincode/keylevelep/cmd",
+			Path:              "github.com/hyperledger/udo/integration/chaincode/keylevelep/cmd",
 			Ctor:              `{"Args":["init"]}`,
 			CollectionsConfig: "testdata/collection_config.json",
 		}

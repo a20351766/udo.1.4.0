@@ -13,7 +13,7 @@ checks before applying the state changes that come with the transaction itself:
   of the corresponding chaincodes.
 
 There are use cases which demand custom transaction validation rules different
-from the default Fabric validation rules, such as:
+from the default UDO validation rules, such as:
 
 - **UTXO (Unspent Transaction Output):** When the validation takes into account
   whether the transaction doesn't double spend its inputs.
@@ -24,7 +24,7 @@ from the default Fabric validation rules, such as:
 Pluggable endorsement and validation logic
 ------------------------------------------
 
-Fabric allows for the implementation and deployment of custom endorsement and
+UDO allows for the implementation and deployment of custom endorsement and
 validation logic into the peer to be associated with chaincode handling in a
 pluggable manner. This logic can be either compiled into the peer as built in
 selectable logic, or compiled and deployed alongside the peer as a
@@ -83,13 +83,13 @@ in ``core.yaml``:
             name: DefaultEndorsement
           custom:
             name: customEndorsement
-            library: /etc/hyperledger/fabric/plugins/customEndorsement.so
+            library: /etc/hyperledger/udo/plugins/customEndorsement.so
         validators:
           vscc:
             name: DefaultValidation
           custom:
             name: customValidation
-            library: /etc/hyperledger/fabric/plugins/customValidation.so
+            library: /etc/hyperledger/udo/plugins/customValidation.so
 
 And we'd have to place the ``.so`` plugin files in the peer's local file system.
 
@@ -139,7 +139,7 @@ interface.
 After the creation of the ``Plugin`` instance, the ``Init`` method is invoked on
 it by the peer with the ``dependencies`` passed as parameters.
 
-Currently Fabric comes with the following dependencies for endorsement plugins:
+Currently UDO comes with the following dependencies for endorsement plugins:
 
 - ``SigningIdentityFetcher``: Returns an instance of ``SigningIdentity`` based
   on a given signed proposal:
@@ -228,7 +228,7 @@ interface.
 After the creation of the ``Plugin`` instance, the **Init** method is invoked on
 it by the peer with the dependencies passed as parameters.
 
-Currently Fabric comes with the following dependencies for validation plugins:
+Currently UDO comes with the following dependencies for validation plugins:
 
 - ``IdentityDeserializer``: Converts byte representation of identities into
   ``Identity`` objects that can be used to verify signatures signed by them, be
@@ -278,7 +278,7 @@ Currently Fabric comes with the following dependencies for validation plugins:
 Important notes
 ---------------
 
-- **Validation plugin consistency across peers:** In future releases, the Fabric
+- **Validation plugin consistency across peers:** In future releases, the UDO
   channel infrastructure would guarantee that the same validation logic is used
   for a given chaincode by all peers in the channel at any given blockchain
   height in order to eliminate the chance of mis-configuration which would might
@@ -303,9 +303,9 @@ Important notes
   not exist, should be handled as deterministic errors and should not lead the
   plugin to return an ``ExecutionFailureError``.
 
-- **Importing Fabric code into the plugin**: Importing code that belongs to Fabric
+- **Importing UDO code into the plugin**: Importing code that belongs to UDO
   other than protobufs as part of the plugin is highly discouraged, and can lead
-  to issues when the Fabric code changes between releases, or can cause inoperability
+  to issues when the UDO code changes between releases, or can cause inoperability
   issues when running mixed peer versions. Ideally, the plugin code should only
   use the dependencies given to it, and should import the bare minimum other
   than protobufs.

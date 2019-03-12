@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package client_test
 
 import (
-	"github.com/hyperledger/fabric/protos/common"
-	"github.com/hyperledger/fabric/protos/token"
-	"github.com/hyperledger/fabric/token/client"
-	"github.com/hyperledger/fabric/token/client/mock"
+	"github.com/hyperledger/udo/protos/common"
+	"github.com/hyperledger/udo/protos/token"
+	"github.com/hyperledger/udo/token/client"
+	"github.com/hyperledger/udo/token/client/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/pkg/errors"
@@ -25,7 +25,7 @@ var _ = Describe("TokenClient", func() {
 
 		fakeSigningIdentity *mock.SigningIdentity
 		fakeProver          *mock.Prover
-		fakeTxSubmitter     *mock.FabricTxSubmitter
+		fakeTxSubmitter     *mock.UDOTxSubmitter
 
 		tokenClient *client.Client
 	)
@@ -43,7 +43,7 @@ var _ = Describe("TokenClient", func() {
 		fakeSigningIdentity = &mock.SigningIdentity{}
 		fakeSigningIdentity.SignReturns([]byte("tx-signature"), nil) // same signature as envelope
 
-		fakeTxSubmitter = &mock.FabricTxSubmitter{}
+		fakeTxSubmitter = &mock.UDOTxSubmitter{}
 		fakeTxSubmitter.SubmitReturns(nil)
 
 		tokenClient = &client.Client{

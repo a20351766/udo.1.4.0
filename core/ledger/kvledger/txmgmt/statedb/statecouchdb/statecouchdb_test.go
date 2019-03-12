@@ -14,15 +14,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb/commontests"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
-	ledgertestutil "github.com/hyperledger/fabric/core/ledger/testutil"
-	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
-	"github.com/hyperledger/fabric/integration/runner"
+	"github.com/hyperledger/udo/common/flogging"
+	"github.com/hyperledger/udo/common/ledger/testutil"
+	"github.com/hyperledger/udo/core/common/ccprovider"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/statedb/commontests"
+	"github.com/hyperledger/udo/core/ledger/kvledger/txmgmt/version"
+	ledgertestutil "github.com/hyperledger/udo/core/ledger/testutil"
+	"github.com/hyperledger/udo/core/ledger/util/couchdb"
+	"github.com/hyperledger/udo/integration/runner"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -34,7 +34,7 @@ func TestMain(m *testing.M) {
 func testMain(m *testing.M) int {
 	// Read the core.yaml file for default config.
 	ledgertestutil.SetupCoreYAMLConfig()
-	viper.Set("peer.fileSystemPath", "/tmp/fabric/ledgertests/kvledger/txmgmt/statedb/statecouchdb")
+	viper.Set("peer.fileSystemPath", "/tmp/udo/ledgertests/kvledger/txmgmt/statedb/statecouchdb")
 
 	// Switch to CouchDB
 	couchAddress, cleanup := couchDBSetup()

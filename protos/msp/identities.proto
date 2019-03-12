@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 
 syntax = "proto3";
 
-option go_package = "github.com/hyperledger/fabric/protos/msp";
-option java_package = "org.hyperledger.fabric.protos.msp";
+option go_package = "github.com/hyperledger/udo/protos/msp";
+option java_package = "org.hyperledger.udo.protos.msp";
 
 package msp;
 
